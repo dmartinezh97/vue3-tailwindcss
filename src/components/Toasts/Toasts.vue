@@ -11,7 +11,7 @@ const getToasts = computed(() => {
 </script>
 
 <template>
-  <div class="fixed z-20 bottom-10 right-2" v-if="getToasts.length">
-    <Toast v-for="(toast, index) in getToasts" :key="index" :msg="toast.msg" :size="toast.size" :time="toast.time" :type="toast.type"></Toast>
+  <div class="fixed z-50 bottom-2 right-2 md:bottom-10 md:right-10" v-if="getToasts.length">
+    <Toast v-for="(toast, index) in getToasts" :key="index" :msg="toast.msg" :type="toast.type"></Toast>
   </div>
 </template>

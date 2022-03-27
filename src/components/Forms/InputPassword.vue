@@ -50,8 +50,12 @@ const classInputObject = computed(() => ({
 
 <template>
   <div class="flex flex-col">
-    <label v-if="props.label" class="text-gray-600 font-medium mb-1">{{ props.label }}</label>
+    <div class="flex items-center justify-between">
+      <label v-if="props.label" class="text-gray-600 font-medium mb-1">{{ props.label }}</label>
+      <a href="#" class="text-xs text-gray-400 hover:underline">Forget Password?</a>
+    </div>
     <input
+      type="password"
       :value="modelValue"
       :disabled="disabled"
       @input="updateValue"

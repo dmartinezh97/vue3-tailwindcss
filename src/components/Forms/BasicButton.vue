@@ -9,19 +9,34 @@ const props = defineProps({
     type: String,
     required: true
   },
+  block: {
+    type: Boolean,
+    default: false,
+    required: false
+  },
+  rounded: {
+    type: Boolean,
+    default: true,
+    required: false
+  },
+  outlined: {
+    type: Boolean,
+    default: false,
+    required: false
+  },
   shadow: {
-    type: String as PropType<ButtonShadowEnum>,
-    default: ButtonShadowEnum.DEFAULT,
+    type: Boolean,
+    default: false,
     required: false
   },
-  size: {
-    type: String as PropType<SizeEnum>,
-    default: SizeEnum.DEFAULT,
+  submit: {
+    type: Boolean,
+    default: false,
     required: false
   },
-  type: {
-    type: String as PropType<ButtonStyleEnum>,
-    default: ButtonStyleEnum.DEFAULT,
+  disabled: {
+    type: Boolean,
+    default: false,
     required: false
   },
 })
@@ -31,29 +46,23 @@ const onClick = () => {
   emit('click')
 };
 
-const classSizeObject = computed(() => ({
-  'text-xs p-1.5': SizeEnum.XSMALL == props.size,
-  'text-sm p-2': SizeEnum.SMALL == props.size,
-  'text-base p-3': SizeEnum.DEFAULT == props.size,
-  'text-lg p-4': SizeEnum.LARGE == props.size,
-}))
-
-const classTypeObject = computed(() => ({
-  'bg-uno hover:bg-dos text-white': ButtonStyleEnum.DEFAULT == props.type,
-  'bg-white text-uno border border-uno': ButtonStyleEnum.OUTLINED == props.type,
-  'text-uno hover:bg-uno/10 bg-transparent': ButtonStyleEnum.TEXT == props.type,
-}))
-
-const classShadowObject = computed(() => ({
-  'shadow-lg shadow-uno/50': ButtonShadowEnum.DEFAULT == props.shadow,
+const classObject = computed(() => ({
+  'w-full': props.block,
+  'rounded-lg': props.rounded,
+  'bg-uno text-white border boder-uno hover:bg-dos': !props.outlined && !props.disabled,
+  'bg-gray-100 text-gray-600 border border-none': props.outlined && !props.disabled,
+  'shadow-lg shadow-uno/20': props.shadow && !props.disabled,
+  'bg-gray-200 text-gray-500 border border-gray-300 shadow-sm': props.disabled,
 }))
 
 </script>
 
 <template>
   <button
-    :class="[classSizeObject, classTypeObject]"
-    class="block mb-2 w-full font-medium rounded-lg focus:outline-none focus:ring-none transition ease-in duration-150"
+    :type="submit ? 'submit' :'button'"
+    :class="classObject"
+    :disabled="props.disabled"
+    class="block font-medium px-5 py-2 transition ease-in duration-150"
     @click="onClick"
   >{{ text }}</button>
 </template>

@@ -4,14 +4,22 @@ import AppFooter from './components/AppFooter.vue'
 import AppHeader from './components/AppHeader.vue'
 import Toasts from './components/Toasts/Toasts.vue'
 import Navbar from './components/Navbar.vue'
+import { useUserStore } from './stores/modulos/user';
+import Sidebar from './components/Sidebar.vue';
+
+const userStore = useUserStore();
+
 </script>
 
 <template>
-  <div class="flex">
-    <!-- <AppHeader></AppHeader> -->
+  <div class="flex flex-col">
     <Navbar></Navbar>
-    <RouterView /> 
-    <!-- <AppFooter></AppFooter> -->
+    <div class="flex">
+      <Sidebar></Sidebar>
+      <div class="w-full p-2 lg:p-4">
+        <RouterView /> 
+      </div>
+    </div>
     <Toasts></Toasts>
   </div>
 </template>

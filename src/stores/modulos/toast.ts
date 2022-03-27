@@ -21,7 +21,10 @@ export const useToastStore = defineStore({
     }),
     actions: {
         info(msg: string) {
-            this.toasts.push({msg, type: ToastTypeEnum.SUCCESS })
+            this.toasts.push({msg, type: ToastTypeEnum.INFO })
+        },
+        success(msg: string) {
+            this.toasts.push({ msg, type: ToastTypeEnum.SUCCESS })
         },
         warning(msg: string) {
             this.toasts.push({ msg, type: ToastTypeEnum.WARNING })

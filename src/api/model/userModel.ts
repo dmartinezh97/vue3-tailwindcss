@@ -1,5 +1,5 @@
 /**
- * @description: Login parametros
+ * @description: Parametros para iniciar sesión
  */
 export interface LoginParams {
     username: string;
@@ -7,7 +7,7 @@ export interface LoginParams {
 }
 
 /**
- * @description: Login valores de retorno
+ * @description: Los valores de retorno cuando inicia sesión
  */
 export interface LoginResultModel {
     idUsuario: string | number;

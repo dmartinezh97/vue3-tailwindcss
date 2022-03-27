@@ -1,4 +1,5 @@
 import { ToastProps } from '../components/Toasts/typing';
+import { MisNegociosResultModel } from '../api/model/negocioModel';
 
 export interface FrmLogin {
     email: string;
@@ -27,6 +28,10 @@ export interface ToastState {
 
 export interface AppState {
     pageLoading: boolean;
+}
+
+export interface NegocioState {
+    negocios: MisNegociosResultModel[];
 }
 
 export interface UserInfo {
