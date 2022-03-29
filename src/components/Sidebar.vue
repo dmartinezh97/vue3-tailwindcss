@@ -5,6 +5,7 @@ import { useNegocioStore } from '@/stores/modulos/negocio';
 import { computed, onMounted } from 'vue';
 import { useUserStore } from '../stores/modulos/user';
 import BasicButton from './Forms/BasicButton.vue';
+import IconAdd from './icons/IconAdd.vue';
 
 
 const userStore = useUserStore();
@@ -35,7 +36,7 @@ const onClickAddNegocio = () => {
           <nav>
               <!-- BUCLE CON TODOS LOS NEGOCIOS -->
               <template v-for="negocio in getMisNegocios">
-                <router-link :to="{ name: PageEnum.VER_NEGOCIO, params: { id: negocio.idnegocio } }" class="flex items-center px-4 py-2 text-gray-600 transition-colors duration-200 transform rounded-md dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                <router-link :to="{ name: PageEnum.VER_NEGOCIO, params: { id: negocio.idnegocio } }" active-class="bg-gray-200" class="flex items-center px-4 py-2 mb-2 text-gray-600 transition-colors duration-200 transform rounded-md dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
                   <div class="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
                     <img
                       :src="negocio.img_logo"
@@ -46,13 +47,13 @@ const onClickAddNegocio = () => {
                   <span class="mx-4 font-medium capitalize whitespace-nowrap text-ellipsis overflow-hidden">{{negocio.nombre}}</span>
                 </router-link>
               </template>
-              <a @click="onClickAddNegocio" class="flex items-center px-4 py-2 mt-5 text-gray-700 bg-gray-200 rounded-md dark:bg-gray-700 dark:text-gray-200" href="#">
+              <hr class="my-3 border-gray-200 dark:border-gray-600" />
+              <router-link :to="{ name: PageEnum.ADD_NEGOCIO }" active-class="bg-gray-200" class="flex items-center px-4 py-2 text-gray-700  rounded-md dark:bg-gray-700 dark:text-gray-200" href="#">
                   <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
-    
                   <span class="mx-4 font-medium">Añadir negocio</span>
-              </a>
+              </router-link>
               <div v-if="getMisNegocios.length == 0" @click="onClickAddNegocio" class="flex flex-col items-center p-6 px-4 mt-5 space-y-3 cursor-pointer text-center bg-gray-100 rounded-xl dark:bg-gray-800">
                 <span class="inline-block p-3 text-blue-500 bg-blue-100 rounded-full dark:text-white dark:bg-blue-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,7 +69,7 @@ const onClickAddNegocio = () => {
                     <svg class="w-4 h-4 mx-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </span>
               </div>
-              <!-- <hr class="my-6 border-gray-200 dark:border-gray-600" /> -->                 
+              <!-- <hr class="my-6 border-gray-200 dark:border-gray-600" /> -->             
           </nav>
         </div>
       </div>

@@ -18,9 +18,9 @@ export namespace Http {
                 (config: AxiosRequestConfig) => {
                     const userStore = useUserStore();
                     const token = userStore.getToken;
+                    //TODO: Filtrar por permiso de rutas si es Auth para enviar token
                     config.headers.common["Authorization"] = "Bearer " + token;
 
-                    console.log("request");
                     return config;
                 },
                 (err: any) => {
@@ -32,7 +32,8 @@ export namespace Http {
         protected response() {
             axios.interceptors.response.use(
                 (response: AxiosResponse) => {
-                    console.log("response");
+                    //console.log("response");
+                    //Si da un 401, redireccionar a una página personalizada
                     return response;
                 },
                 (error: any) => {

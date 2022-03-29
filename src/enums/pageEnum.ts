@@ -7,6 +7,7 @@ export enum PageEnum {
     VER_NEGOCIO = 'VerNegocio',
     NEGOCIO_INFORMACION_GENERAL = 'NegocioInformacionGeneral',
     NEGOCIO_EVENTOS = 'NegocioEventos',
+    NEGOCIO_TRABAJADORES = 'NegocioTrabajadores',
     ADD_NEGOCIO = 'AddNegocio',
     BUSCAR_NEGOCIO = 'BuscarNegocio',
     LOGIN = '/login',

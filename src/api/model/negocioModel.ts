@@ -24,3 +24,17 @@ export interface MisNegociosResultModel {
     img_logo: string;
     img_cabecera: string;
 }
+
+
+/**
+ * @description: Recibe la información general del negocio
+ */
+export interface NegocioInformacionGeneralResultModel {
+    idnegocio: number;
+    nombre: string;
+    descripcion: string;
+    tipo_negocio: string;
+    ubicacion: string;
+    img_logo: string;
+    img_cabecera: string;
+}

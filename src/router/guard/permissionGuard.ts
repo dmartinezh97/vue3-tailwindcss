@@ -6,7 +6,7 @@ import { PageEnum } from '../../enums/pageEnum';
 export function createPermissionGuard(router: Router) {
     const userStore = useUserStore();
     router.beforeEach(async (to, from, next) => {
-        console.log("Logeado:" + userStore.getIsLogged);
+        //console.log("Logeado:" + userStore.getIsLogged);
 
         // if (to.path == PageEnum.INICIO && !userStore.getIsLogged) {
         //     router.push(PageEnum.BIENVENIDA)

@@ -5,6 +5,7 @@ import BaseNegocioViewVue from "./BaseNegocioView.vue";
 import VerNegocioViewVue from "./VerNegocioView.vue";
 import InformacionGeneralViewVue from "./InformacionGeneralView.vue";
 import EventosViewVue from "./EventosView.vue";
+import TrabajadoresViewVue from "./TrabajadoresView.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -35,6 +36,11 @@ const routes: RouteRecordRaw[] = [
                         path: '/negocio/:id/eventos',
                         name: PageEnum.NEGOCIO_EVENTOS,
                         component: EventosViewVue,
+                    },
+                    {
+                        path: '/negocio/:id/trabajadores',
+                        name: PageEnum.NEGOCIO_TRABAJADORES,
+                        component: TrabajadoresViewVue,
                     },
                 ]
             }
