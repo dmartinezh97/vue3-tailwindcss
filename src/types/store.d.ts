@@ -1,5 +1,6 @@
 import { ToastProps } from '../components/Toasts/typing';
 import { MisNegociosResultModel } from '../api/model/negocioModel';
+import type { MisEventosResultModel } from '@/api/model/eventoModel';
 
 export interface FrmLogin {
     email: string;
@@ -32,6 +33,10 @@ export interface AppState {
 
 export interface NegocioState {
     negocios: MisNegociosResultModel[];
+}
+
+export interface EventoState {
+    eventos: MisEventosResultModel[];
 }
 
 export interface UserInfo {

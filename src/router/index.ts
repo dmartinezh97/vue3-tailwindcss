@@ -1,8 +1,7 @@
-import { bienvenidaModule } from '@/views/bienvenida';
 import { discoverModule } from '@/views/discover';
 import { homeModule } from '@/views/home';
 import { loginModule } from '@/views/login';
-import { negocioModule } from '@/views/negocio';
+import { negocioModule } from '@/views/negocios';
 import { profileModule } from '@/views/profile';
 import { signupModule } from '@/views/signup';
 import { testModule } from '@/views/test';
@@ -12,7 +11,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    ...bienvenidaModule.routes,
     ...homeModule.routes,
     ...negocioModule.routes,
     ...loginModule.routes,

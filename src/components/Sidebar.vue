@@ -2,7 +2,7 @@
 import { PageEnum } from '@/enums/pageEnum';
 import { router } from '@/router';
 import { useNegocioStore } from '@/stores/modulos/negocio';
-import { computed, onMounted } from 'vue';
+import { computed, onBeforeMount, onMounted } from 'vue';
 import { useUserStore } from '../stores/modulos/user';
 import BasicButton from './Forms/BasicButton.vue';
 import IconAdd from './icons/IconAdd.vue';
@@ -11,8 +11,11 @@ import IconAdd from './icons/IconAdd.vue';
 const userStore = useUserStore();
 const negocioStore = useNegocioStore();
 
+// onMounted(()=>{
+//   negocioStore.misNegocios()
+// })
 
-onMounted(()=>{
+onBeforeMount(()=>{
   negocioStore.misNegocios()
 })
 

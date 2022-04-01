@@ -17,7 +17,11 @@ const userStore = useUserStore();
     <div class="flex">
       <Sidebar></Sidebar>
       <div class="w-full p-2 lg:p-4">
-        <RouterView /> 
+        <router-view v-slot="{ Component }">
+          <Transition name="fade" mode="out-in">
+            <component :is="Component"></component>
+          </Transition>
+        </router-view>
       </div>
     </div>
     <Toasts></Toasts>

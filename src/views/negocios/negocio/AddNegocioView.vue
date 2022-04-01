@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import BasicButton from "../../components/Forms/BasicButton.vue";
+import BasicButton from "@/components/Forms/BasicButton.vue";
 import { ButtonStyleEnum, ButtonShadowEnum } from "@/enums/buttonEnum";
-import AnimationApp from "../../components/icons/AnimationApp.vue";
-import { router } from '../../router/index';
-import { SizeEnum } from '../../enums/sizeEnum';
-import InputText from '../../components/Forms/InputText.vue';
+import AnimationApp from "@/components/icons/AnimationApp.vue";
+import { router } from '@/router/index';
+import { SizeEnum } from '@/enums/sizeEnum';
+import InputText from '@/components/Forms/InputText.vue';
 import { computed, reactive, ref } from "vue";
-import type { NegocioParams } from '../../api/model/negocioModel';
-import { useNegocioStore } from '../../stores/modulos/negocio';
+import type { NegocioParams } from '@/api/model/negocioModel';
+import { useNegocioStore } from '@/stores/modulos/negocio';
 
 const logo = ref(null)
 const imgCabecera = ref(null)

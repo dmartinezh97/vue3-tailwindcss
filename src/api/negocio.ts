@@ -20,7 +20,7 @@ export function crearNegocioAPI(data: FormData) {
 }
 
 /**
- * @description: Crear un negocio API
+ * @description: Recibe un listado de negocios API
  */
 export function misNegociosAPI() {
     return axios.get<MisNegociosResultModel[]>(Api.MisNegocios);

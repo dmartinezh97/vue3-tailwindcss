@@ -3,12 +3,21 @@ export enum PageEnum {
     INICIO = '/',
     BIENVENIDA = '/bienvenida',
     EVENTOS = '/eventos',
-    BASE_NEGOCIO = '/negocio',
+    /* NEGOCIO */
+    BASE_NEGOCIO = 'BaseNegocio',
     VER_NEGOCIO = 'VerNegocio',
-    NEGOCIO_INFORMACION_GENERAL = 'NegocioInformacionGeneral',
-    NEGOCIO_EVENTOS = 'NegocioEventos',
-    NEGOCIO_TRABAJADORES = 'NegocioTrabajadores',
+    INFORMACION_GENERAL_NEGOCIO = 'InformacionGeneralNegocio',
     ADD_NEGOCIO = 'AddNegocio',
+    NEGOCIO_TRABAJADORES = 'NegocioTrabajadores',
+    /* EVENTOS DE UN NEGOCIO */
+    BASE_EVENTOS = 'BaseEventos',
+    VER_EVENTO_NEGOCIO = 'VerEventoNegocio',
+    EVENTOS_NEGOCIO = 'EventosNegocio',
+    ADD_EVENTO = 'AddEvento',
+
+
+
+
     BUSCAR_NEGOCIO = 'BuscarNegocio',
     LOGIN = '/login',
     REGISTRO = '/signup',

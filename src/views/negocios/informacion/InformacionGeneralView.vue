@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';
-import { useNegocioStore } from '../../stores/modulos/negocio';
-import type { NegocioInformacionGeneralResultModel } from '../../api/model/negocioModel';
+import { useNegocioStore } from '@/stores/modulos/negocio';
+import type { NegocioInformacionGeneralResultModel } from '@/api/model/negocioModel';
 
 const negocioStore = useNegocioStore();
 const { params } = useRoute()
@@ -34,9 +34,9 @@ const getInfo = async (id: string) => {
         <div class="flex justify-center -mt-40 md:ml-10 md:justify-start">
             <img class="object-cover w-48 h-48 border-2 border-uno rounded-full dark:border-uno" alt="Testimonial avatar" :src="info.img_logo">
         </div>
-        <div class="p-6">
+        <div class="p-6 pt-3">
           <div>
-              <h3 class="block mt-2 text-2xl font-semibold text-gray-800 transition-colors capitalize duration-200 transform dark:text-white hover:text-gray-600">{{info?.nombre}}</h3>
+              <h3 class="block mt-2 text-3xl font-bold text-gray-800 transition-colors capitalize duration-200 transform dark:text-white hover:text-gray-600">{{info?.nombre}}</h3>
               <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ info?.descripcion }}</p>
           </div>
           <div>
