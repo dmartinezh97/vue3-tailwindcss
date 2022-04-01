@@ -5,6 +5,8 @@ export interface EventoParams {
     nombre: string;
     descripcion: string;
     img_cabecera: string;
+    fecha_inicio: string;
+    fecha_fin: string;
 }
 
 /**

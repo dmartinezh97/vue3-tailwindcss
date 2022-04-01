@@ -7,6 +7,7 @@ import type { EventoParams } from "@/api/model/eventoModel";
 import { useEventoStore } from '../../../stores/modulos/evento';
 import BasicButton from '../../../components/Forms/BasicButton.vue';
 import { useRoute } from 'vue-router';
+import InputDate from '../../../components/Forms/InputDate.vue';
 
 let tabActive = ref(1)
 let imgCabecera = ref(null)
@@ -28,7 +29,9 @@ const onClickBtnCrearEvento = () => {
 const frmData: EventoParams = reactive({
   nombre: "",
   descripcion: "",
-  img_cabecera: ""
+  img_cabecera: "",
+  fecha_inicio: "",
+  fecha_fin: "",
 })
 
 const onChangeFileImgCabecera = (e: any) => {
@@ -41,13 +44,6 @@ const onClickChangeTab = (tab: number) => {
   tabActive.value = tab
 };
 
-// const getImageCabecera = computed(() => {
-//   if(imgCabecera.value){
-//     var urlCreator = window.URL || window.webkitURL;
-//     return "bg-[url('" + urlCreator.createObjectURL(imgCabecera.value) + "')] opacity-10";
-//   }else return "";
-// })
-
 const getImageCabecera = computed(() => {
   if (imgCabecera.value) {
     var urlCreator = window.URL || window.webkitURL;
@@ -55,15 +51,10 @@ const getImageCabecera = computed(() => {
   } else return "";
 })
 
-// const getImgCabeceraNegocio = computed(() => {
-//   var urlCreator = window.URL || window.webkitURL;
-//   return imgCabecera.value != null ? urlCreator.createObjectURL(imgCabecera.value) : "https://scontent-mad1-1.xx.fbcdn.net/v/t39.30808-6/276007407_4930148147032672_7062034494787834528_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=0debeb&_nc_ohc=0lnQAr5zXgAAX_5cE-x&_nc_ht=scontent-mad1-1.xx&oh=00_AT-hA2BKSVcZVpZEZrSennS4Q14hSAh_TUdhec1KRF5Y5w&oe=624483B3";
-// })
-
 </script>
 
 <template>
-  <div id="addevento" class="w-full p-4">
+  <div id="addevento" class="w-full p-4 overflow-y-auto">
     <div class>
       <div class="h-80"></div>
       <div class="-mt-72 z-10">
@@ -122,6 +113,14 @@ const getImageCabecera = computed(() => {
               </div>
               <div class="mb-4">
                 <InputTextarea v-model="frmData.descripcion" label="Descripción"></InputTextarea>
+              </div>
+              <div class="grid grid-cols-4 gap-4 mb-4">
+                <div>
+                  <InputDate v-model="frmData.fecha_inicio" label="Fecha Inicio" datetime></InputDate>
+                </div>
+                <div>
+                  <InputDate v-model="frmData.fecha_fin" label="Fecha Fin" datetime></InputDate>
+                </div>
               </div>
               <div>
                 <BasicButton text="Crear evento" @click="onClickBtnCrearEvento" block shadow></BasicButton>
