@@ -1,22 +1,21 @@
 import axios from 'axios';
-import type { NegocioParams, NegocioResultModel,MisNegociosResultModel, NegocioInformacionGeneralResultModel } from './model/negocioModel';
+import type { NegocioParams, NegocioResultModel, MisNegociosResultModel, NegocioInformacionGeneralModel } from './model/negocioModel';
 
 enum Api {
     MisNegocios = '/Negocio/MisNegocios',
     CrearNegocio = '/Negocio/CrearNegocio',
     EsMiNegocio = '/Negocio/EsMiNegocio',
     InformacionGeneral = '/Negocio/InformacionGeneral',
+    UpdateLogo = '/Negocio/UpdateLogo',
+    UpdateCabecera = '/Negocio/UpdateCabecera',
+    UpdateDatos = '/Negocio/UpdateDatos',
 }
 
 /**
  * @description: Crear un negocio API
  */
-export function crearNegocioAPI(data: FormData) {
-    return axios.post<NegocioResultModel>(Api.CrearNegocio, data, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    });
+export function crearNegocioAPI() {
+    return axios.post<NegocioResultModel>(Api.CrearNegocio);
 }
 
 /**
@@ -41,9 +40,38 @@ export function esMiNegocioAPI(idnegocio: string) {
  * @description: Recibe la información general del negocio
  */
 export function getInformacionGeneralAPI(idnegocio: string) {
-    return axios.get<NegocioInformacionGeneralResultModel>(Api.InformacionGeneral, {
+    return axios.get<NegocioInformacionGeneralModel>(Api.InformacionGeneral, {
         params: {
             idnegocio
         }
     });
+}
+
+/**
+ * @description: Actualiza el logo
+ */
+export function updateLogoAPI(data: FormData) {
+    return axios.put<boolean>(Api.UpdateLogo, data, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+}
+
+/**
+ * @description: Actualiza la imagen de cabecera del negocio
+ */
+export function updateCabeceraAPI(data: FormData) {
+    return axios.put<boolean>(Api.UpdateCabecera, data, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+}
+
+/**
+ * @description: Actualiza los datos del negocio
+ */
+export function updateDatosAPI(data: NegocioInformacionGeneralModel) {
+    return axios.put<boolean>(Api.UpdateDatos, data);
 }

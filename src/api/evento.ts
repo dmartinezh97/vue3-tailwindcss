@@ -1,9 +1,10 @@
 import axios from 'axios';
-import type { MisEventosResultModel } from './model/eventoModel';
+import type { EventoInformacionModel, MisEventosResultModel } from './model/eventoModel';
 
 enum Api {
     CrearEvento = '/Evento/CrearEvento',
     MisEventos = '/Evento/MisEventos',
+    GetInformacion = '/Evento/Informacion',
 }
 
 /**
@@ -24,6 +25,17 @@ export function misEventosAPI(idnegocio: string) {
     return axios.get<MisEventosResultModel[]>(Api.MisEventos, {
         params: {
             idnegocio
+        }
+    });
+}
+
+/**
+ * @description: Recibe la información de un evento API
+ */
+export function getInformacionAPI(idevento: string) {
+    return axios.get<EventoInformacionModel>(Api.GetInformacion, {
+        params: {
+            idevento
         }
     });
 }

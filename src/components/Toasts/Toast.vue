@@ -101,8 +101,8 @@ const deleteToast = () => {
       
       <div class="px-4 py-2 -mx-3">
           <div class="mx-3">
-              <span v-if="props.type == ToastTypeEnum.SUCCESS" class="font-semibold text-emerald-500 dark:text-emerald-400">Success</span>
-              <span v-else-if="props.type == ToastTypeEnum.WARNING" class="font-semibold text-yellow-400 dark:text-yellow-300">Warning</span>
+              <span v-if="props.type == ToastTypeEnum.SUCCESS" class="font-semibold text-emerald-500 dark:text-emerald-400">Bien</span>
+              <span v-else-if="props.type == ToastTypeEnum.WARNING" class="font-semibold text-yellow-400 dark:text-yellow-300">Cuidado</span>
               <span v-else-if="props.type == ToastTypeEnum.ERROR" class="font-semibold text-red-500 dark:text-red-400">Error</span>
               <span v-else class="font-semibold text-blue-500 dark:text-blue-400">Info</span>
               <p class="text-sm text-gray-600 dark:text-gray-200">{{ props.msg }}</p>

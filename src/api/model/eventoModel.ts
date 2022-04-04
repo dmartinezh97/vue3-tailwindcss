@@ -20,3 +20,16 @@ export interface MisEventosResultModel {
     fecha_creacion: Date;
     fecha_modificacion: Date;
 }
+
+
+/**
+ * @description: Recibe la información de un evento
+ */
+export interface EventoInformacionModel {
+    idevento: number;
+    nombre: string;
+    descripcion: string;
+    img_cabecera: string;
+    fecha_creacion: string;
+    fecha_modificacion: string;
+}

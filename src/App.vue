@@ -5,7 +5,6 @@ import AppHeader from './components/AppHeader.vue'
 import Toasts from './components/Toasts/Toasts.vue'
 import Navbar from './components/Navbar.vue'
 import { useUserStore } from './stores/modulos/user';
-import Sidebar from './components/Sidebar.vue';
 
 const userStore = useUserStore();
 
@@ -15,7 +14,6 @@ const userStore = useUserStore();
   <div class="flex flex-col">
     <Navbar></Navbar>
     <div class="flex">
-      <Sidebar></Sidebar>
       <div class="w-full p-2 lg:p-4">
         <router-view v-slot="{ Component }">
           <Transition name="fade" mode="out-in">

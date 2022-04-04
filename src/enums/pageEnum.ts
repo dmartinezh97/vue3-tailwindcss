@@ -1,10 +1,11 @@
 export enum PageEnum {
-    ROOT = '/',
-    INICIO = '/',
+    ROOT = 'Root',
+    INICIO = 'Inicio',
     BIENVENIDA = '/bienvenida',
     EVENTOS = '/eventos',
     /* NEGOCIO */
     BASE_NEGOCIO = 'BaseNegocio',
+    LISTAR_NEGOCIOS = 'ListarNegocios',
     VER_NEGOCIO = 'VerNegocio',
     INFORMACION_GENERAL_NEGOCIO = 'InformacionGeneralNegocio',
     ADD_NEGOCIO = 'AddNegocio',
@@ -14,6 +15,7 @@ export enum PageEnum {
     VER_EVENTO_NEGOCIO = 'VerEventoNegocio',
     EVENTOS_NEGOCIO = 'EventosNegocio',
     ADD_EVENTO = 'AddEvento',
+    EDITAR_EVENTO = 'EditarEvento',
 
 
 

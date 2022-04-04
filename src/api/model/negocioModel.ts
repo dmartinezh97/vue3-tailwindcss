@@ -25,11 +25,10 @@ export interface MisNegociosResultModel {
     img_cabecera: string;
 }
 
-
 /**
  * @description: Recibe la información general del negocio
  */
-export interface NegocioInformacionGeneralResultModel {
+export interface NegocioInformacionGeneralModel {
     idnegocio: number;
     nombre: string;
     descripcion: string;

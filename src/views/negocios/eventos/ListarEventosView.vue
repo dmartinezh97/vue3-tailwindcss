@@ -23,7 +23,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <div id="eventos" class="w-full p-4">
+  <div id="eventos">
     <div class="max-w-7xl mx-auto overflow-hidden">
       <div class="grid grid-cols-3 gap-6 gap-y-10">
         <!-- AQUI -->
@@ -37,15 +37,15 @@ onBeforeMount(async () => {
             </router-link>
         </div>
 
-        <div v-for="evento in statePage.eventos" :key="'evento-'+evento.idevento" class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
+        <router-link v-for="evento in statePage.eventos" :to="{ name: PageEnum.EDITAR_EVENTO, params: { idevento: evento.idevento } }" :key="'evento-'+evento.idevento" class="flex flex-col items-center justify-center w-full max-w-sm mx-auto">
             <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md" :style="'background-image: url('+ evento.img_cabecera +')'"></div>
             <div class="w-56 -mt-10 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
-                <h3 class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white"> {{evento.nombre}} </h3>
+                <h3 class="py-2 px-3 font-bold tracking-wide whitespace-nowrap text-ellipsis overflow-hidden text-center text-gray-800 uppercase dark:text-white"> {{evento.nombre}} </h3>
                 <div class="text-center px-3 py-2 bg-gray-200 dark:bg-gray-700">
                     Vie. 01 de Abrrrrr
                 </div>
             </div>
-        </div>
+        </router-link>
       </div>
     </div>
   </div>

@@ -4,12 +4,15 @@ import { router } from '@/router';
 import { computed } from 'vue';
 import { useUserStore } from '../stores/modulos/user';
 import BasicButton from './Forms/BasicButton.vue';
+import SidebarNegocio from './SidebarNegocio.vue';
 
 
 const userStore = useUserStore();
 
 const onClickBtnInicio = () => {
-  router.push(PageEnum.INICIO);
+  router.push({
+    name: PageEnum.INICIO
+  });
 };
 
 const onClickBtnLogin = () => {
@@ -28,7 +31,7 @@ const onClickVerNegocio = () => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 bg-white shadow-md">
+  <header class="sticky top-0 z-30 bg-white shadow-md">
     <div class="flex items-center justify-between h-16 px-6 mx-auto">
       <div class="flex flex-1 w-0 lg:hidden">
         <button class="p-2 text-gray-600 bg-gray-100 rounded-full" type="button">
@@ -73,10 +76,11 @@ const onClickVerNegocio = () => {
       <nav
         class="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0"
       >
-        <a class="text-gray-900" href>About</a>
+        <router-link :to="{ name: PageEnum.BASE_NEGOCIO }">Negocios</router-link>
+        <!-- <a class="text-gray-900" href>About</a>
         <a class="text-gray-900" href>Blog</a>
         <a class="text-gray-900" href>Projects</a>
-        <a class="text-gray-900" href>Contact</a>
+        <a class="text-gray-900" href>Contact</a> -->
       </nav>
 
       <div class="items-center hidden space-x-2 lg:flex">
@@ -121,7 +125,7 @@ const onClickVerNegocio = () => {
         <!-- <a class="px-5 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg" href>Sign up</a> -->
       </div>
     </div>
-
+    <SidebarNegocio></SidebarNegocio>
     <!-- <div class="border-t border-gray-100 lg:hidden">
       <nav class="flex items-center justify-center p-4 overflow-x-auto text-sm font-medium">
         <a class="flex-shrink-0 pl-4 text-gray-900" href>About</a>
