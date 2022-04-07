@@ -23,6 +23,10 @@ const props = defineProps({
   },
 })
 
+onMounted(() => {
+  valueLocal.value = props.modelValue ? "T" : "F"
+})
+
 const emit = defineEmits(['update:modelValue'])
 const updateValue = (e: Event) => {
     valueLocal.value = valueLocal.value === "T" ? "F" : "T";

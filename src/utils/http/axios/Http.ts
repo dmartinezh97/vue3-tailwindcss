@@ -1,6 +1,7 @@
 import type { AxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios"
 import axios from 'axios';
 import { useUserStore } from '../../../stores/modulos/user';
+import { useToastStore } from '../../../stores/modulos/toast';
 
 // interface VueConstructor {
 //     $axios: AxiosInstance;
@@ -32,11 +33,19 @@ export namespace Http {
         protected response() {
             axios.interceptors.response.use(
                 (response: AxiosResponse) => {
-                    //console.log("response");
-                    //Si da un 401, redireccionar a una página personalizada
                     return response;
                 },
                 (error: any) => {
+                    const toastStore = useToastStore();
+                    //TODO: Si da un 401, redireccionar a una página personalizada
+                    switch (error.response.status) {
+                        case 400:
+                            toastStore.error(error.response.data.error);
+                            break;
+                        default:
+                            toastStore.warning(error.response.data.error);
+                            break;
+                    }
                     return Promise.reject(error);
                 }
             );
