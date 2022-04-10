@@ -22,13 +22,8 @@ const onClickBtnLogin = () => {
   router.push(PageEnum.LOGIN);
 };
 
-const onClickVerNegocio = () => {
-  router.push({
-    name: "VerNegocio",
-    params: {
-      id: 1
-    }
-  })
+const onClickCerrarSesion = () => {
+  userStore.resetState();
 };
 
 </script>
@@ -131,11 +126,12 @@ const onClickVerNegocio = () => {
               leave-to-class="transform scale-95 opacity-0"
             >
               <MenuItems
-                class="absolute right-0 w-48 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                class="absolute right-0 z-10 w-48 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
                 <div>
                   <MenuItem v-slot="{ active }">
                     <button
+                      @click="onClickCerrarSesion"
                       :class="[
                         active ? 'bg-gray-100 text-gray-800' : 'text-gray-900',
                                 'group flex rounded-md items-center w-full p-3 px-4 text-sm',

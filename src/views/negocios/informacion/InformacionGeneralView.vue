@@ -12,6 +12,7 @@ import IconDanger from '../../../components/icons/IconDanger.vue';
 import IconPencilAlt from '../../../components/icons/IconPencilAlt.vue';
 import IconSave from '../../../components/icons/IconSave.vue';
 import DialogOkCancel from '../../../components/Dialogs/DialogOkCancel.vue';
+import { convertToSlug } from '../../../utils/slug';
 
 const negocioStore = useNegocioStore();
 const { params } = useRoute()
@@ -19,10 +20,9 @@ const { params } = useRoute()
 let imgLogo = ref(null)
 let imgCabecera = ref(null)
 let info = ref<NegocioInformacionGeneralModel | null>();
-let esEditable = ref(false)
+let infoInicial = ref<NegocioInformacionGeneralModel | null>();
 let showModalUbicacion = ref(false)
 let showModalGuardarCambios = ref(false)
-let textEditar = ref('Editar')
 
 onMounted(async () => {
   await getInfo(params.id.toString())
@@ -35,7 +35,16 @@ onBeforeRouteUpdate(async (onRouteChange)=> {
 
 const getInfo = async (id: string) => {
   if(id){
-    info.value = await negocioStore.getInformacionGeneral(id);
+    const res = await negocioStore.getInformacionGeneral(id);
+    info.value = { ...res };
+    infoInicial.value = { ...res };
+  }
+};
+
+const onChangeNombre = () => {
+  //info.value.nombre = e.target.value;
+  if(info.value){
+    info.value.slug = convertToSlug(info.value.nombre)
   }
 };
 
@@ -50,15 +59,6 @@ const onChangeFileImgPerfil = (e: any) => {
   }
 };
 
-const getImageLogo = computed(() => {
-  if (imgLogo.value) {
-    var urlCreator = window.URL || window.webkitURL;
-    return urlCreator.createObjectURL(imgLogo.value);
-  } else if(info.value && info.value.img_logo) {
-    return info.value.img_logo
-  } else return "";
-})
-
 const onChangeFileImgCabecera = (e: any) => {
   if (e.target.files.length > 0) {
     imgCabecera.value = e.target.files[0];
@@ -70,31 +70,15 @@ const onChangeFileImgCabecera = (e: any) => {
   }
 };
 
-const getImageCabecera = computed(() => {
-  if (imgCabecera.value) {
-    var urlCreator = window.URL || window.webkitURL;
-    return urlCreator.createObjectURL(imgCabecera.value);
-  } else if(info.value && info.value.img_cabecera) {
-    return info.value.img_cabecera
-  } else return "";
-})
-
-
 const onChangeUbicacion = (url: string) => {
   if(info.value){
     info.value.ubicacion = url
   }
 };
 
-
-const onClickEditar = () => {
-  if(esEditable.value){
-    //TODO: Hacer petición abrir dialog y preguntar si se quieren guardar los cambios
-    showModalGuardarCambios.value = true
-  }else{
-    esEditable.value = true
-    textEditar.value = 'Guardar cambios'
-  }
+const onClickBtnConfirmarGuardarCambios = () => {
+  //TODO: Hacer petición abrir dialog y preguntar si se quieren guardar los cambios
+  showModalGuardarCambios.value = true
 }
 
 const onClickGuardarCambios = async () => {
@@ -107,16 +91,31 @@ const onClickGuardarCambios = async () => {
       await getInfo(params.id.toString())
       //Luego cerrar dialog
       showModalGuardarCambios.value = false
-      esEditable.value = false
-      textEditar.value = 'Editar'
     }
   }
 }
 
-const classBtnEditarObject = computed(() => ({
-  'bg-gray-200 hover:bg-gray-300 text-gray-700 border border-gray-300': !esEditable.value,
-  'bg-uno text-white border border-uno hover:bg-dos': esEditable.value
-}))
+const getImageLogo = computed(() => {
+  if (imgLogo.value) {
+    var urlCreator = window.URL || window.webkitURL;
+    return urlCreator.createObjectURL(imgLogo.value);
+  } else if(info.value && info.value.img_logo) {
+    return info.value.img_logo
+  } else return "";
+})
+
+const getImageCabecera = computed(() => {
+  if (imgCabecera.value) {
+    var urlCreator = window.URL || window.webkitURL;
+    return urlCreator.createObjectURL(imgCabecera.value);
+  } else if(info.value && info.value.img_cabecera) {
+    return info.value.img_cabecera
+  } else return "";
+})
+
+const unchanged = computed(() => {
+  return JSON.stringify(info.value) === JSON.stringify(infoInicial.value)
+})
 
 </script>
 
@@ -151,37 +150,29 @@ const classBtnEditarObject = computed(() => ({
             </label>
         </div>
         <div class="p-6 pt-3">
-          <div class="flex justify-end">
-            <button @click="onClickEditar" type="button" :class="classBtnEditarObject" class="flex items-center rounded-lg font-medium px-3 py-2 transition ease-in duration-150">
-              <IconSave v-if="esEditable" class="w-5 h-5 mr-2"></IconSave>
-              <IconPencilAlt v-else class="w-5 h-5 mr-2"></IconPencilAlt>
-              {{textEditar}}
-            </button>
-          </div>
           <div>
-              <InputText label="Nombre" v-model="info.nombre" :editable="esEditable" class="mb-4">
-                <template v-slot:content>
-                  <h3 class="block mt-2 mb-4 text-3xl font-bold text-gray-800 transition-colors rounded-md capitalize duration-200 transform dark:text-white hover:text-gray-600">{{info.nombre}}</h3>
-                </template>
-              </InputText>
-              <InputTextarea label="Descripción" v-model="info.descripcion" :editable="esEditable" class="mb-4">
-                <template v-slot:content>
-                  <p class="mt-2 mb-4 text-gray-600">{{ info.descripcion }}</p>
-                </template>
-              </InputTextarea>
-              <InputText label="Ubicación" v-model="info.ubicacion" :editable="esEditable" @click="showModalUbicacion=!showModalUbicacion" class="mb-4" readonly></InputText>
-              <iframe v-if="!esEditable && info.ubicacion" :src="info.ubicacion" width="100%" height="450" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <InputText label="Nombre" v-model="info.nombre" @keyup="onChangeNombre" class="mb-4"></InputText>
+              <InputText label="Slug" v-model="info.slug" class="mb-4"></InputText>
+              <InputTextarea label="Descripción" v-model="info.descripcion" class="mb-4"></InputTextarea>
+              <InputText label="Ubicación" v-model="info.ubicacion" @click="showModalUbicacion=!showModalUbicacion" class="mb-4" readonly></InputText>
+              <!-- <iframe v-if="!esEditable && info.ubicacion" :src="info.ubicacion" width="100%" height="450" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
               <div v-else-if="!esEditable && !info.ubicacion" class="flex mb-4">
                 <IconDanger class="text-yellow-500"></IconDanger>
                 <p class="ml-2 text-gray-600">Ubicación no disponible</p>
-              </div>
+              </div> -->
+          </div>
+          <div class="flex justify-end">
+            <BasicButton text="Guardar cambios" @click="onClickBtnConfirmarGuardarCambios" :disabled="unchanged">
+              <template v-slot:icon>
+                <IconSave class="w-5 h-5 mr-2"></IconSave>
+              </template>
+            </BasicButton>
           </div>
         </div>
     </div>
     <!-- DIALOGS -->
-    <DialogGoogleMaps v-model="showModalUbicacion" @submit="onChangeUbicacion"></DialogGoogleMaps>
+    <DialogGoogleMaps v-if="info && showModalUbicacion" v-model="showModalUbicacion" :direccion="info.ubicacion" @submit="onChangeUbicacion"></DialogGoogleMaps>
     <DialogOkCancel v-model="showModalGuardarCambios" @submit="onClickGuardarCambios" titulo="¿Desea guardar los cambios?" descripcion="Si quieres guardar algún cambio que hayas hecho, tan solo debes hacer clic sobre el botón Aceptar."></DialogOkCancel>
-
     <!-- DIALOGS -->
   </div>
 </template>

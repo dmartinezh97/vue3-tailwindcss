@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, reactive } from 'vue';
 import InputText from '../../../components/Forms/InputText.vue';
 import InputTextarea from '@/components/Forms/InputTextarea.vue';
 import type { EventoInformacionModel, ServicioModel } from "@/api/model/eventoModel";
@@ -15,8 +15,9 @@ import IconSave from '../../../components/icons/IconSave.vue';
 import { useToastStore } from '@/stores/modulos/toast';
 import IconOption from '../../../components/icons/IconOption.vue';
 import IconMoreVertical from '../../../components/icons/IconMoreVertical.vue';
-import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import { Menu, MenuButton, MenuItems, MenuItem, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import IconTrash from '../../../components/icons/IconTrash.vue'
+import BasicButton from '../../../components/Forms/BasicButton.vue'
 
 
 const eventoStore = useEventoStore();
@@ -25,35 +26,23 @@ const { params } = useRoute();
 let idevento = ref("0");
 let imgCabecera = ref(null)
 let info = ref<EventoInformacionModel>();
-let testSwitch = ref(false)
-let textEditar = ref('Editar')
+let infoInicial = ref<EventoInformacionModel>();
 let showModalAddServicio = ref(false)
 
 onMounted(async () => {
-  if (params.idevento) {
-    idevento.value = params.idevento.toString();
-    await getInfo()
-  } else {
-    info.value = {
-      idevento: 0,
-      nombre: "",
-      descripcion: "",
-      img_cabecera: "",
-      fecha_creacion: "",
-      fecha_modificacion: "",
-      servicios: []
-    }
-  }
+  idevento.value = params.idevento.toString();
+  await getInfo()
 });
 
-const getImageCabecera = computed(() => {
-  if (imgCabecera.value) {
-    var urlCreator = window.URL || window.webkitURL;
-    return urlCreator.createObjectURL(imgCabecera.value);
-  } else if (info.value && info.value.img_cabecera) {
-    return info.value.img_cabecera
-  } else return "";
-})
+const getInfo = async () => {
+  if (idevento.value != "0") {
+    const res = await eventoStore.getInformacion(idevento.value);
+    //TODO: Mirar a ver porqué sigue siendo reactivo con el objeto servicios
+    // Arreglar botón de guardar cambios que no compara el objeto servicios :)
+    info.value = { ...res };
+    infoInicial.value = { ...res };
+  }
+}
 
 const onChangeFileImgCabecera = (e: any) => {
   if (e.target.files.length > 0) {
@@ -66,21 +55,17 @@ const onChangeFileImgCabecera = (e: any) => {
   }
 };
 
-const getInfo = async () => {
-  if (idevento.value != "0") {
-    info.value = await eventoStore.getInformacion(idevento.value);
-  }
-}
-
 const onClickAddServicio = async () => {
-  await onClickBtnActualizarServicio()
+  if(!unchanged.value) {
+    await onClickBtnActualizarEvento()
+  }
   const res = await eventoStore.crearServicio(idevento.value)
   if (res) {
     await getInfo()
   }
 }
 
-const onClickBtnActualizarServicio = async () => {
+const onClickBtnActualizarEvento = async () => {
   if (info.value) {
     await eventoStore.updateInformacionEvento(info.value)
   }
@@ -97,10 +82,19 @@ const onClickBtnGuardarCambios = () => {
   showModalAddServicio.value = true
 }
 
-// const classBtnEditarObject = computed(() => ({
-//   'bg-gray-200 hover:bg-gray-300 text-gray-700 border border-gray-300': !esEditable.value,
-//   'bg-uno text-white border border-uno hover:bg-dos': esEditable.value
-// }))
+const getImageCabecera = computed(() => {
+  if (imgCabecera.value) {
+    var urlCreator = window.URL || window.webkitURL;
+    return urlCreator.createObjectURL(imgCabecera.value);
+  } else if (info.value && info.value.img_cabecera) {
+    return info.value.img_cabecera
+  } else return "";
+})
+
+const unchanged = computed(() => {
+  return JSON.stringify(info.value) === JSON.stringify(infoInicial.value)
+})
+
 
 </script>
 
@@ -131,7 +125,7 @@ const onClickBtnGuardarCambios = () => {
       <div>
         <div class="p-6 pt-3">
           <InputText label="Nombre" v-model="info.nombre" class="mb-4"></InputText>
-          <InputTextarea label="Descripción" v-model="info.descripcion" class="mb-4">
+          <InputTextarea label="Descripción" v-model="info.descripcion">
             <template v-slot:content>
               <p class="mt-2 text-gray-600">{{ info.descripcion }}</p>
             </template>
@@ -142,19 +136,16 @@ const onClickBtnGuardarCambios = () => {
             class="block text-3xl font-bold text-gray-800 transition-colors rounded-md capitalize duration-200 transform dark:text-white hover:text-gray-600"
           >Servicios</h3>
           <div class="pt-3 pb-6">
-            <div
-              class="rounded-lg overflow-hidden shadow-md mb-4 border border-gray-300"
-              v-for="(servicio, index) in info.servicios"
-              :key="'servicio-' + index"
-            >
-              <div class="flex justify-between bg-gray-100 font-bold p-5">
-                <div>Servicio</div>
-                <div>
-                  <!--  -->
+            <Disclosure v-for="(servicio, index) in info.servicios" :key="'servicio-' + index">
+              <div class="rounded-lg shadow-md mb-4">
+                <div class="flex justify-between w-full rounded-t-lg border border-gray-300 bg-gray-100 font-bold">
+                  <DisclosureButton class="w-full text-left p-5">
+                    <div>Servicio</div>
+                  </DisclosureButton>
                   <Menu as="div" class="relative inline-block text-left">
                     <div>
                       <MenuButton
-                        class="inline-flex"
+                        class="inline-flex p-5"
                       >
                         <IconMoreVertical
                           class="w-5 h-5 text-gray-600 hover:text-gray-400"
@@ -194,12 +185,9 @@ const onClickBtnGuardarCambios = () => {
                       </MenuItems>
                     </transition>
                   </Menu>
-                  <!--  -->
-                  <!-- <IconMoreVertical class="w-5 h-5 cursor-pointer text-gray-600"></IconMoreVertical> -->
                 </div>
-              </div>
-              <div class="grid grid-cols-5 p-5">
-                <div class="px-3">
+                <DisclosurePanel class="grid grid-cols-5 p-5">
+                  <div class="px-3">
                   <InputText label="Nombre" v-model="servicio.nombre" class="mb-4"></InputText>
                 </div>
                 <div class="px-3 col-span-2">
@@ -254,8 +242,9 @@ const onClickBtnGuardarCambios = () => {
                     class="mb-4"
                   ></InputText>
                 </div>
+                </DisclosurePanel>
               </div>
-            </div>
+            </Disclosure>
             <div
               class="w-full border-2 border-dashed border-gray-300 rounded-lg cursor-pointer"
               @click="onClickAddServicio"
@@ -286,13 +275,11 @@ const onClickBtnGuardarCambios = () => {
         </div>
         <div class="p-6">
           <div class="flex justify-end">
-            <button
-              @click="onClickBtnGuardarCambios"
-              type="button"
-              class="flex items-center rounded-lg bg-uno text-white font-medium px-3 py-2 transition ease-in duration-150"
-            >
-              <IconSave class="w-5 h-5 mr-2"></IconSave>Guardar cambios
-            </button>
+            <BasicButton text="Guardar cambios" @click="onClickBtnGuardarCambios" :disabled="unchanged">
+              <template v-slot:icon>
+                <IconSave class="w-5 h-5 mr-2"></IconSave>
+              </template>
+            </BasicButton>
           </div>
         </div>
       </div>
@@ -300,7 +287,7 @@ const onClickBtnGuardarCambios = () => {
     <!-- DIALOGS -->
     <DialogOkCancel
       v-model="showModalAddServicio"
-      @submit="onClickBtnActualizarServicio"
+      @submit="onClickBtnActualizarEvento"
       titulo="¿Desea guardar los cambios?"
       descripcion="Si quieres guardar algún cambio que hayas hecho, tan solo debes hacer clic sobre el botón Aceptar."
     ></DialogOkCancel>

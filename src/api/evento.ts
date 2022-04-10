@@ -14,10 +14,10 @@ enum Api {
 /**
  * @description: Crear un evento API
  */
-export function crearEventoAPI(data: FormData) {
-    return axios.post<boolean>(Api.CrearEvento, data, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
+export function crearEventoAPI(idnegocio: string) {
+    return axios.post<number>(Api.CrearEvento, null, {
+        params: {
+            idnegocio
         }
     });
 }

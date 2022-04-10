@@ -16,12 +16,19 @@ export const useEventoStore = defineStore({
         /**
          * @description: Crear un evento
          */
-        async crearEvento(dataFrm: FormData): Promise<any | null> {
+        async crearEvento(idnegocio: string): Promise<any | null> {
             try {
                 //TODO: Hacer validaciónn de datos
-                await crearEventoAPI(dataFrm)
+                const result = await crearEventoAPI(idnegocio)
+                const { data } = result;
                 useToastStore().success("¡Evento creado!")
-                router.push({ name: PageEnum.EVENTOS_NEGOCIO })
+                console.log(data);
+                router.push({
+                    name: PageEnum.EDITAR_EVENTO,
+                    params: {
+                        idevento: data
+                    }
+                })
             } catch (error) {
                 return Promise.reject(error)
             }

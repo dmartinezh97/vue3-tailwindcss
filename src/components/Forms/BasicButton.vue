@@ -52,7 +52,7 @@ const classObject = computed(() => ({
   'bg-uno text-white border border-uno hover:bg-dos': !props.outlined && !props.disabled,
   'bg-gray-100 text-gray-600 border border-none': props.outlined && !props.disabled,
   'shadow-lg shadow-uno/20': props.shadow && !props.disabled,
-  'bg-gray-200 text-gray-500 border border-gray-300 shadow-sm': props.disabled,
+  'bg-gray-200 hover:bg-gray-300 text-gray-400 border border-gray-300': props.disabled,
 }))
 
 </script>
@@ -62,7 +62,11 @@ const classObject = computed(() => ({
     :type="submit ? 'submit' :'button'"
     :class="classObject"
     :disabled="props.disabled"
-    class="block font-medium px-5 py-2 transition ease-in duration-150"
+    class="flex items-center font-medium px-3 py-2 transition ease-in duration-150"
     @click="onClick"
-  >{{ text }}</button>
+  >
+  <slot name="icon">
+  </slot>
+  {{ text }}
+  </button>
 </template>

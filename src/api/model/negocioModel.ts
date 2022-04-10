@@ -31,6 +31,7 @@ export interface MisNegociosResultModel {
 export interface NegocioInformacionGeneralModel {
     idnegocio: number;
     nombre: string;
+    slug: string;
     descripcion: string;
     tipo_negocio: string;
     ubicacion: string;

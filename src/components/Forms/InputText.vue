@@ -69,7 +69,7 @@ const classInputObject = computed(() => ({
 
 <template>
   <template v-if="editable">
-    <div class="flex flex-col" :class="class" @click="onClick">
+    <div class="flex flex-col" :class="class">
       <label v-if="props.label" class="text-gray-600 font-medium mb-1">{{ props.label }}</label>
       <div class="flex items-center">
         <input
@@ -77,6 +77,7 @@ const classInputObject = computed(() => ({
           step="0.1"
           :value="modelValue"
           :disabled="disabled"
+          @click="onClick"
           @input="updateValue"
           :class="classInputObject"
           :placeholder="props.placeholder"

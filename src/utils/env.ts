@@ -1,5 +1,3 @@
-
-
 /**
  * @description: Get variables de entorno
  * @returns:

@@ -56,11 +56,11 @@ const routes: RouteRecordRaw[] = [
                                 name: PageEnum.EVENTOS_NEGOCIO,
                                 component: ListarEventosViewVue,
                             },
-                            {
-                                path: 'editar',
-                                name: PageEnum.ADD_EVENTO,
-                                component: AddEditarEventoViewVue,
-                            },
+                            // {
+                            //     path: 'editar',
+                            //     name: PageEnum.ADD_EVENTO,
+                            //     component: AddEditarEventoViewVue,
+                            // },
                             {
                                 path: 'editar/:idevento',
                                 name: PageEnum.EDITAR_EVENTO,

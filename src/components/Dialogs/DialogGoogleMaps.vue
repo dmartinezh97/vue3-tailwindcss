@@ -1,17 +1,28 @@
 <script setup lang="ts">
 import BasicButton from "../Forms/BasicButton.vue";
 import InputText from "../Forms/InputText.vue";
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 const direccion = ref("");
 const direccionOk = ref(false);
 
 const props = defineProps({
+    direccion: {
+        type: String,
+        default: "",
+        required: true
+    },
     modelValue: {
         type: Boolean,
         default: '',
         required: true
     },
+})
+
+onMounted(() => {
+    if (props.direccion) {
+        direccion.value = props.direccion;
+    }
 })
 
 const emit = defineEmits(['update:modelValue', 'submit'])
@@ -51,8 +62,8 @@ const getDireccion = computed(() => {
 
 <template>
     <div class="fixed inset-0 z-50 bg-[#00000099]" v-show="props.modelValue">
-        <div class="flex flex-col justify-center items-center h-full">
-            <div class="p-8 bg-white rounded-lg shadow-2xl w-full max-w-2xl">
+        <div class="flex flex-col justify-center items-center h-full p-8">
+            <div class="p-8 bg-white rounded-lg shadow-2xl w-full max-w-4xl overflow-y-auto">
                 <h2 class="text-lg font-bold mb-4">Añadir ubicación</h2>
                 <InputText label="Ubicación" v-model="direccion"></InputText>
                 <iframe v-if="getDireccion" :src="getDireccion" width="100%" height="450" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

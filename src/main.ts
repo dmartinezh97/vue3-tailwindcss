@@ -7,6 +7,7 @@ import { setupStore } from './stores'
 import { setupAxios } from './utils/http/axios/index';
 import { setupRouterGuard } from './router/guard/index';
 import { router } from './router/index';
+import filters from './utils/filters';
 
 const app = createApp(App)
 
@@ -25,6 +26,8 @@ setupRouter(app)
 //Configuración de rutas protegidas
 setupRouterGuard(router);
 
+//Añadimos los filtros
+app.config.globalProperties.$filters = filters
 
 //Montamos/Instanciamos la aplicación web
 app.mount('#app')

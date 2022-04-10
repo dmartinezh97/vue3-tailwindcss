@@ -35,6 +35,9 @@ export const useUserStore = defineStore({
         resetState() {
             this.user = null;
             this.token = "";
+            router.push({
+                name: PageEnum.INICIO
+            });
         },
         setUserInfo(info: UserInfo | null) {
             this.user = info;
@@ -51,7 +54,9 @@ export const useUserStore = defineStore({
                 const { data } = result
                 this.setUserInfo(data)
                 this.setToken(data.token)
-                router.push(PageEnum.INICIO)
+                router.push({
+                    name: PageEnum.INICIO
+                })
             } catch (error) {
                 return Promise.reject(error)
             }
