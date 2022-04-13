@@ -2,14 +2,15 @@
 import { PageEnum } from '@/enums/pageEnum';
 import { router } from '@/router';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useUserStore } from '../stores/modulos/user';
 import BasicButton from './Forms/BasicButton.vue';
 import SidebarNegocio from './SidebarNegocio.vue';
 import IconTrash from './icons/IconTrash.vue';
 import IconLogout from './icons/IconLogout.vue';
+import DialogRegistro from './DialogRegistro.vue';
 
-
+const showModalRegistro = ref(false);
 const userStore = useUserStore();
 
 const onClickBtnInicio = () => {
@@ -18,8 +19,12 @@ const onClickBtnInicio = () => {
   });
 };
 
-const onClickBtnLogin = () => {
-  router.push(PageEnum.LOGIN);
+const onClickBtnRegistro = () => {
+  showModalRegistro.value = true;
+};
+
+const onClickBtnCloseRegistro = () => {
+  showModalRegistro.value = false;
 };
 
 const onClickCerrarSesion = () => {
@@ -30,50 +35,28 @@ const onClickCerrarSesion = () => {
 
 <template>
   <header class="sticky top-0 z-30 bg-white shadow-md">
-    <div class="flex items-center justify-between h-16 px-6 mx-auto">
+    <div class="container h-16 flex items-center justify-between  px-6 mx-auto">
       <div class="flex flex-1 w-0 lg:hidden">
         <button class="p-2 text-gray-600 bg-gray-100 rounded-full" type="button">
-          <svg
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-            />
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round"
+              stroke-linejoin="round" stroke-width="2" />
           </svg>
         </button>
       </div>
-
-      <div @click="onClickBtnInicio" class="flex items-center space-x-4 cursor-pointer">
+      <div @click="onClickBtnInicio" class="flex items-center lg:flex-1 space-x-4 cursor-pointer">
         <img src="@/assets/logo.svg" alt="Logo App" class="w-16 h-16" />
       </div>
-
       <div class="flex justify-end flex-1 w-0 lg:hidden">
         <button class="p-2 text-gray-500 bg-gray-100 rounded-full" type="button">
-          <svg
-            class="w-5 h-5"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd"
               d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-              fill-rule="evenodd"
-            />
+              fill-rule="evenodd" />
           </svg>
         </button>
       </div>
-
-      <nav
-        class="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0"
-      >
+      <nav class="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0">
         <router-link :to="{ name: PageEnum.BASE_NEGOCIO }">Negocios</router-link>
         <!-- <a class="text-gray-900" href>About</a>
         <a class="text-gray-900" href>Blog</a>
@@ -81,82 +64,61 @@ const onClickCerrarSesion = () => {
         <a class="text-gray-900" href>Contact</a>-->
       </nav>
 
-      <div class="items-center hidden space-x-2 lg:flex">
-        <template v-if="userStore.getIsLogged">
-          <button
-            class="hidden mx-4 text-gray-600 transition-colors duration-200 transform md:block dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none"
-            aria-label="show notifications"
-          >
-            <svg
-              class="w-6 h-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-          <Menu as="div" class="relative inline-block text-left">
-            <div>
-              <MenuButton
-                class="flex items-center"
-              >
-                <div class="w-10 h-10 overflow-hidden border-2 border-gray-400 rounded-full">
-                  <img
-                    src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                    class="object-cover w-full h-full"
-                    alt="avatar"
-                  />
-                </div>
-              </MenuButton>
-            </div>
-
-            <transition
-              enter-active-class="transition duration-100 ease-out"
-              enter-from-class="transform scale-95 opacity-0"
-              enter-to-class="transform scale-100 opacity-100"
-              leave-active-class="transition duration-75 ease-in"
-              leave-from-class="transform scale-100 opacity-100"
-              leave-to-class="transform scale-95 opacity-0"
-            >
-              <MenuItems
-                class="absolute right-0 z-10 w-48 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-              >
-                <div>
-                  <MenuItem v-slot="{ active }">
-                    <button
-                      @click="onClickCerrarSesion"
-                      :class="[
-                        active ? 'bg-gray-100 text-gray-800' : 'text-gray-900',
-                                'group flex rounded-md items-center w-full p-3 px-4 text-sm',
-                      ]"
-                    >
-                      <IconLogout
-                        :active="active"
-                        class="w-5 h-5 mr-2 text-uno"
-                        aria-hidden="true"
-                      />Cerrar sesión
-                    </button>
-                  </MenuItem>
-                </div>
-              </MenuItems>
-            </transition>
-          </Menu>
-        </template>
-        <template v-else>
-          <BasicButton text="Iniciar sesión" @click="onClickBtnLogin" outlined></BasicButton>
-          <BasicButton text="Crear cuenta"></BasicButton>
-        </template>
-        <!-- <a class="px-5 py-2 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg" href>Iniciar sesión</a> -->
-        <!-- <a class="px-5 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg" href>Sign up</a> -->
+      <div class="lg:flex lg:flex-1 justify-end items-center hidden space-x-4">
+        <div class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none">Añade tu negocio</div>
+        <Menu as="div" class="relative inline-block text-left">
+          <MenuButton class="flex items-center border border-gray-300 pl-3 p-1 rounded-full">
+            <span class="material-icons text-lg text-gray-400">menu</span>
+            <span class="material-icons text-3xl leading-none text-gray-400 ml-3 rounded-full">account_circle</span>
+          </MenuButton>
+          <transition enter-active-class="transition duration-100 ease-out"
+            enter-from-class="transform scale-95 opacity-0" enter-to-class="transform scale-100 opacity-100"
+            leave-active-class="transition duration-75 ease-in" leave-from-class="transform scale-100 opacity-100"
+            leave-to-class="transform scale-95 opacity-0">
+            <MenuItems
+              class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <div class="py-2">
+                <MenuItem v-slot="{ active }">
+                <button @click="onClickBtnRegistro"
+                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
+                  <!-- <EditIcon
+                      :active="active"
+                      class="w-5 h-5 mr-2 text-violet-400"
+                      aria-hidden="true"
+                    /> -->
+                  Regístrate
+                </button>
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                <button :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
+                  Iniciar sesión
+                </button>
+                </MenuItem>
+              </div>
+              <div class="py-2">
+                <MenuItem v-slot="{ active }">
+                <button :class="[
+                  active ? 'bg-gray-200' : 'text-gray-900',
+                  'group flex items-center w-full px-4 py-2 text-sm',
+                ]">
+                  Añade tu negocio
+                </button>
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                <button :class="[
+                  active ? 'bg-gray-200' : 'text-gray-900',
+                  'group flex items-center w-full px-4 py-2 text-sm',
+                ]">
+                  Ayuda
+                </button>
+                </MenuItem>
+              </div>
+            </MenuItems>
+          </transition>
+        </Menu>
       </div>
     </div>
+    <DialogRegistro v-model="showModalRegistro"></DialogRegistro>
     <SidebarNegocio></SidebarNegocio>
     <!-- <div class="border-t border-gray-100 lg:hidden">
       <nav class="flex items-center justify-center p-4 overflow-x-auto text-sm font-medium">
