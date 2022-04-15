@@ -14,8 +14,8 @@ const buscar = ref("");
 </script>
 
 <template>
-  <div id="inicio">
-    
+  <div id="inicio" class="text-center">
+    <h1>Inicio</h1>
   </div>
 </template>
 

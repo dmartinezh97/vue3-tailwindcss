@@ -7,14 +7,29 @@ export interface LoginParams {
 }
 
 /**
+ * @description: Parametros para crear cuenta
+ */
+export interface SignupParams {
+    nombre: string;
+    apellidos: string;
+    usuario: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+}
+
+/**
  * @description: Los valores de retorno cuando inicia sesión
  */
 export interface LoginResultModel {
-    idUsuario: string | number;
-    nombre: string;
-    apellidos: string;
-    email: string;
-    token: string;
+    IdUsuario: string;
+    Nombre: string;
+    Apellidos: string;
+    Usuario: string;
+    Telefono: string;
+    Email: string;
+    Rol: string;
+    Token: string;
 }
 
 /**

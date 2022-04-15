@@ -40,10 +40,14 @@ export interface EventoState {
 }
 
 export interface UserInfo {
-    idUsuario: string | number;
-    nombre: string;
-    apellidos: string;
-    email: string;
+    IdUsuario: string;
+    Nombre: string;
+    Apellidos: string;
+    Usuario: string;
+    Telefono: string;
+    Email: string;
+    Rol: string;
+    Token: string;
 }
 
 //TODO: Temporal

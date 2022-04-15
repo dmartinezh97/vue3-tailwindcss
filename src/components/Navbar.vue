@@ -9,8 +9,11 @@ import SidebarNegocio from './SidebarNegocio.vue';
 import IconTrash from './icons/IconTrash.vue';
 import IconLogout from './icons/IconLogout.vue';
 import DialogRegistro from './DialogRegistro.vue';
+import DialogLogin from './DialogLogin.vue';
 
 const showModalRegistro = ref(false);
+const showModalLogin = ref(false);
+
 const userStore = useUserStore();
 
 const onClickBtnInicio = () => {
@@ -19,12 +22,14 @@ const onClickBtnInicio = () => {
   });
 };
 
-const onClickBtnRegistro = () => {
-  showModalRegistro.value = true;
+const onClickBtnLogin = () => {
+  showModalRegistro.value = false;
+  showModalLogin.value = true;
 };
 
-const onClickBtnCloseRegistro = () => {
-  showModalRegistro.value = false;
+const onClickBtnRegistro = () => {
+  showModalLogin.value = false;
+  showModalRegistro.value = true;
 };
 
 const onClickCerrarSesion = () => {
@@ -37,12 +42,7 @@ const onClickCerrarSesion = () => {
   <header class="sticky top-0 z-30 bg-white shadow-md">
     <div class="container h-16 flex items-center justify-between  px-6 mx-auto">
       <div class="flex flex-1 w-0 lg:hidden">
-        <button class="p-2 text-gray-600 bg-gray-100 rounded-full" type="button">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round"
-              stroke-linejoin="round" stroke-width="2" />
-          </svg>
-        </button>
+        <span class="material-icons text-gray-600 bg-gray-100 rounded-full p-2">menu</span>
       </div>
       <div @click="onClickBtnInicio" class="flex items-center lg:flex-1 space-x-4 cursor-pointer">
         <img src="@/assets/logo.svg" alt="Logo App" class="w-16 h-16" />
@@ -65,7 +65,7 @@ const onClickCerrarSesion = () => {
       </nav>
 
       <div class="lg:flex lg:flex-1 justify-end items-center hidden space-x-4">
-        <div class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none">Añade tu negocio</div>
+        <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.HOME_NEGOCIOS }">Añade tu negocio</router-link>
         <Menu as="div" class="relative inline-block text-left">
           <MenuButton class="flex items-center border border-gray-300 pl-3 p-1 rounded-full">
             <span class="material-icons text-lg text-gray-400">menu</span>
@@ -78,37 +78,44 @@ const onClickCerrarSesion = () => {
             <MenuItems
               class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div class="py-2">
-                <MenuItem v-slot="{ active }">
-                <button @click="onClickBtnRegistro"
-                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
-                  <!-- <EditIcon
-                      :active="active"
-                      class="w-5 h-5 mr-2 text-violet-400"
-                      aria-hidden="true"
-                    /> -->
-                  Regístrate
-                </button>
-                </MenuItem>
-                <MenuItem v-slot="{ active }">
-                <button :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
-                  Iniciar sesión
-                </button>
-                </MenuItem>
+                <template v-if="userStore.getIsLogged">
+                  <MenuItem v-slot="{ active }">
+                  <button @click="onClickCerrarSesion"
+                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
+                    Cerrar sesión
+                  </button>
+                  </MenuItem>
+                </template>
+                <template v-else>
+                  <MenuItem v-slot="{ active }">
+                  <button @click="onClickBtnRegistro"
+                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
+                    <!-- <EditIcon
+                          :active="active"
+                          class="w-5 h-5 mr-2 text-violet-400"
+                          aria-hidden="true"
+                        /> -->
+                    Regístrate
+                  </button>
+                  </MenuItem>
+                  <MenuItem v-slot="{ active }">
+                  <button @click="onClickBtnLogin"
+                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
+                    Iniciar sesión
+                  </button>
+                  </MenuItem>
+                </template>
               </div>
               <div class="py-2">
                 <MenuItem v-slot="{ active }">
-                <button :class="[
-                  active ? 'bg-gray-200' : 'text-gray-900',
-                  'group flex items-center w-full px-4 py-2 text-sm',
-                ]">
+                <button
+                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
                   Añade tu negocio
                 </button>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
-                <button :class="[
-                  active ? 'bg-gray-200' : 'text-gray-900',
-                  'group flex items-center w-full px-4 py-2 text-sm',
-                ]">
+                <button
+                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
                   Ayuda
                 </button>
                 </MenuItem>
@@ -118,15 +125,16 @@ const onClickCerrarSesion = () => {
         </Menu>
       </div>
     </div>
-    <DialogRegistro v-model="showModalRegistro"></DialogRegistro>
+    <DialogLogin v-model="showModalLogin" @registro="onClickBtnRegistro"></DialogLogin>
+    <DialogRegistro v-model="showModalRegistro" @login="onClickBtnLogin"></DialogRegistro>
     <SidebarNegocio></SidebarNegocio>
     <!-- <div class="border-t border-gray-100 lg:hidden">
       <nav class="flex items-center justify-center p-4 overflow-x-auto text-sm font-medium">
-        <a class="flex-shrink-0 pl-4 text-gray-900" href>About</a>
-        <a class="flex-shrink-0 pl-4 text-gray-900" href>Blog</a>
-        <a class="flex-shrink-0 pl-4 text-gray-900" href>Projects</a>
-        <a class="flex-shrink-0 pl-4 text-gray-900" href>Contact</a>
+        <a class="flex-shrink-0 pl-4 text-gray-900">About</a>
+        <a class="flex-shrink-0 pl-4 text-gray-900">Blog</a>
+        <a class="flex-shrink-0 pl-4 text-gray-900">Projects</a>
+        <a class="flex-shrink-0 pl-4 text-gray-900">Contact</a>
       </nav>
-    </div>-->
+    </div> -->
   </header>
 </template>

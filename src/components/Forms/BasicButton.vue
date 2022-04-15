@@ -62,7 +62,7 @@ const classObject = computed(() => ({
     :type="submit ? 'submit' :'button'"
     :class="classObject"
     :disabled="props.disabled"
-    class="flex items-center justify-center font-semibold px-3 py-3.5 leading-none transition ease-in duration-150"
+    class="flex items-center justify-center font-semibold px-6 py-3.5 leading-none transition ease-in duration-150"
     @click="onClick"
   >
   <slot name="icon">

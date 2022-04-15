@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+input:focus-within~label,
+input:not(:placeholder-shown)~label {
+    @apply text-gray-400 font-bold transform text-xs px-2.5 -translate-y-7 left-2; /* -translate-x-5 */
+}
+
+input:focus-within~label {
+    @apply text-uno font-bold;
+}
+
+.linea-o{
+    @apply flex items-center text-xs ;
+}
+.linea-o::after{
+    @apply block w-full h-[1px] bg-gray-300 ml-4 content-[''];
+}
+.linea-o::before {
+    @apply block w-full h-[1px] bg-gray-300 mr-4 content-[''];
+}

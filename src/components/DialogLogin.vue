@@ -3,18 +3,14 @@ import { ref, onMounted, onDeactivated, reactive } from 'vue';
 import { Dialog, DialogOverlay, DialogTitle, DialogDescription } from '@headlessui/vue'
 import BasicButton from './Forms/BasicButton.vue'
 import InputText from './Forms/InputText.vue'
+import type { LoginParams } from '@/api/model/userModel';
 import { useUserStore } from '@/stores/modulos/user';
-import type { SignupParams } from '@/api/model/userModel';
 
 const userStore = useUserStore();
 
-const frmData: SignupParams = reactive({
-    nombre: "",
-    apellidos: "",
-    usuario: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+const frmData: LoginParams = reactive({
+    username: "dmartinezh97@gmail.com",
+    password: "1234"
 })
 
 const props = defineProps({
@@ -24,19 +20,19 @@ const props = defineProps({
     },
 })
 
-const emit = defineEmits(['update:modelValue', 'login'])
+const emit = defineEmits(['update:modelValue', 'registro'])
 const setIsOpen = (value: boolean) => {
     emit('update:modelValue', value)
 };
 
-const onClickOpenLogin = () => {
-    emit('login', true)
+const onClickOpenRegistro = () => {
+    emit('registro', true)
 };
 
 const onClickBtnLogin = async () => {
-    const res = await userStore.signUp(frmData)
+    const res = await userStore.login(frmData)
     if (res) {
-        //setIsOpen(false)
+        setIsOpen(false)
     }
 };
 
@@ -48,7 +44,7 @@ const onClickBtnLogin = async () => {
             <DialogOverlay class="fixed inset-0 bg-black opacity-30" />
             <div class="relative w-full max-w-lg mx-auto bg-white rounded-xl">
                 <div class="flex justify-center items-center h-16 border-b border-gray-200 px-3">
-                    <h2 class="text-base leading-none tracking-tight font-extrabold">Regístrate</h2>
+                    <h2 class="text-base leading-none tracking-tight font-extrabold">Inicia sesión</h2>
                     <button @click="setIsOpen(false)"
                         class="w-8 h-8 absolute right-4 top-1/2 transform -translate-y-1/2 hover:bg-gray-100 rounded-full">
                         <span class="material-icons text-lg text-gray-500">close</span>
@@ -56,25 +52,21 @@ const onClickBtnLogin = async () => {
                 </div>
                 <div class="p-6">
                     <div class="mb-8">
-                        <h3 class="font-semibold text-xl">¡Únete a {nombreApp} hoy mismo!</h3>
+                        <h3 class="font-semibold text-xl">¡Te damos la bienvenida a {nombreApp}!</h3>
                     </div>
                     <div>
-                        <InputText label="Nombre" v-model="frmData.nombre"></InputText>
-                        <InputText label="Apellidos" v-model="frmData.apellidos"></InputText>
-                        <InputText label="Usuario" v-model="frmData.usuario"></InputText>
-                        <InputText label="Correo electrónico" v-model="frmData.email" type="email"></InputText>
+                        <InputText label="Correo electrónico" v-model="frmData.username" type="email"></InputText>
                         <InputText label="Contraseña" v-model="frmData.password" type="password"></InputText>
-                        <InputText label="Confirmar contraseña" v-model="frmData.confirmPassword" type="password"></InputText>
                     </div>
                     <div>
-                        <BasicButton @click="onClickBtnLogin" text="Crear cuenta" block></BasicButton>
+                        <BasicButton @click="onClickBtnLogin" text="Iniciar sesión" block></BasicButton>
                     </div>
                     <div class="my-4">
                         <div class="linea-o">o</div>
                     </div>
                     <div>
-                        <button @click="onClickOpenLogin" class="w-full rounded-lg text-gray-600 border border-gray-300 hover:bg-gray-100 flex items-center justify-center text-sm font-normal px-3 py-3.5 leading-none transition ease-in duration-150">
-                            Inicia sesión con el correo electrónico
+                        <button @click="onClickOpenRegistro" class="w-full rounded-lg text-gray-600 border border-gray-300 hover:bg-gray-100 flex items-center justify-center text-sm font-normal px-3 py-3.5 leading-none transition ease-in duration-150">
+                            Regístrate con el correo electrónico
                         </button>
                     </div>
                 </div>

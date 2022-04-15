@@ -13,7 +13,7 @@ const negocioStore = useNegocioStore();
 const route = useRoute();
 
 onBeforeMount(() => {
-  negocioStore.misNegocios()
+  //negocioStore.misNegocios()
 })
 
 const list = reactive({

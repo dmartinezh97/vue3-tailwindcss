@@ -1,8 +1,9 @@
-import type { LoginParams, LoginResultModel, UserInfoModel } from "./model/userModel";
+import type { LoginParams, LoginResultModel, UserInfoModel, SignupParams } from "./model/userModel";
 import axios from 'axios';
 
 enum Api {
     Login = '/Auth/Login',
+    SignUp = '/Auth/SignUp',
     GetUserInfo = '/Usuario/GetInfo',
     UpdateUserInfo = '/Usuario/UpdateInfo',
     // Logout = '/Auth/logout',
@@ -14,6 +15,13 @@ enum Api {
  */
 export function loginApi(params: LoginParams) {
     return axios.post<LoginResultModel>(Api.Login, params);
+}
+
+/**
+ * @description: Registro API
+ */
+export function signUpApi(params: SignupParams) {
+    return axios.post<LoginResultModel>(Api.SignUp, params);
 }
 
 /**

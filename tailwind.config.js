@@ -21,7 +21,19 @@ module.exports = {
         fondo: '#F5F5F5',
         success: '#46BFA3',
         fuente: '#27425D'
-      }
+      },
+      height: {
+        'screen-nav': 'calc(100vh - 64px)',
+        'screen-nav2': 'calc(100vh - 160px)',
+      },
+      transformOrigin: {
+        "0": "0%",
+      },
+      zIndex: {
+        "1": "1",
+        "2": "2",
+        "-1": "-1",
+      },
     },
   },
   plugins: [],

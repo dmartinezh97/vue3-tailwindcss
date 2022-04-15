@@ -38,11 +38,6 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  editable: {
-    type: Boolean,
-    default: true,
-    required: false
-  },
   modelValue: {
     type: [String, Number],
     default: '',
@@ -50,47 +45,19 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:modelValue', 'click'])
+const emit = defineEmits(['update:modelValue'])
 const updateValue = (e: Event) => {
   emit('update:modelValue', (e.target as HTMLInputElement).value)
 };
 
-const onClick = () => {
-  emit('click')
-};
-
-const classInputObject = computed(() => ({
-  'bg-gray-200': props.disabled,
-  'rounded-lg': props.iconRight === '',
-  'rounded-l-lg': props.iconRight != '',
-}))
-
 </script>
 
 <template>
-  <template v-if="editable">
-    <div class="flex flex-col" :class="class">
-      <label v-if="props.label" class="text-gray-600 font-medium mb-1">{{ props.label }}</label>
-      <div class="flex items-center">
-        <input
-          :type="type"
-          step="0.1"
-          :value="modelValue"
-          :disabled="disabled"
-          @click="onClick"
-          @input="updateValue"
-          :class="classInputObject"
-          :placeholder="props.placeholder"
-          spellcheck="false"
-          :readonly="readonly"
-          class="block w-full font-light text-base bg-transparent text-black placeholder:text-gray-300 py-2 px-4 bg-primary border border-gray-300 focus:border focus:outline-none focus:border-uno focus:ring-none"
-        />
-        <div v-if="props.iconRight!=''" class="px-4 py-2 rounded-r-lg bg-primary border-r border-y border-gray-300">{{props.iconRight}}</div>
-      </div>
+  <div class="border border-gray-300 rounded-md focus-within:border-uno mb-4">
+    <div class="relative px-4 py-2">
+      <input :value="modelValue" :type="props.type" @input="updateValue" name="username" placeholder=" " class="block w-full z-2 appearance-none focus:outline-none bg-transparent" />
+      <label for="username" class="absolute top-1/2 left-6 transform -translate-y-1/2 z-1 duration-300 bg-white">{{props.label}}</label>
+      <!-- <label for="username" class="absolute top-1/2 transform -translate-y-1/2 z-1 duration-300 bg-white">{{props.label}}</label> -->
     </div>
-  </template>
-  <template v-else>
-    <slot name="content">
-    </slot>
-  </template>
+  </div>
 </template>

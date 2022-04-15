@@ -12,7 +12,7 @@ import InputPassword from '../../components/Forms/InputPassword.vue';
 const userStore = useUserStore();
 
 const frmData: LoginParams = reactive({
-  username: "dmartinezh97@gmail.com",
+  username: "dani@gmail.com",
   password: "1234"
 })
 
