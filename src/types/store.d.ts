@@ -33,6 +33,13 @@ export interface AppState {
 
 export interface NegocioState {
     negocios: MisNegociosResultModel[];
+    negocio: Partial<NuevoNegocio>;
+}
+
+export interface NuevoNegocio{
+    nombre: string;
+    descripcion: string;
+    tipo_negocio: string;
 }
 
 export interface EventoState {

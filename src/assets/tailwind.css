@@ -21,3 +21,8 @@ input:focus-within~label {
 .linea-o::before {
     @apply block w-full h-[1px] bg-gray-300 mr-4 content-[''];
 }
+
+.scroll-content-negocio{
+    @apply flex flex-col justify-center items-center overflow-y-auto;
+    height: calc(100vh - calc(96px + 64px));
+}

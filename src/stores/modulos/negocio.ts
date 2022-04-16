@@ -11,9 +11,13 @@ import type { NegocioState } from '@/types/store';
 export const useNegocioStore = defineStore({
     id: 'negocio',
     state: (): NegocioState => ({
-        negocios: []
+        negocios: [],
+        negocio: {}
     }),
     actions: {
+        resetState() {
+            this.negocio = {}
+        },
         /**
          * @description: Listado de mis negocios
          */

@@ -5,7 +5,7 @@ import { isDevMode } from '@/utils/env';
 import { Http } from './Http';
 
 export function setupAxios(app: App<Element>) {
-  axios.defaults.baseURL = isDevMode() ? "https://localhost:44392/" : "";
+  axios.defaults.baseURL = isDevMode() ? "https://26.25.24.45:45455/" : "";
   new Http.ApiJwtService();
   app.use(VueAxios, axios)
 }
