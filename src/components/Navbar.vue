@@ -63,11 +63,11 @@ const onClickCerrarSesion = () => {
           enter-active-class="transition duration-200 ease-out"
           enter-from-class="translate-y-1 opacity-0"
           enter-to-class="translate-y-0 opacity-100"
-          leave-active-class="transition duration-150 ease-in"
+          leave-active-class="transition duration-100 ease-in"
           leave-from-class="translate-y-0 opacity-100"
           leave-to-class="translate-y-1 opacity-0"
         >
-          <PopoverPanel class="fixed top-0 left-0 z-40 bg-white w-64 h-screen flex flex-col justify-between">
+          <PopoverPanel class="fixed top-0 left-0 z-40 bg-white w-64 h-full flex flex-col justify-between">
             <div class="flex flex-col">
               <div @click="onClickBtnInicio" class="flex justify-center items-center">
                 <img src="@/assets/logo.svg" alt="Logo App" class="w-20 h-20" />
@@ -101,75 +101,34 @@ const onClickCerrarSesion = () => {
                   </a> -->
               </nav>
               <nav class="mb-2">
-                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
-                      <span class="mx-4 font-medium">Añade tu negocio</span>
+                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
+                    <span class="material-icons">post_add</span>  
+                    <span class="mx-4 font-medium">Añade tu negocio</span>
                   </a>
-                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
-                      <span class="mx-4 font-medium">Ayuda</span>
+                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
+                    <span class="material-icons">help_outline</span>
+                    <span class="mx-4 font-medium">Ayuda</span>
                   </a>
               </nav>
             </div>
             </div>
-            <div v-if="userStore.getIsLogged">
-              <Disclosure v-slot="{ open }">
-                <DisclosureButton
-                  as="div"
-                  class="flex justify-between items-center w-full px-2 py-4 bg-gray-100"
-                >
-                  <div class="flex items-center">
-                    <div>
-                      <img class="object-cover w-9 h-9 mx-2 rounded-full" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="avatar">
-                    </div>
-                    <div class="mx-2 w-32 font-medium text-gray-800 whitespace-nowrap text-ellipsis overflow-hidden">{{userStore.getFullName}}</div>
-                  </div>
-                  <div class="flex flex-col justify-center items-center">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      class="transition duration-500 mr-2"
-                      :class="open ? 'transform rotate-180' : ''"
-                    >
-                      <path
-                        d="M6.34317 7.75732L4.92896 9.17154L12 16.2426L19.0711 9.17157L17.6569 7.75735L12 13.4142L6.34317 7.75732Z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </div>
-                  <!-- <span class="material-icons text-gray-600 bg-gray-100 rounded-full p-2" :class="open ? 'transform rotate-180' : ''">menu</span> -->
-                </DisclosureButton>
-                <transition
-                  enter-active-class="transition duration-100 ease-out"
-                  enter-from-class="transform scale-95 opacity-0"
-                  enter-to-class="transform scale-100 opacity-100"
-                  leave-active-class="transition duration-75 ease-out"
-                  leave-from-class="transform scale-100 opacity-100"
-                  leave-to-class="transform scale-95 opacity-0"
-                >
-                  <DisclosurePanel class="bg-gray-100">
-                    <PopoverButton as="div">
-                      <div @click="onClickCerrarSesion" class="flex items-center px-4 py-2 text-gray-600 transition-colors duration-200 transform" active-class="bg-gray-200" >
-                          <span class="material-icons text-gray-600">person</span>
-                          <span class="mx-4 font-medium">Mi cuenta</span>
-                      </div>
-                    </PopoverButton>
-                    <PopoverButton as="div">
-                      <div @click="onClickCerrarSesion" class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform" active-class="bg-gray-200" >
-                          <span class="material-icons text-gray-600">logout</span>
-                          <span class="mx-4 font-medium">Cerrar sesión</span>
-                      </div>
-                    </PopoverButton>
-                  </DisclosurePanel>
-                </transition>
-              </Disclosure>
+            <div v-if="userStore.getIsLogged" class="p-2">
+              <PopoverButton as="div" v-for="item in menuPrincipal">
+                <BasicButton text="Cerrar sesión" block @click="onClickCerrarSesion">
+                  <template v-slot:icon>
+                    <span class="material-icons mr-5">logout</span>
+                  </template>
+                </BasicButton>
+              </PopoverButton>
             </div>
             <div v-else class="py-4">
               <div @click="onClickBtnRegistro" class="flex items-center px-4 py-2 mb-2 text-gray-600">
-                  <span class="mx-4 font-medium">Regístrate</span>
+                <span class="material-icons">app_registration</span>
+                <span class="mx-4 font-medium">Regístrate</span>
               </div>
               <div @click="onClickBtnLogin" class="flex items-center px-4 py-2 text-gray-600">
-                  <span class="mx-4 font-medium">Iniciar sesión</span>
+                <span class="material-icons">login</span>
+                <span class="mx-4 font-medium">Iniciar sesión</span>
               </div>
             </div>
           </PopoverPanel>
@@ -211,7 +170,8 @@ const onClickCerrarSesion = () => {
                 <template v-if="userStore.getIsLogged">
                   <MenuItem v-slot="{ active }">
                   <button @click="onClickCerrarSesion"
-                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
+                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-base']">
+                    <span class="material-icons text-lg mr-4 text-gray-600">logout</span>
                     Cerrar sesión
                   </button>
                   </MenuItem>
@@ -219,18 +179,15 @@ const onClickCerrarSesion = () => {
                 <template v-else>
                   <MenuItem v-slot="{ active }">
                   <button @click="onClickBtnRegistro"
-                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
-                    <!-- <EditIcon
-                          :active="active"
-                          class="w-5 h-5 mr-2 text-violet-400"
-                          aria-hidden="true"
-                        /> -->
+                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-base']">
+                    <span class="material-icons text-lg mr-4 text-gray-600">app_registration</span>
                     Regístrate
                   </button>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
                   <button @click="onClickBtnLogin"
-                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
+                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-base']">
+                    <span class="material-icons text-lg mr-4 text-gray-600">login</span>
                     Iniciar sesión
                   </button>
                   </MenuItem>
@@ -239,13 +196,15 @@ const onClickCerrarSesion = () => {
               <div class="py-2">
                 <MenuItem v-slot="{ active }">
                 <button
-                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
+                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-base']">
+                  <span class="material-icons text-lg mr-4 text-gray-600">post_add</span>
                   Añade tu negocio
                 </button>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                 <button
-                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
+                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-base']">
+                  <span class="material-icons text-lg mr-4 text-gray-600">help_outline</span>
                   Ayuda
                 </button>
                 </MenuItem>
