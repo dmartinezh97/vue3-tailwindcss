@@ -44,13 +44,13 @@ const onClickBtnLogin = async () => {
 
 <template>
     <Dialog :open="props.modelValue" @close="setIsOpen" class="fixed inset-0 z-30 overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen p-8">
+        <div class="flex items-center justify-center min-h-full py-8 px-1 md:p-8">
             <DialogOverlay class="fixed inset-0 bg-black opacity-30" />
             <div class="relative w-full max-w-lg mx-auto bg-white rounded-xl">
                 <div class="flex justify-center items-center h-16 border-b border-gray-200 px-3">
                     <h2 class="text-base leading-none tracking-tight font-extrabold">Regístrate</h2>
                     <button @click="setIsOpen(false)"
-                        class="w-8 h-8 absolute right-4 top-1/2 transform -translate-y-1/2 hover:bg-gray-100 rounded-full">
+                        class="w-8 h-8 absolute right-4 top-1/2 transform -translate-y-1/2 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-none">
                         <span class="material-icons text-lg text-gray-500">close</span>
                     </button>
                 </div>

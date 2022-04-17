@@ -25,7 +25,10 @@ export const useUserStore = defineStore({
             return this.user || {};
         },
         getFullName(): string {
-            return this.user.nombre + " " + this.user.apellidos;
+            return this.user.Nombre + " " + this.user.Apellidos;
+        },
+        getEmail(): string {
+            return this.user.Email;
         },
         getToken(): string {
             return this.token || "";

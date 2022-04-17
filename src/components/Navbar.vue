@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { PageEnum } from '@/enums/pageEnum';
 import { router } from '@/router';
-import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
-import { computed, ref } from 'vue';
+import { Menu, MenuButton, MenuItems, MenuItem, Popover, PopoverButton, PopoverPanel, PopoverOverlay, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
+import { computed, ref, reactive } from 'vue';
 import { useUserStore } from '../stores/modulos/user';
 import BasicButton from './Forms/BasicButton.vue';
 import SidebarNegocio from './SidebarNegocio.vue';
@@ -13,6 +13,15 @@ import DialogLogin from './DialogLogin.vue';
 
 const showModalRegistro = ref(false);
 const showModalLogin = ref(false);
+
+
+const menuPrincipal = reactive([
+  {
+    label: 'Negocios',
+    icon: 'store',
+    route: PageEnum.HOME_NEGOCIOS,
+  },
+])
 
 const userStore = useUserStore();
 
@@ -40,10 +49,132 @@ const onClickCerrarSesion = () => {
 
 <template>
   <header class="sticky top-0 z-30 bg-white shadow-md">
-    <div class="container h-16 flex items-center justify-between  px-6 mx-auto">
-      <div class="flex flex-1 w-0 lg:hidden">
+    <div class="container h-16 flex items-center justify-between px-6 mx-auto">
+      <!-- <div class="flex flex-1 w-0 lg:hidden">
         <span class="material-icons text-gray-600 bg-gray-100 rounded-full p-2">menu</span>
-      </div>
+      </div> -->
+      <Popover class="flex flex-1 w-0 lg:hidden">
+        <PopoverButton as="div">
+          <span class="material-icons text-gray-600 bg-gray-100 rounded-full p-2">menu</span>
+        </PopoverButton>
+        <PopoverOverlay class="bg-black opacity-30 z-40 fixed inset-0" />
+
+        <transition
+          enter-active-class="transition duration-200 ease-out"
+          enter-from-class="translate-y-1 opacity-0"
+          enter-to-class="translate-y-0 opacity-100"
+          leave-active-class="transition duration-150 ease-in"
+          leave-from-class="translate-y-0 opacity-100"
+          leave-to-class="translate-y-1 opacity-0"
+        >
+          <PopoverPanel class="fixed top-0 left-0 z-40 bg-white w-64 h-screen flex flex-col justify-between">
+            <div class="flex flex-col">
+              <div @click="onClickBtnInicio" class="flex justify-center items-center">
+                <img src="@/assets/logo.svg" alt="Logo App" class="w-20 h-20" />
+              </div>
+              <div class="flex flex-col justify-between divide-y divide-gray-200">
+              <nav class="mb-2">
+                <PopoverButton as="div" v-for="item in menuPrincipal">
+                  <router-link class="flex items-center px-4 py-2" active-class="bg-gray-200" :to="{ name: item.route }">
+                    <span class="mx-4 font-medium">{{item.label}}</span>
+                  </router-link>
+                </PopoverButton>
+
+                  <!-- <a class="flex items-center px-4 py-2 text-gray-700 bg-gray-200 dark:bg-gray-700 dark:text-gray-200" href="#">
+                      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      <span class="mx-4 font-medium">Dashboard</span>
+                  </a>
+                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      <span class="mx-4 font-medium">Accounts</span>
+                  </a>
+                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                      <span class="mx-4 font-medium">Añade tu negocio</span>
+                  </a>
+                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                      <span class="mx-4 font-medium">Ayuda</span>
+                  </a> -->
+              </nav>
+              <nav class="mb-2">
+                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                      <span class="mx-4 font-medium">Añade tu negocio</span>
+                  </a>
+                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
+                      <span class="mx-4 font-medium">Ayuda</span>
+                  </a>
+              </nav>
+            </div>
+            </div>
+            <div v-if="userStore.getIsLogged">
+              <Disclosure v-slot="{ open }">
+                <DisclosureButton
+                  as="div"
+                  class="flex justify-between items-center w-full px-2 py-4 bg-gray-100"
+                >
+                  <div class="flex items-center">
+                    <div>
+                      <img class="object-cover w-9 h-9 mx-2 rounded-full" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="avatar">
+                    </div>
+                    <div class="mx-2 w-32 font-medium text-gray-800 whitespace-nowrap text-ellipsis overflow-hidden">{{userStore.getFullName}}</div>
+                  </div>
+                  <div class="flex flex-col justify-center items-center">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="transition duration-500 mr-2"
+                      :class="open ? 'transform rotate-180' : ''"
+                    >
+                      <path
+                        d="M6.34317 7.75732L4.92896 9.17154L12 16.2426L19.0711 9.17157L17.6569 7.75735L12 13.4142L6.34317 7.75732Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+                  <!-- <span class="material-icons text-gray-600 bg-gray-100 rounded-full p-2" :class="open ? 'transform rotate-180' : ''">menu</span> -->
+                </DisclosureButton>
+                <transition
+                  enter-active-class="transition duration-100 ease-out"
+                  enter-from-class="transform scale-95 opacity-0"
+                  enter-to-class="transform scale-100 opacity-100"
+                  leave-active-class="transition duration-75 ease-out"
+                  leave-from-class="transform scale-100 opacity-100"
+                  leave-to-class="transform scale-95 opacity-0"
+                >
+                  <DisclosurePanel class="bg-gray-100">
+                    <PopoverButton as="div">
+                      <div @click="onClickCerrarSesion" class="flex items-center px-4 py-2 text-gray-600 transition-colors duration-200 transform" active-class="bg-gray-200" >
+                          <span class="material-icons text-gray-600">person</span>
+                          <span class="mx-4 font-medium">Mi cuenta</span>
+                      </div>
+                    </PopoverButton>
+                    <PopoverButton as="div">
+                      <div @click="onClickCerrarSesion" class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform" active-class="bg-gray-200" >
+                          <span class="material-icons text-gray-600">logout</span>
+                          <span class="mx-4 font-medium">Cerrar sesión</span>
+                      </div>
+                    </PopoverButton>
+                  </DisclosurePanel>
+                </transition>
+              </Disclosure>
+            </div>
+            <div v-else class="py-4">
+              <div @click="onClickBtnRegistro" class="flex items-center px-4 py-2 mb-2 text-gray-600">
+                  <span class="mx-4 font-medium">Regístrate</span>
+              </div>
+              <div @click="onClickBtnLogin" class="flex items-center px-4 py-2 text-gray-600">
+                  <span class="mx-4 font-medium">Iniciar sesión</span>
+              </div>
+            </div>
+          </PopoverPanel>
+        </transition>
+      </Popover>
       <div @click="onClickBtnInicio" class="flex items-center lg:flex-1 space-x-4 cursor-pointer">
         <img src="@/assets/logo.svg" alt="Logo App" class="w-16 h-16" />
       </div>
@@ -57,13 +188,12 @@ const onClickCerrarSesion = () => {
         </button>
       </div>
       <nav class="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0">
-        <router-link :to="{ name: PageEnum.BASE_NEGOCIO }">Negocios</router-link>
+        <router-link v-for="item in menuPrincipal" :to="{ name: item.route }">{{item.label}}</router-link>
         <!-- <a class="text-gray-900" href>About</a>
         <a class="text-gray-900" href>Blog</a>
         <a class="text-gray-900" href>Projects</a>
         <a class="text-gray-900" href>Contact</a>-->
       </nav>
-
       <div class="lg:flex lg:flex-1 justify-end items-center hidden space-x-4">
         <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.HOME_NEGOCIOS }">Añade tu negocio</router-link>
         <Menu as="div" class="relative inline-block text-left">
