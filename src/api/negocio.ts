@@ -1,21 +1,52 @@
 import axios from 'axios';
 import type { NegocioParams, NegocioResultModel, MisNegociosResultModel, NegocioInformacionGeneralModel } from './model/negocioModel';
+import type { NuevoNegocio } from '../types/store';
 
 enum Api {
-    MisNegocios = '/Negocio/MisNegocios',
-    CrearNegocio = '/Negocio/CrearNegocio',
-    EsMiNegocio = '/Negocio/EsMiNegocio',
-    InformacionGeneral = '/Negocio/InformacionGeneral',
+    CrearNegocio = '/Negocio/Crear',
     UpdateLogo = '/Negocio/UpdateLogo',
     UpdateCabecera = '/Negocio/UpdateCabecera',
+    
+    
+    MisNegocios = '/Negocio/MisNegocios',
+    EsMiNegocio = '/Negocio/EsMiNegocio',
+    InformacionGeneral = '/Negocio/InformacionGeneral',
     UpdateDatos = '/Negocio/UpdateDatos',
 }
 
 /**
  * @description: Crear un negocio API
  */
-export function crearNegocioAPI() {
-    return axios.post<NegocioResultModel>(Api.CrearNegocio);
+export function crearNegocioAPI(negocio: Partial<NuevoNegocio>) {
+    return axios.post<NegocioResultModel>(Api.CrearNegocio, negocio);
+}
+
+/**
+ * @description: Actualiza el logo de un negocio
+ */
+export function updateLogoNegocioAPI(idnegocio: number, frmData: FormData) {
+    return axios.post<boolean>(Api.UpdateLogo, frmData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        params: {
+            idnegocio
+        }
+    });
+}
+
+/**
+ * @description: Actualiza la imagen de cabecera de un negocio
+ */
+export function updateImgCabeceraNegocioAPI(idnegocio: number, frmData: FormData) {
+    return axios.post<boolean>(Api.UpdateCabecera, frmData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        params: {
+            idnegocio
+        }
+    });
 }
 
 /**

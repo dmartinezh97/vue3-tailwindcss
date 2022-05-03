@@ -19,16 +19,8 @@ onBeforeMount(() => {
 const list = reactive({
   menu: [
     {
-      text: "Información general",
-      ruta: PageEnum.INFORMACION_GENERAL_NEGOCIO
-    },
-    {
-      text: "Eventos",
-      ruta: PageEnum.BASE_EVENTOS
-    },
-    {
-      text: "Trabajadores",
-      ruta: PageEnum.NEGOCIO_TRABAJADORES
+      text: "Negocios",
+      ruta: PageEnum.HOME_NEGOCIOS
     },
   ]
 })
@@ -40,7 +32,8 @@ const tengoQueMostrarme = computed(() => {
 </script>
 
 <template>
-  <template v-if="userStore.getIsLogged && tengoQueMostrarme">
+  <template v-if="userStore.getIsLogged">
+    <!-- && tengoQueMostrarme -->
     <!-- PARA SELECCIONAR EL LOCAL -->
     <div class="bg-white border-t border-gray-100">
       <!-- <nav class="flex items-center justify-center p-4 overflow-x-auto text-sm font-medium">

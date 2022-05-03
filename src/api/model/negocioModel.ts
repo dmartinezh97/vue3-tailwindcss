@@ -12,7 +12,13 @@ export interface NegocioParams {
  * @description: Los valores de retorno cuando crea un negocio
  */
 export interface NegocioResultModel {
-    idnegocio: number;
+    IdNegocio: number;
+    Nombre: string;
+    Slug: string;
+    Descripcion: string;
+    IdTipoNegocio: string;
+    ImgCabecera: string;
+    Logo: string;
 }
 
 /**

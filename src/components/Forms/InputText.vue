@@ -53,7 +53,7 @@ const updateValue = (e: Event) => {
 </script>
 
 <template>
-  <div class="border border-gray-300 rounded-md focus-within:border-uno mb-4">
+  <div class="border border-gray-300 w-full rounded-md focus-within:border-uno mb-4">
     <div class="relative px-4 py-2">
       <input :value="modelValue" :type="props.type" @input="updateValue" name="username" placeholder=" " class="block w-full z-2 appearance-none focus:outline-none bg-transparent" />
       <label for="username" class="absolute top-1/2 left-6 transform -translate-y-1/2 z-1 duration-300 bg-white">{{props.label}}</label>

@@ -5,7 +5,7 @@ import { Menu, MenuButton, MenuItems, MenuItem, Popover, PopoverButton, PopoverP
 import { computed, ref, reactive } from 'vue';
 import { useUserStore } from '../stores/modulos/user';
 import BasicButton from './Forms/BasicButton.vue';
-import SidebarNegocio from './SidebarNegocio.vue';
+import SidebarEmpresa from './SidebarEmpresa.vue';
 import IconTrash from './icons/IconTrash.vue';
 import IconLogout from './icons/IconLogout.vue';
 import DialogRegistro from './DialogRegistro.vue';
@@ -101,14 +101,16 @@ const onClickCerrarSesion = () => {
                   </a> -->
               </nav>
               <nav class="mb-2">
-                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
+                <PopoverButton>
+                  <router-link active-class="bg-gray-200" :to="{ name: PageEnum.HOME_NEGOCIOS }" class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
                     <span class="material-icons">post_add</span>  
                     <span class="mx-4 font-medium">Añade tu negocio</span>
-                  </a>
-                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
-                    <span class="material-icons">help_outline</span>
-                    <span class="mx-4 font-medium">Ayuda</span>
-                  </a>
+                  </router-link>
+                </PopoverButton>
+                <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
+                  <span class="material-icons">help_outline</span>
+                  <span class="mx-4 font-medium">Ayuda</span>
+                </a>
               </nav>
             </div>
             </div>
@@ -154,7 +156,7 @@ const onClickCerrarSesion = () => {
         <a class="text-gray-900" href>Contact</a>-->
       </nav>
       <div class="lg:flex lg:flex-1 justify-end items-center hidden space-x-4">
-        <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.HOME_NEGOCIOS }">Añade tu negocio</router-link>
+        <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.HOME_NEGOCIOS }">Modo empresa</router-link>
         <Menu as="div" class="relative inline-block text-left">
           <MenuButton class="flex items-center border border-gray-300 pl-3 p-1 rounded-full">
             <span class="material-icons text-lg text-gray-400">menu</span>
@@ -170,7 +172,7 @@ const onClickCerrarSesion = () => {
                 <template v-if="userStore.getIsLogged">
                   <MenuItem v-slot="{ active }">
                   <button @click="onClickCerrarSesion"
-                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-base']">
+                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
                     <span class="material-icons text-lg mr-4 text-gray-600">logout</span>
                     Cerrar sesión
                   </button>
@@ -179,14 +181,14 @@ const onClickCerrarSesion = () => {
                 <template v-else>
                   <MenuItem v-slot="{ active }">
                   <button @click="onClickBtnRegistro"
-                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-base']">
+                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
                     <span class="material-icons text-lg mr-4 text-gray-600">app_registration</span>
                     Regístrate
                   </button>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
                   <button @click="onClickBtnLogin"
-                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-base']">
+                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
                     <span class="material-icons text-lg mr-4 text-gray-600">login</span>
                     Iniciar sesión
                   </button>
@@ -196,14 +198,14 @@ const onClickCerrarSesion = () => {
               <div class="py-2">
                 <MenuItem v-slot="{ active }">
                 <button
-                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-base']">
+                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
                   <span class="material-icons text-lg mr-4 text-gray-600">post_add</span>
                   Añade tu negocio
                 </button>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                 <button
-                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-base']">
+                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
                   <span class="material-icons text-lg mr-4 text-gray-600">help_outline</span>
                   Ayuda
                 </button>
@@ -216,7 +218,7 @@ const onClickCerrarSesion = () => {
     </div>
     <DialogLogin v-model="showModalLogin" @registro="onClickBtnRegistro"></DialogLogin>
     <DialogRegistro v-model="showModalRegistro" @login="onClickBtnLogin"></DialogRegistro>
-    <SidebarNegocio></SidebarNegocio>
+    <!-- <SidebarEmpresa></SidebarEmpresa> -->
     <!-- <div class="border-t border-gray-100 lg:hidden">
       <nav class="flex items-center justify-center p-4 overflow-x-auto text-sm font-medium">
         <a class="flex-shrink-0 pl-4 text-gray-900">About</a>

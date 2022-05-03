@@ -14,7 +14,7 @@ const userStore = useUserStore();
   <div class="flex flex-col">
     <Navbar></Navbar>
     <div class="flex">
-      <div class="w-full p-2 lg:p-4">
+      <div class="w-full lg:p-4">
         <router-view v-slot="{ Component }">
           <Transition name="fade" mode="out-in">
             <component :is="Component"></component>

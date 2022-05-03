@@ -24,7 +24,7 @@ module.exports = {
       },
       height: {
         'screen-nav': 'calc(100vh - 64px)',
-        'screen-nav2': 'calc(100vh - 160px)',
+        'screen-nav2': 'calc(100vh - calc(96px + 64px))',
       },
       transformOrigin: {
         "0": "0%",

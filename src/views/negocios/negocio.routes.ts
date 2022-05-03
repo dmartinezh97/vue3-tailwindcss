@@ -12,6 +12,9 @@ import AddEditarEventoViewVue from "./eventos/AddEditarEventoView.vue";
 import HomeNegociosViewVue from "./home/HomeNegociosView.vue";
 import SeleccionarTipoNegocioViewVue from "./home/SeleccionarTipoNegocioView.vue";
 import DescripcionNegocioViewVue from "./home/DescripcionNegocioView.vue";
+import FotosNegocioViewVue from "./home/FotosNegocioView.vue";
+import UbicacionNegocioViewVue from "./home/UbicacionNegocioView.vue";
+import RevisarNegocioViewVue from "./home/RevisarNegocioView.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -36,6 +39,21 @@ const routes: RouteRecordRaw[] = [
                 path: 'descripcion',
                 name: PageEnum.DESCRIPCION_NEGOCIO,
                 component: DescripcionNegocioViewVue,
+            },
+            {
+                path: 'fotos',
+                name: PageEnum.FOTOS_NEGOCIO,
+                component: FotosNegocioViewVue,
+            },
+            {
+                path: 'ubicacion',
+                name: PageEnum.UBICACION_NEGOCIO,
+                component: UbicacionNegocioViewVue,
+            },
+            {
+                path: 'revisar',
+                name: PageEnum.REVISAR_NEGOCIO,
+                component: RevisarNegocioViewVue,
             },
             // {
             //     path: 'listado',

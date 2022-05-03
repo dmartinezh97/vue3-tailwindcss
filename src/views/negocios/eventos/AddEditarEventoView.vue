@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, reactive } from 'vue';
+import { ref, computed, onMounted, reactive, unref } from 'vue';
 import InputText from '../../../components/Forms/InputText.vue';
 import InputTextarea from '@/components/Forms/InputTextarea.vue';
 import type { EventoInformacionModel, ServicioModel } from "@/api/model/eventoModel";
@@ -35,12 +35,14 @@ onMounted(async () => {
 });
 
 const getInfo = async () => {
-  if (idevento.value != "0") {
+  if (idevento.value != "0" && idevento.value != undefined && idevento.value != null) {
     const res = await eventoStore.getInformacion(idevento.value);
-    //TODO: Mirar a ver porqué sigue siendo reactivo con el objeto servicios
+    // TODO: Mirar a ver porqué sigue siendo reactivo con el objeto servicios
     // Arreglar botón de guardar cambios que no compara el objeto servicios :)
     info.value = { ...res };
-    infoInicial.value = { ...res };
+    info.value.nombre = "Test"
+    infoInicial.value = { ...res }; //Does not work
+    infoInicial.value = unref(res) //It works
   }
 }
 

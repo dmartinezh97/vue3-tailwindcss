@@ -40,6 +40,18 @@ export interface NuevoNegocio{
     nombre: string;
     descripcion: string;
     tipo_negocio: string;
+    logo: any;
+    imgCabecera: any;
+    direccion: DireccionNegocio;
+}
+
+export interface DireccionNegocio{
+    calle: string;
+    numero: string;
+    localidad: string;
+    cp: string;
+    provincia: string;
+    pais: string;
 }
 
 export interface EventoState {

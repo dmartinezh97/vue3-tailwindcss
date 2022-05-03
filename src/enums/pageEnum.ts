@@ -8,6 +8,9 @@ export enum PageEnum {
     HOME_NEGOCIOS = 'HomeNegocio',
     SELECCIONAR_TIPO_NEGOCIO = 'SeleccionarTipoNegocio',
     DESCRIPCION_NEGOCIO = 'DescripcionNegocio',
+    FOTOS_NEGOCIO = 'FotosNegocio',
+    UBICACION_NEGOCIO = 'UbicacionNegocio',
+    REVISAR_NEGOCIO = 'RevisarNegocio',
 
 
 

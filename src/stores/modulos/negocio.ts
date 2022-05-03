@@ -2,9 +2,10 @@ import { defineStore } from 'pinia'
 import { router } from '../../router/index';
 import { PageEnum } from '@/enums/pageEnum';
 import type { NegocioInformacionGeneralModel, NegocioParams } from '@/api/model/negocioModel';
-import { crearNegocioAPI, misNegociosAPI, esMiNegocioAPI, getInformacionGeneralAPI, updateLogoAPI, updateCabeceraAPI, updateDatosAPI } from '../../api/negocio';
+import { crearNegocioAPI, misNegociosAPI, esMiNegocioAPI, getInformacionGeneralAPI, updateLogoAPI, updateCabeceraAPI, updateDatosAPI, updateLogoNegocioAPI, updateImgCabeceraNegocioAPI } from '../../api/negocio';
 import { useToastStore } from './toast';
 import type { NegocioState } from '@/types/store';
+import type { NuevoNegocio } from '../../types/store';
 
 //const toastStore = useToastStore();
 
@@ -32,22 +33,31 @@ export const useNegocioStore = defineStore({
             }
         },
         /**
-         * @description: Iniciar sesión
+         * @description: Crear negocio
          */
-        async crearNegocio(): Promise<any | null> {
+        async crearNegocio(negocio: Partial<NuevoNegocio>): Promise<any | null> {
             try {
-                //TODO: Hacer validaciónn de datos
-                
-                const result = await crearNegocioAPI()
+                const result = await crearNegocioAPI(negocio)
                 const { data } = result;
+
+                let frmDataLogo = new FormData();
+                frmDataLogo.append('logo', negocio.logo);
+                let frmDataCabecera = new FormData();
+                frmDataCabecera.append('cabecera', negocio.imgCabecera);
+
+                await Promise.all([
+                    updateLogoNegocioAPI(data.IdNegocio, frmDataLogo),
+                    updateImgCabeceraNegocioAPI(data.IdNegocio, frmDataCabecera)
+                ])
+
                 useToastStore().success("¡Negocio creado!")
-                this.misNegocios();
-                router.push({
-                    name: PageEnum.VER_NEGOCIO,
-                    params: {
-                        id: data.idnegocio
-                    }
-                })
+                // this.misNegocios();
+                // router.push({
+                //     name: PageEnum.VER_NEGOCIO,
+                //     params: {
+                //         id: data.idnegocio
+                //     }
+                // })
             } catch (error) {
                 return Promise.reject(error)
             }
