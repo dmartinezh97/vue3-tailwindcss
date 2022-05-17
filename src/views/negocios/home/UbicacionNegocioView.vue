@@ -44,35 +44,32 @@ const getIsDisabledBtnSiguiente = computed(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-2 -p-2 lg:-m-4 h-screen-nav">
-    <div class="flex items-center bg-gradient-to-t from-gris via-rosa to-rosaclaro">
-      <div class="ml-14 mr-8">
-        <h1 class="text-5xl font-semibold tracking-wide text-white">¿Dónde se encuentra tu negocio?</h1>
+  <div class="flex flex-col h-screen-nav lg:-m-4 bg-white">
+    <div class="grow-0">
+      <div class="text-center mx-auto md:max-w-2xl lg:max-w-5xl xl:max-w-5xl">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl px-6 pb-12 pt-16 md:pt-20 font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gris via-rosa to-rosaclaro leading-tight">¿Dónde se encuentra tu negocio?</h1>
       </div>
     </div>
-    <div class="flex flex-col justify-between bg-white">
-      <div class="scroll-content-negocio">
-        <!-- LOGO -->
-        <div class="w-full max-w-lg bg-white rounded-xl shadow-xl border border-gray-200">
-          <div class="relative w-full max-w-lg mx-auto">
-                <div class="flex justify-center items-center h-16 border-b border-gray-200 px-3">
-                    <h2 class="text-base leading-none tracking-tight font-extrabold">Confirma tu dirección</h2>
-                </div>
-                <div class="p-6">
-                    <!-- <div class="mb-8">
-                        <h3 class="font-semibold text-xl">¡Te damos la bienvenida a {nombreApp}!</h3>
-                    </div> -->
-                    <div>
-                      <InputText label="Calle" v-model="direccion.calle"></InputText>
-                      <InputText label="Número (Opcional)" v-model="direccion.numero"></InputText>
-                      <InputText label="Localidad" v-model="direccion.localidad"></InputText>
-                      <InputText label="Código postal" v-model="direccion.cp"></InputText>
-                      <InputText label="Provincia" v-model="direccion.provincia"></InputText>
-                      <InputText label="País" v-model="direccion.pais"></InputText>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="flex flex-col justify-between grow bg-white">
+      <div class="px-3">
+        <div class="relative w-full max-w-lg mx-auto bg-white rounded-xl shadow-xl border border-gray-200">
+              <div class="flex justify-center items-center h-16 border-b border-gray-200 px-3">
+                  <h2 class="text-base leading-none tracking-tight font-extrabold">Confirma tu dirección</h2>
+              </div>
+              <div class="p-6">
+                  <!-- <div class="mb-8">
+                      <h3 class="font-semibold text-xl">¡Te damos la bienvenida a {nombreApp}!</h3>
+                  </div> -->
+                  <div>
+                    <InputText label="Calle" v-model="direccion.calle"></InputText>
+                    <InputText label="Número (Opcional)" v-model="direccion.numero"></InputText>
+                    <InputText label="Localidad" v-model="direccion.localidad"></InputText>
+                    <InputText label="Código postal" v-model="direccion.cp"></InputText>
+                    <InputText label="Provincia" v-model="direccion.provincia"></InputText>
+                    <InputText label="País" v-model="direccion.pais"></InputText>
+                  </div>
+              </div>
+          </div>
       </div>
       <div class="flex justify-between items-center px-8 py-6 border-t-2 border-gray-100 bg-white">
         <div @click="onClickAtras"

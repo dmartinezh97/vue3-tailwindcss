@@ -59,34 +59,31 @@ const getIsDisabledBtnSiguiente = computed(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-2 -p-2 lg:-m-4 h-screen-nav">
-    <div class="flex items-center bg-gradient-to-t from-gris via-rosa to-rosaclaro">
-      <div class="ml-14 mr-8">
-        <h1 class="text-5xl font-semibold tracking-wide text-white">Ponle un nombre y elige cual de estas afirmaciones describe mejor tu negocio</h1>
-        <!-- <h1 class="text-5xl font-semibold tracking-wide text-white">¿Cuál de estas afirmaciones describe mejor tu negocio?</h1> -->
+  <div class="flex flex-col h-screen-nav lg:-m-4 bg-white">
+    <div class="grow-0">
+      <div class="text-center mx-auto md:max-w-2xl lg:max-w-5xl xl:max-w-4xl">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl px-6 pb-12 pt-16 md:pt-20 font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gris via-rosa to-rosaclaro leading-tight">¿Cual de estas afirmaciones describe mejor tu negocio?</h1>
       </div>
     </div>
-    <div class="flex flex-col justify-between bg-white">
-      <div class="scroll-content-negocio">
-        <div class="flex flex-col items-center py-8 w-full relative overflow-y-auto">
-          <div class="w-[580px]">
-            <div class="mb-8">
-              <InputText v-model="nombre" label="Nombre" block></InputText>
-            </div>
-            <RadioGroup v-model="descripcion" class="space-y-4">
-              <template v-if="getTipoNegocio == 1">
-                <RadioGroupOption v-for="tipo in tiposDescripcionDiscoteca" v-slot="{ checked }" :value="tipo.desc">
-                  <div :class="[ checked ? 'bg-gray-100 border-gray-400': '', 'flex flex-col   border border-gray-300 hover:bg-gray-100 p-4 pl-6 rounded-2xl cursor-pointer']">
-                    <div class="font-semibold text-lg mb-1.5">{{tipo.title}}</div>
-                    <div class="text-base text-gray-400">{{tipo.desc}}</div>
-                  </div>
-                </RadioGroupOption>
-              </template>
-              <template v-else>
-                <h1>ELSE</h1>
-              </template>
-            </RadioGroup>
+    <div class="flex flex-col justify-between grow bg-white">
+      <div class="flex flex-col items-center py-8 w-full relative overflow-y-auto">
+        <div class="w-full max-w-[580px] focus:outline-none px-6">
+          <div class="mb-8">
+            <InputText v-model="nombre" label="Nombre" block></InputText>
           </div>
+          <RadioGroup v-model="descripcion" class="space-y-4">
+            <template v-if="getTipoNegocio == 1">
+              <RadioGroupOption v-for="tipo in tiposDescripcionDiscoteca" v-slot="{ checked }" :value="tipo.desc">
+                <div :class="[ checked ? 'bg-gray-100 border-gray-400': '', 'flex flex-col   border border-gray-300 hover:bg-gray-100 p-4 pl-6 rounded-2xl cursor-pointer']">
+                  <div class="font-semibold text-lg mb-1.5">{{tipo.title}}</div>
+                  <div class="text-base text-gray-400">{{tipo.desc}}</div>
+                </div>
+              </RadioGroupOption>
+            </template>
+            <template v-else>
+              <h1>ELSE</h1>
+            </template>
+          </RadioGroup>
         </div>
       </div>
       <div class="flex justify-between items-center px-8 py-6 border-t-2 border-gray-100 bg-white">

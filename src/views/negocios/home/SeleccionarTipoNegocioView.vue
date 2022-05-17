@@ -51,21 +51,23 @@ const getIsDisabledBtnSiguiente = computed(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-2 lg:-m-4 h-screen-nav bg-white">
-    <div class="flex items-center justify-center lg:bg-gradient-to-t from-gris via-rosa to-rosaclaro">
-      <div class="max-w-2xl text-center mt-12 lg:text-left lg:ml-14 lg:mr-8">
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r lg:text-5xl lg:font-semibold lg:tracking-wide leading-tight lg:text-white">¿Qué tipo de negocio vas a crear?</h1>
+  <div class="flex flex-col h-screen-nav lg:-m-4 bg-white">
+    <div class="grow-0">
+      <div class="text-center mx-auto md:max-w-4xl lg:max-w-5xl xl:max-w-5xl">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl px-6 pb-12 pt-16 md:pt-20 font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gris via-rosa to-rosaclaro leading-tight">¿Qué tipo de negocio vas a crear?</h1>
       </div>
     </div>
-    <div class="flex flex-col justify-between">
-      <div class="lg:h-screen-nav2 scroll-content-negocio">
-        <RadioGroup v-model="tipoNegocio" class="flex flex-col items-center py-8 w-full relative space-y-4 overflow-y-auto">
-          <RadioGroupOption v-for="tipo in tiposNegocio" v-slot="{ checked }" :value="tipo.value">
-            <div :class="[ checked ? 'bg-gray-100 border-gray-400': '', 'flex justify-between items-center min-w-[380px] w-full border border-gray-300 hover:bg-gray-100 p-4 pl-6 rounded-2xl cursor-pointer']">
-              <div class="font-semibold text-lg">{{tipo.label}}</div>
-              <div>
-                <div class="w-14 h-14">
-                  <img :src="tipo.img" alt="">
+    <div class="flex flex-col justify-between grow bg-white">
+      <div class="">
+        <RadioGroup v-model="tipoNegocio" class="flex flex-col items-center py-8 px-6 w-full relative space-y-4 overflow-y-auto">
+          <RadioGroupOption v-for="tipo in tiposNegocio" v-slot="{ checked }" :value="tipo.value" as="template">
+            <div class="w-full max-w-[380px] lg:max-w-[480px] xl:lg:max-w-[580px] focus:outline-none">
+              <div :class="[ checked ? 'bg-gray-100 border-gray-400': '', 'flex justify-between items-center border border-gray-300 hover:bg-gray-100 p-4 pl-6 rounded-2xl cursor-pointer']">
+                <div class="font-semibold text-lg">{{tipo.label}}</div>
+                <div>
+                  <div class="w-14 h-14">
+                    <img :src="tipo.img" alt="">
+                  </div>
                 </div>
               </div>
             </div>

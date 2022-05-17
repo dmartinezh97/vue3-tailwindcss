@@ -78,22 +78,21 @@ const getImageCabecera = computed(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-2 -p-2 lg:-m-4 h-screen-nav">
-    <div class="flex items-center bg-gradient-to-t from-gris via-rosa to-rosaclaro">
-      <div class="ml-14 mr-8">
-        <h1 class="text-5xl font-semibold tracking-wide text-white">Ahora, vamos a subir el logo y una foto de nuestro
+  <div class="flex flex-col h-screen-nav lg:-m-4 bg-white">
+    <div class="grow-0">
+      <div class="text-center mx-auto md:max-w-2xl lg:max-w-5xl xl:max-w-4xl">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl px-6 pb-12 pt-16 md:pt-20 font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gris via-rosa to-rosaclaro leading-tight">Ahora, vamos a subir el logo y una foto de nuestro
           negocio</h1>
       </div>
     </div>
-    <div class="flex flex-col justify-between bg-white">
-      <div class="scroll-content-negocio">
-        <!-- LOGO -->
-        <div class="flex flex-col items-center py-8 w-full relative space-y-4 overflow-y-auto">
-          <div class="leading-tight mb-4">
-            <h2 class="text-2xl font-semibold">Añade dos fotos como mínimo</h2>
-            <div>Previsualiza como verán tus clientes las imágenes.</div>
-          </div>
-          <div class="w-[580px] border border-gray-300 hover:bg-gray-100 rounded mb-4">
+    <div class="flex flex-col justify-between grow bg-white">
+      <div class="flex flex-col items-center pb-8 w-full relative space-y-4 overflow-y-auto">
+        <div class="text-center leading-tight mb-4 px-6 xl:mb-12">
+          <h2 class="text-2xl font-semibold">Añade dos fotos como mínimo</h2>
+          <div>Previsualiza como verán tus clientes las imágenes.</div>
+        </div>
+        <div class="grid grid-cols-1 w-full xl:grid-cols-2 gap-x-6 px-3">
+          <div class="w-full max-w-[580px] mx-auto border border-gray-300 hover:bg-gray-100 rounded mb-4">
             <label for="foto-logo"
               :class="[getImageLogo ? '' : 'cursor-pointer', 'flex flex-col justify-center items-center overflow-hidden h-60']">
               <template v-if="getImageLogo">
@@ -109,7 +108,7 @@ const getImageCabecera = computed(() => {
               </template>
             </label>
           </div>
-          <div class="w-[580px] border border-gray-300 hover:bg-gray-100 rounded mb-4">
+          <div class="w-full max-w-[580px] mx-auto border border-gray-300 hover:bg-gray-100 rounded mb-4">
             <label for="foto-logo"
               :class="[getImageCabecera ? '' : 'cursor-pointer', 'flex flex-col justify-center items-center overflow-hidden h-60']">
               <template v-if="getImageCabecera">
