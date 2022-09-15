@@ -101,7 +101,7 @@ const onClickCerrarSesion = () => {
                   </a> -->
               </nav>
               <nav class="mb-2">
-                <PopoverButton>
+                <PopoverButton as="div">
                   <router-link active-class="bg-gray-200" :to="{ name: PageEnum.HOME_NEGOCIOS }" class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
                     <span class="material-icons">post_add</span>  
                     <span class="mx-4 font-medium">Añade tu negocio</span>
