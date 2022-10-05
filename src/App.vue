@@ -4,6 +4,7 @@ import AppFooter from './components/AppFooter.vue'
 import AppHeader from './components/AppHeader.vue'
 import Toasts from './components/Toasts/Toasts.vue'
 import Navbar from './components/Navbar.vue'
+import DialogCookies from './components/DialogCookies.vue';
 import { useUserStore } from './stores/modulos/user';
 
 const userStore = useUserStore();
@@ -23,6 +24,9 @@ const userStore = useUserStore();
       </div>
     </div>
     <Toasts></Toasts>
+    <!-- Dialogs -->
+    <DialogCookies></DialogCookies>
+    <!-- Fin dialogs -->
   </div>
 </template>
 
