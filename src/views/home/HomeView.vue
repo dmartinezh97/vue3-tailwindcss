@@ -6,7 +6,7 @@ import { router } from '../../router/index';
 import { SizeEnum } from '../../enums/sizeEnum';
 import { PageEnum } from '../../enums/pageEnum';
 import InputText from '../../components/Forms/InputText.vue';
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import type { LocalInfo } from "@/types/store";
 
 const buscar = ref("");

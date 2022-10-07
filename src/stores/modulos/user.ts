@@ -1,4 +1,4 @@
-import { TOKEN_KEY, USER_INFO_KEY } from '@/enums/cacheEnum';
+import { TOKEN_KEY, USER_INFO_KEY, COOKIES_KEY } from '@/enums/cacheEnum';
 import type { UserState } from '@/types/store'
 import { defineStore } from 'pinia'
 import type { UserInfo } from '../../types/store';
@@ -16,6 +16,7 @@ export const useUserStore = defineStore({
     state: (): UserState => ({
         user: useStorage<UserInfo>(USER_INFO_KEY, null, undefined, { serializer: StorageSerializers.object }),
         token: useStorage<string>(TOKEN_KEY, ""),
+        cookiesAceptadas: useStorage<boolean>(COOKIES_KEY, false),
     }),
     getters: {
         getIsLogged(): boolean {
@@ -25,19 +26,28 @@ export const useUserStore = defineStore({
             return this.user || {};
         },
         getFullName(): string {
-            return this.user.Nombre + " " + this.user.Apellidos;
+            if(this.user){
+                return this.user.Nombre + " " + this.user.Apellidos;
+            }else return "-"
         },
         getEmail(): string {
-            return this.user.Email;
+            if(this.user){
+                return this.user.Email;
+            }else return "-"
+            
         },
         getToken(): string {
             return this.token || "";
+        },
+        getIsCookiesAcepted(): boolean {
+            return this.cookiesAceptadas;
         },
     },
     actions: {
         resetState() {
             this.user = null;
             this.token = "";
+            this.cookiesAceptadas = false;
             router.push({
                 name: PageEnum.INICIO
             });
@@ -47,6 +57,9 @@ export const useUserStore = defineStore({
         },
         setToken(info: string | undefined) {
             this.token = info ? info : ''; // for null or undefined value
+        },
+        setCookies(value: boolean) {
+            this.cookiesAceptadas = value
         },
         /**
          * @description: Iniciar sesión

@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import AppFooter from './components/AppFooter.vue'
-import AppHeader from './components/AppHeader.vue'
+import { RouterView } from 'vue-router'
 import Toasts from './components/Toasts/Toasts.vue'
 import Navbar from './components/Navbar.vue'
 import DialogCookies from './components/DialogCookies.vue';
-import { useUserStore } from './stores/modulos/user';
 
-const userStore = useUserStore();
 
 </script>
 

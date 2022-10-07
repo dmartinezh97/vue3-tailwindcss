@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onDeactivated, reactive } from 'vue';
+import { ref, onMounted, onDeactivated, reactive, onBeforeMount } from 'vue';
 import { Dialog, DialogOverlay, DialogTitle, DialogDescription } from '@headlessui/vue'
 import BasicButton from './Forms/BasicButton.vue'
 import InputText from './Forms/InputText.vue'
@@ -8,33 +8,22 @@ import { useUserStore } from '@/stores/modulos/user';
 
 const userStore = useUserStore();
 
-const showModal = ref(true);
-// const emit = defineEmits(['update:modelValue', 'registro'])
-const setIsOpen = (value: boolean) => {
-    showModal.value = false
-    //emit('update:modelValue', value)
+const aceptarCookies = () => {
+    userStore.setCookies(true)
 };
 
 const onClickAbrirPoliticaDeCookies = () => {
     alert("test")
 };
 
-
-// const onClickOpenRegistro = () => {
-//     emit('registro', true)
-// };
-
-// const onClickBtnLogin = async () => {
-//     const res = await userStore.login(frmData)
-//     if (res) {
-//         setIsOpen(false)
-//     }
-// };
+const onClickAbrirPreferenciaDeCookies = () => {
+    alert("test")
+};
 
 </script>
 
 <template>
-    <Dialog :open="showModal" @close="setIsOpen" class="fixed bottom-0 z-30 overflow-y-auto w-full">
+    <Dialog :open="!userStore.getIsCookiesAcepted" class="fixed bottom-0 z-30 overflow-y-auto w-full">
         <div class="flex items-end justify-center py-8 px-1 md:p-8">
             <!-- <DialogOverlay class="fixed inset-0 bg-black opacity-0" /> -->
             <div class="relative flex w-full max-w-screen-2xl mx-auto p-6 bg-white rounded-xl shadow-2xl">
@@ -49,8 +38,8 @@ const onClickAbrirPoliticaDeCookies = () => {
                 </div>
                 <div class="flex items-center">
                     <div class="flex gap-x-2">
-                        <BasicButton text="Preferencias de cookies" class="min-w-[250px]" outlined></BasicButton>
-                        <BasicButton text="Vale" class="min-w-[150px]"></BasicButton>
+                        <BasicButton @click="onClickAbrirPreferenciaDeCookies" text="Preferencias de cookies" class="min-w-[250px]" outlined></BasicButton>
+                        <BasicButton @click="aceptarCookies" text="Vale" class="min-w-[150px]"></BasicButton>
                     </div>
                 </div>
             </div>

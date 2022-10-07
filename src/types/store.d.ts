@@ -18,6 +18,7 @@ export interface FrmSignup {
 interface UserState {
     user: Nullable<UserInfo>;
     token: RemovableRef<string>;
+    cookiesAceptadas: RemovableRef<boolean>;
     //roleList: RoleEnum[];
     // sessionTimeout?: boolean;
     // lastUpdateTime: number;

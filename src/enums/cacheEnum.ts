@@ -1,6 +1,9 @@
 // clave token
 export const TOKEN_KEY = 'TOKEN__';
 
+// clave cookies aceptadas
+export const COOKIES_KEY = 'COOKIES__';
+
 // clave información usuario
 export const USER_INFO_KEY = 'USER__INFO__';
 
