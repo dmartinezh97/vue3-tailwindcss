@@ -55,11 +55,11 @@ const onClickBtnLogin = async () => {
                         <h3 class="font-semibold text-xl">¡Te damos la bienvenida a {nombreApp}!</h3>
                     </div>
                     <div>
-                        <InputText label="Correo electrónico" v-model="frmData.username" type="email"></InputText>
-                        <InputText label="Contraseña" v-model="frmData.password" type="password"></InputText>
+                        <InputText label="Correo electrónico" data-test="inputEmail" v-model="frmData.username" type="email"></InputText>
+                        <InputText label="Contraseña" data-test="inputPassword" v-model="frmData.password" type="password"></InputText>
                     </div>
                     <div>
-                        <BasicButton @click="onClickBtnLogin" text="Iniciar sesión" block></BasicButton>
+                        <BasicButton @click="onClickBtnLogin" data-test="btnIniciarSesion" text="Iniciar sesión" block></BasicButton>
                     </div>
                     <div class="my-4">
                         <div class="linea-o">o</div>

@@ -39,7 +39,7 @@ const onClickAbrirPreferenciaDeCookies = () => {
                 <div class="flex items-center">
                     <div class="flex gap-x-2">
                         <BasicButton @click="onClickAbrirPreferenciaDeCookies" text="Preferencias de cookies" class="min-w-[250px]" outlined></BasicButton>
-                        <BasicButton @click="aceptarCookies" text="Vale" class="min-w-[150px]"></BasicButton>
+                        <BasicButton @click="aceptarCookies" data-test="btnAceptar" text="Vale" class="min-w-[150px]"></BasicButton>
                     </div>
                 </div>
             </div>

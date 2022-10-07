@@ -158,7 +158,7 @@ const onClickCerrarSesion = () => {
       <div class="lg:flex lg:flex-1 justify-end items-center hidden space-x-4">
         <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.HOME_NEGOCIOS }">Modo empresa</router-link>
         <Menu as="div" class="relative inline-block text-left">
-          <MenuButton class="flex items-center border border-gray-300 shadow-sm hover:shadow-md pl-3 p-1 rounded-full">
+          <MenuButton data-test="btnMenu" class="flex items-center border border-gray-300 shadow-sm hover:shadow-md pl-3 p-1 rounded-full">
             <span class="material-icons text-lg text-gray-400">menu</span>
             <span class="material-icons text-3xl leading-none text-gray-400 ml-3 rounded-full">account_circle</span>
           </MenuButton>
@@ -171,7 +171,7 @@ const onClickCerrarSesion = () => {
               <div class="py-2">
                 <template v-if="userStore.getIsLogged">
                   <MenuItem v-slot="{ active }">
-                  <button @click="onClickCerrarSesion"
+                  <button @click="onClickCerrarSesion" data-test="btnCerrarSesion"
                     :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
                     <span class="material-icons text-lg mr-4 text-gray-600">logout</span>
                     Cerrar sesión
@@ -187,7 +187,7 @@ const onClickCerrarSesion = () => {
                   </button>
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
-                  <button @click="onClickBtnLogin"
+                  <button @click="onClickBtnLogin" data-test="btnLogin"
                     :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
                     <span class="material-icons text-lg mr-4 text-gray-600">login</span>
                     Iniciar sesión

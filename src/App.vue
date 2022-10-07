@@ -21,7 +21,7 @@ import DialogCookies from './components/DialogCookies.vue';
     </div>
     <Toasts></Toasts>
     <!-- Dialogs -->
-    <DialogCookies></DialogCookies>
+    <!-- <DialogCookies></DialogCookies> -->
     <!-- Fin dialogs -->
   </div>
 </template>
