@@ -11,11 +11,17 @@ import type { LocalInfo } from "@/types/store";
 
 const buscar = ref("");
 
+const onSubmitCrearNegocio = () => {
+  router.push({
+    name: PageEnum.SELECCIONAR_TIPO_NEGOCIO
+  })
+};
+
 </script>
 
 <template>
   <div id="inicio" class="text-center">
-    <h1>Inicio</h1>
+    <h1 @click="onSubmitCrearNegocio">Inicio</h1>
   </div>
 </template>
 

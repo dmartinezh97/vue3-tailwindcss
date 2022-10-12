@@ -33,6 +33,8 @@ const onClickBtnLogin = async () => {
     const res = await userStore.login(frmData)
     if (res) {
         setIsOpen(false)
+        frmData.username = ""
+        frmData.password = ""
     }
 };
 

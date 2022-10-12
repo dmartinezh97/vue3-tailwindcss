@@ -68,7 +68,7 @@ const getImageLogo = computed(() => {
       </div>
     </div> -->
     <div class="flex flex-col justify-between grow bg-white">
-      <div class="max-w-3xl w-full mx-auto px-3 lg:pt-4">
+      <div class="max-w-3xl w-full mx-auto px-3 lg:py-4">
         <div class="relative border border-gray-300 rounded-md overflow-hidden">
           <img :src="getImageCabecera" class="object-cover object-center w-full h-56">
           <!-- <div class="absolute right-3 mt-1">

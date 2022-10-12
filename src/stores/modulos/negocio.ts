@@ -43,7 +43,7 @@ export const useNegocioStore = defineStore({
                 let frmDataLogo = new FormData();
                 frmDataLogo.append('logo', negocio.logo);
                 let frmDataCabecera = new FormData();
-                frmDataCabecera.append('cabecera', negocio.imgCabecera);
+                frmDataCabecera.append('img_cabecera', negocio.imgCabecera);
 
                 await Promise.all([
                     updateLogoNegocioAPI(data.IdNegocio, frmDataLogo),
