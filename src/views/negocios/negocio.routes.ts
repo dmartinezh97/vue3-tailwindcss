@@ -60,11 +60,11 @@ const routes: RouteRecordRaw[] = [
             //     name: PageEnum.LISTAR_NEGOCIOS,
             //     component: ListarNegociosViewVue,
             // },
-            // {
-            //     path: 'add',
-            //     name: PageEnum.ADD_NEGOCIO,
-            //     component: AddNegocioViewVue,
-            // },
+            {
+                path: 'add',
+                name: PageEnum.ADD_NEGOCIO,
+                component: AddNegocioViewVue,
+            },
             // {
             //     path: ':id',
             //     name: PageEnum.VER_NEGOCIO,

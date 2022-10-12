@@ -25,7 +25,7 @@ export function crearNegocioAPI(negocio: Partial<NuevoNegocio>) {
  * @description: Actualiza el logo de un negocio
  */
 export function updateLogoNegocioAPI(idnegocio: number, frmData: FormData) {
-    return axios.post<boolean>(Api.UpdateLogo, frmData, {
+    return axios.put<boolean>(Api.UpdateLogo, frmData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         },
@@ -39,7 +39,7 @@ export function updateLogoNegocioAPI(idnegocio: number, frmData: FormData) {
  * @description: Actualiza la imagen de cabecera de un negocio
  */
 export function updateImgCabeceraNegocioAPI(idnegocio: number, frmData: FormData) {
-    return axios.post<boolean>(Api.UpdateCabecera, frmData, {
+    return axios.put<boolean>(Api.UpdateCabecera, frmData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         },

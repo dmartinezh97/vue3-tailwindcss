@@ -34,7 +34,6 @@ export const useUserStore = defineStore({
             if(this.user){
                 return this.user.Email;
             }else return "-"
-            
         },
         getToken(): string {
             return this.token || "";
