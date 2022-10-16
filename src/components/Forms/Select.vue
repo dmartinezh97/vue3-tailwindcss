@@ -4,10 +4,10 @@ import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headless
 import { getPropertyFromItem } from '../../utils/helpers'
 import IconArrowDown from '../icons/IconArrowDown.vue';
 import IconCheck from '../icons/IconCheck.vue';
+import type { SelectItemKey } from "@/types/app"
 
 let selectText = ref("");
 let selectValue = ref();
-type SelectItemKey = string | (string | number)[] | ((item: object, fallback?: any) => any)
 
 const props = defineProps({
   label: {

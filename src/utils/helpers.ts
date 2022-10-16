@@ -1,4 +1,4 @@
-type SelectItemKey = string | (string | number)[] | ((item: object, fallback?: any) => any)
+import type { SelectItemKey } from "@/types/app"
 
 /**
  * @description: Recibe la propiedad de un item
