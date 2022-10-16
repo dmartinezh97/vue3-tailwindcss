@@ -44,7 +44,7 @@ const frmData: NegocioParams = reactive({
   nombre: "",
   descripcion: "",
   ubicacion: "",
-  tipo_negocio: "",
+  tipo_negocio: 0,
 })
 
 const getNombreNegocio = computed(() => {
@@ -122,7 +122,7 @@ const getImgCabeceraNegocio = computed(() => {
         />
         <div class="flex justify-center -mt-16 mr-3 md:justify-end">
           <img
-            class="object-cover w-20 h-20 border-2 border-uno rounded-full dark:border-uno"
+            class="object-cover w-20 h-20 border-2 border-uno-500 rounded-full dark:border-uno-500"
             alt="Testimonial avatar"
             :src="getLogoNegocio"
           />

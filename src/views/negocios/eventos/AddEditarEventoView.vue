@@ -113,7 +113,7 @@ const unchanged = computed(() => {
         <div v-else class="object-cover w-full h-96 bg-gray-200" alt="Foto cabecera"></div>
         <label
           for="foto-cabecera"
-          class="absolute z-20 top-3 md:top-auto md:bottom-3 right-3 p-2 bg-primary text-gray-600 md:bg-uno md:text-white border md:border-uno md:hover:bg-dos rounded-lg cursor-pointer font-medium md:px-3 md:py-2 transition ease-in duration-150"
+          class="absolute z-20 top-3 md:top-auto md:bottom-3 right-3 p-2 bg-primary text-gray-600 md:bg-uno-500 md:text-white border md:border-uno-500 md:hover:bg-dos rounded-lg cursor-pointer font-medium md:px-3 md:py-2 transition ease-in duration-150"
         >
           <div class="hidden md:flex md:items-center">
             <IconPencilAlt class="w-5 h-5 mr-2"></IconPencilAlt>Editar foto de portada
@@ -178,7 +178,7 @@ const unchanged = computed(() => {
                             >
                               <IconTrash
                                 :active="active"
-                                class="w-5 h-5 mr-2 text-uno"
+                                class="w-5 h-5 mr-2 text-uno-500"
                                 aria-hidden="true"
                               />Eliminar
                             </button>

@@ -75,7 +75,7 @@ const getImageLogo = computed(() => {
             <span class="material-icons text-3xl text-gray-600">place</span>
           </div> -->
           <div class="flex justify-start ml-8 -mt-24">
-            <img :src="getImageLogo" class="object-cover border-2 border-uno rounded-full dark:border-uno w-32 h-32">
+            <img :src="getImageLogo" class="object-cover border-2 border-uno-500 rounded-full dark:border-uno-500 w-32 h-32">
           </div>
           <div class="py-4 px-6">
             <h1 class="text-xl font-bold tracking-wide text-gray-800">{{ negocioStore.negocio.nombre }}</h1>

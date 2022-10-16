@@ -32,9 +32,9 @@ const props = defineProps<{
 // }))
 
 // const classTypeObject = computed(() => ({
-//   'bg-uno hover:bg-dos text-white shadow-lg shadow-uno/50': ButtonStyleEnum.DEFAULT == props.type,
-//   'bg-white text-uno border border-uno': ButtonStyleEnum.OUTLINED == props.type,
-//   'text-uno hover:bg-uno/10 bg-transparent': ButtonStyleEnum.TEXT == props.type,
+//   'bg-uno-500 hover:bg-dos text-white shadow-lg shadow-uno/50': ButtonStyleEnum.DEFAULT == props.type,
+//   'bg-white text-uno-500 border border-uno-500': ButtonStyleEnum.OUTLINED == props.type,
+//   'text-uno-500 hover:bg-uno-500/10 bg-transparent': ButtonStyleEnum.TEXT == props.type,
 // }))
 
 </script>
@@ -53,13 +53,13 @@ const props = defineProps<{
                 <label class="text-xs font-light text-fuente">{{props.data.direccion}}</label>
             </div>
             <div class="flex items-center">
-                <IconStar class="w-5 h-5 text-uno"></IconStar>
-                <IconStar class="w-5 h-5 text-uno"></IconStar>
-                <IconStar class="w-5 h-5 text-uno"></IconStar>
-                <IconStar class="w-5 h-5 text-uno"></IconStar>
-                <IconStar class="w-5 h-5 text-uno"></IconStar>
+                <IconStar class="w-5 h-5 text-uno-500"></IconStar>
+                <IconStar class="w-5 h-5 text-uno-500"></IconStar>
+                <IconStar class="w-5 h-5 text-uno-500"></IconStar>
+                <IconStar class="w-5 h-5 text-uno-500"></IconStar>
+                <IconStar class="w-5 h-5 text-uno-500"></IconStar>
                 <span
-                    class="bg-dos/20 text-uno text-xs font-semibold mx-2 px-2.5 py-0.5 rounded"
+                    class="bg-dos/20 text-uno-500 text-xs font-semibold mx-2 px-2.5 py-0.5 rounded"
                 >{{props.data.puntuacion}}</span>
             </div>
             <div></div>

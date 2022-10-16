@@ -58,7 +58,7 @@ const classInputObject = computed(() => ({
         :placeholder="props.placeholder"
         spellcheck="false"
         rows="4"
-        class="block w-full font-light text-base bg-primary text-black placeholder:text-gray-300 rounded-lg py-2 px-4 border border-gray-300 focus:border focus:outline-none focus:border-uno focus:ring-none"
+        class="block w-full font-light text-base bg-primary text-black placeholder:text-gray-300 rounded-lg py-2 px-4 border border-gray-300 focus:border focus:outline-none focus:border-uno-500 focus:ring-none"
       ></textarea>  
     </div>
   </template>

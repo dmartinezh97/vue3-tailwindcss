@@ -38,7 +38,7 @@ const onFocusOutInput = (e: Event) => {
 const classInputObject = computed(() => ({
   'bg-gray-200': props.disabled,
   // 'rounded-tr-lg rounded-br-lg border border-l-0 pr-3 focus:outline-none': props.preffix,
-  // 'rounded-lg border px-3 focus:outline-none focus:ring-none focus:border-uno': !props.preffix,
+  // 'rounded-lg border px-3 focus:outline-none focus:ring-none focus:border-uno-500': !props.preffix,
 }))
 
 // const classIconObject = computed(() => ({
@@ -63,7 +63,7 @@ const classInputObject = computed(() => ({
       :class="classInputObject"
       :placeholder="props.placeholder"
       spellcheck="false"
-      class="block w-full font-light text-base bg-primary text-black placeholder:text-gray-300 rounded-lg py-2 px-4 border border-gray-300 focus:border focus:outline-none focus:border-uno focus:ring-none"
+      class="block w-full font-light text-base bg-primary text-black placeholder:text-gray-300 rounded-lg py-2 px-4 border border-gray-300 focus:border focus:outline-none focus:border-uno-500 focus:ring-none"
     />
   </div>
 </template>

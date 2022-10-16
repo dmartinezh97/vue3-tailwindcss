@@ -4,13 +4,13 @@
 
 
 input:focus-within~label,
-input:not(:placeholder-shown)~label {
+input:not(:placeholder-shown)~label, .select label {
     @apply text-gray-400 font-bold transform text-xs px-2.5 -translate-y-7 left-2;
     /* -translate-x-5 */
 }
 
 input:focus-within~label {
-    @apply text-uno font-bold;
+    @apply text-uno-500 font-bold;
 }
 
 .linea-o {

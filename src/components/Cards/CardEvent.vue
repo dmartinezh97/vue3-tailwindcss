@@ -33,9 +33,9 @@ const props = defineProps<{
 // }))
 
 // const classTypeObject = computed(() => ({
-//   'bg-uno hover:bg-dos text-white shadow-lg shadow-uno/50': ButtonStyleEnum.DEFAULT == props.type,
-//   'bg-white text-uno border border-uno': ButtonStyleEnum.OUTLINED == props.type,
-//   'text-uno hover:bg-uno/10 bg-transparent': ButtonStyleEnum.TEXT == props.type,
+//   'bg-uno-500 hover:bg-dos text-white shadow-lg shadow-uno/50': ButtonStyleEnum.DEFAULT == props.type,
+//   'bg-white text-uno-500 border border-uno-500': ButtonStyleEnum.OUTLINED == props.type,
+//   'text-uno-500 hover:bg-uno-500/10 bg-transparent': ButtonStyleEnum.TEXT == props.type,
 // }))
 
 </script>
@@ -53,8 +53,8 @@ const props = defineProps<{
                 <h1 class="text-xs font-semibold text-fuente">{{props.data.nombre}}</h1>
                 <label class="text-xs font-light text-fuente" v-if="props.data.fecha">{{props.data.fecha}}</label>
                 <div class="flex items-center my-1" v-if="props.data.ubicacion">
-                    <IconUbicacion class="text-uno fill-uno w-3 h-3 mr-1"></IconUbicacion>
-                    <h1 class="text-xs font-semibold text-uno">{{props.data.ubicacion}}</h1>
+                    <IconUbicacion class="text-uno-500 fill-uno w-3 h-3 mr-1"></IconUbicacion>
+                    <h1 class="text-xs font-semibold text-uno-500">{{props.data.ubicacion}}</h1>
                 </div>
             </div>
         </div>

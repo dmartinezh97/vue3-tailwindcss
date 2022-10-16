@@ -78,7 +78,7 @@ const listaRestaurantes: EventInfo[] = reactive([
     <div id="destinospopulares" class="mb-4">
       <div class="flex justify-between items-center mb-2 px-4">
         <h1 class="text-normal font-semibold text-fuente">Destinos populares para salir</h1>
-        <label class="text-normal font-semibold text-uno">Ver más</label>
+        <label class="text-normal font-semibold text-uno-500">Ver más</label>
       </div>
       <div class="flex flex-no-wrap overflow-x-scroll scrolling-touch items-start px-4 pb-8">
         <!-- CARDS -->
@@ -91,7 +91,7 @@ const listaRestaurantes: EventInfo[] = reactive([
           <h1 class="text-normal font-semibold text-fuente">Festivales</h1>
           <label class="text-xs">Todos los festivales próximos</label>
         </div>
-        <label class="text-normal font-semibold text-uno">Ver más</label>
+        <label class="text-normal font-semibold text-uno-500">Ver más</label>
       </div>
       <div class="flex flex-no-wrap overflow-x-scroll scrolling-touch items-start px-4 pb-8">
         <!-- CARDS -->
@@ -105,7 +105,7 @@ const listaRestaurantes: EventInfo[] = reactive([
           <h1 class="text-normal font-semibold text-fuente">Restaurantes populares</h1>
           <label class="text-xs">Los restaurantes más famosos</label>
         </div>
-        <label class="text-normal font-semibold text-uno">Ver más</label>
+        <label class="text-normal font-semibold text-uno-500">Ver más</label>
       </div>
       <div class="flex flex-no-wrap overflow-x-scroll scrolling-touch items-start px-4 pb-8">
         <!-- CARDS -->

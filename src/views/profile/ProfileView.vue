@@ -32,7 +32,7 @@ const onClickBtnGuardar = async () => {
 
 <template>
   <div id="login">
-    <div class="bg-uno h-32 py-4 text-center">
+    <div class="bg-uno-500 h-32 py-4 text-center">
       <h1 class="text-base text-white font-medium">Modificar perfil</h1>
     </div>
     <div class="rounded-2xl bg-fondo -mt-4 flex flex-col items-center justify-center mb-4 p-4">

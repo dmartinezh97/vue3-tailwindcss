@@ -125,7 +125,7 @@ const unchanged = computed(() => {
         <div class="relative">
           <img v-if="imgCabecera || info.img_cabecera" class="object-cover w-full h-64" :src="getImageCabecera" alt="Foto cabecera">
           <div v-else class="object-cover w-full h-64 bg-gray-200" alt="Foto cabecera"></div>
-          <label for="foto-cabecera" class="absolute z-40 top-3 md:top-auto md:bottom-3 right-3 p-2 bg-primary text-gray-600 md:bg-uno md:text-white border md:border-uno md:hover:bg-dos rounded-lg cursor-pointer font-medium md:px-3 md:py-2 transition ease-in duration-150">
+          <label for="foto-cabecera" class="absolute z-40 top-3 md:top-auto md:bottom-3 right-3 p-2 bg-primary text-gray-600 md:bg-uno-500 md:text-white border md:border-uno-500 md:hover:bg-dos rounded-lg cursor-pointer font-medium md:px-3 md:py-2 transition ease-in duration-150">
             <div class="hidden md:flex md:items-center">
               <IconPencilAlt class="w-5 h-5 mr-2"></IconPencilAlt>
               Editar foto de portada
@@ -138,7 +138,7 @@ const unchanged = computed(() => {
         </div>
         <div class="flex justify-center -mt-40 md:ml-10 md:justify-start">
           <label for="foto-logo" class="relative cursor-pointer">
-            <div class="relative rounded-full overflow-hidden border-4 border-uno">
+            <div class="relative rounded-full overflow-hidden border-4 border-uno-500">
                 <div class="absolute z-20 w-full h-full hover:bg-black/40"></div>
                 <img v-if="imgLogo || info.img_logo" class="object-cover w-48 h-48" alt="Foto perfil" :src="getImageLogo">
                 <div v-else class="object-cover w-48 h-48 bg-gray-200" alt="Foto perfil"></div>

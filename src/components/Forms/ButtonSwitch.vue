@@ -35,7 +35,7 @@ const updateValue = (e: Event) => {
 
 const classObject = computed(() => ({
   'bg-gray-200': !props.modelValue,
-  'bg-uno': props.modelValue,
+  'bg-uno-500': props.modelValue,
 }))
 
 const classSpanObject = computed(() => ({
