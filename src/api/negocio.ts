@@ -17,7 +17,7 @@ enum Api {
 /**
  * @description: Crear un negocio API
  */
-export function crearNegocioAPI(negocio: Partial<NuevoNegocio>) {
+export function crearNegocioAPI(negocio: Partial<NegocioParams>) {
     return axios.post<NegocioResultModel>(Api.CrearNegocio, negocio);
 }
 

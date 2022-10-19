@@ -35,20 +35,20 @@ export const useNegocioStore = defineStore({
         /**
          * @description: Crear negocio
          */
-        async crearNegocio(negocio: Partial<NuevoNegocio>): Promise<any | null> {
+        async crearNegocio(negocio: Partial<NegocioParams>): Promise<any | null> {
             try {
                 const result = await crearNegocioAPI(negocio)
                 const { data } = result;
 
-                let frmDataLogo = new FormData();
-                frmDataLogo.append('logo', negocio.logo);
-                let frmDataCabecera = new FormData();
-                frmDataCabecera.append('img_cabecera', negocio.imgCabecera);
+                // let frmDataLogo = new FormData();
+                // frmDataLogo.append('logo', negocio.logo);
+                // let frmDataCabecera = new FormData();
+                // frmDataCabecera.append('img_cabecera', negocio.imgCabecera);
 
-                await Promise.all([
-                    updateLogoNegocioAPI(data.IdNegocio, frmDataLogo),
-                    updateImgCabeceraNegocioAPI(data.IdNegocio, frmDataCabecera)
-                ])
+                // await Promise.all([
+                //     updateLogoNegocioAPI(data.IdNegocio, frmDataLogo),
+                //     updateImgCabeceraNegocioAPI(data.IdNegocio, frmDataCabecera)
+                // ])
 
                 useToastStore().success("¡Negocio creado!")
                 // this.misNegocios();

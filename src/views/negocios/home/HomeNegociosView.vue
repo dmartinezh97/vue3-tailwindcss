@@ -5,12 +5,13 @@ import { onBeforeMount, computed, ref } from 'vue';
 import { router } from '@/router';
 import { PageEnum } from '@/enums/pageEnum';
 import DialogAddNegocio from '../../../components/Negocio/DialogAddNegocio.vue';
+import DialogOkCancel from '../../../components/Dialogs/DialogOkCancel.vue';
 
 const negocioStore = useNegocioStore();
 let showModal = ref(false);
 
 onBeforeMount(() => {
-  //negocioStore.misNegocios()
+  negocioStore.misNegocios()
 })
 
 // const onClickSeleccionarNegocio = () => {
@@ -36,14 +37,30 @@ const getMisNegocios = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <div @click="onClickOpenModalCrearNegocio" class="flex flex-col items-center justify-center w-full max-w-md mx-auto cursor-pointer">
-        <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"></div>
-        <div class="w-56 -mt-5 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
-            <h3 class="py-2 px-4 font-bold capitalize tracking-wide whitespace-nowrap text-ellipsis overflow-hidden text-center text-gray-800"> Añadir negocio </h3>
-        </div>
+  <div class="grid grid-cols-4 gap-6 gap-y-10">
+    <div @click="onClickOpenModalCrearNegocio"
+      class="flex flex-col items-center justify-center w-full max-w-md mx-auto cursor-pointer">
+      <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"></div>
+      <div class="w-56 -mt-5 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
+        <h3
+          class="py-2 px-4 font-bold capitalize tracking-wide whitespace-nowrap text-ellipsis overflow-hidden text-center text-gray-800">
+          Añadir negocio </h3>
+      </div>
     </div>
+    <router-link v-for="negocio in getMisNegocios" :key="'negocio-'+negocio.idnegocio"
+      :to="{ name: PageEnum.VER_NEGOCIO, params: { id: negocio.idnegocio } }"
+      class="flex flex-col items-center justify-center w-full max-w-md mx-auto">
+      <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
+        :style="'background-image: url('+ negocio.img_cabecera +')'"></div>
+      <div class="w-56 -mt-5 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
+        <h3
+          class="py-2 px-4 font-bold capitalize tracking-wide whitespace-nowrap text-ellipsis overflow-hidden text-center text-gray-800">
+          {{negocio.nombre}} </h3>
+      </div>
+    </router-link>
     <!-- Dialogs -->
+    <DialogOkCancel v-model="showModal" @submit="onSubmitCrearNegocio" titulo="Crear negocio"
+      descripcion="Promociona, vende y gestiona entradas online. Añade un negocio para empezar"></DialogOkCancel>
     <DialogAddNegocio v-model="showModal"></DialogAddNegocio>
     <!-- Dialogs -->
   </div>

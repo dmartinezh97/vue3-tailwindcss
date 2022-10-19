@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, type CSSProperties, type PropType } from 'vue';
-import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
+import { Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
 import { getPropertyFromItem } from '../../utils/helpers'
 import IconArrowDown from '../icons/IconArrowDown.vue';
 import IconCheck from '../icons/IconCheck.vue';
@@ -70,7 +70,7 @@ const updateValue = (e: Event) => {
       <ListboxButton
         class="border border-gray-300 w-full rounded-md focus-within:border-uno-500">
         <div class="select relative px-4 py-2">
-          <span class="block truncate text-left">{{ selectText }}</span>
+          <span class="block truncate text-left">{{ selectText ? selectText : '- Selecciona una opción -' }}</span>
           <span class="absolute inset-y-0 right-0 flex items-center pr-2">
             <IconArrowDown></IconArrowDown>
           </span>

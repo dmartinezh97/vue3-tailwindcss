@@ -40,10 +40,10 @@ export interface NegocioState {
 export interface NuevoNegocio{
     nombre: string;
     descripcion: string;
-    tipo_negocio: string;
-    logo: any;
-    imgCabecera: any;
-    direccion: DireccionNegocio;
+    tipo_negocio: number;
+    // logo: any;
+    // imgCabecera: any;
+    // direccion: DireccionNegocio;
 }
 
 export interface DireccionNegocio{

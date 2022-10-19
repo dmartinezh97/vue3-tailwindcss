@@ -65,6 +65,21 @@ const routes: RouteRecordRaw[] = [
                 name: PageEnum.ADD_NEGOCIO,
                 component: AddNegocioViewVue,
             },
+            {
+                path: ':id',
+                name: PageEnum.VER_NEGOCIO,
+                component: VerNegocioViewVue,
+                redirect: {
+                    name: PageEnum.INFORMACION_GENERAL_NEGOCIO
+                },
+                children: [
+                    {
+                        path: 'informacion',
+                        name: PageEnum.INFORMACION_GENERAL_NEGOCIO,
+                        component: InformacionGeneralViewVue,
+                    },
+                ]
+            }
             // {
             //     path: ':id',
             //     name: PageEnum.VER_NEGOCIO,

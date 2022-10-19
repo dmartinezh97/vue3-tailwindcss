@@ -5,7 +5,6 @@ export interface NegocioParams {
     nombre: string;
     descripcion: string;
     tipo_negocio: number;
-    ubicacion: string;
 }
 
 /**

@@ -3,17 +3,17 @@ import { ref, onMounted, onDeactivated, reactive } from 'vue';
 import { Dialog, DialogOverlay, DialogTitle, DialogDescription } from '@headlessui/vue'
 import BasicButton from '../Forms/BasicButton.vue'
 import InputText from '../Forms/InputText.vue'
-import { useUserStore } from '@/stores/modulos/user';
 import type { NegocioParams } from '@/api/model/negocioModel';
 import Select from '../Forms/Select.vue';
+import { listadoTipoNegocio } from '@/data/app'
+import { useNegocioStore } from '@/stores/modulos/negocio';
 
-const userStore = useUserStore();
+const negocioStore = useNegocioStore();
 
 const frmData: NegocioParams = reactive({
     nombre: "",
     descripcion: "",
-    tipo_negocio: 5,
-    ubicacion: ""
+    tipo_negocio: 0
 })
 
 const props = defineProps({
@@ -23,24 +23,17 @@ const props = defineProps({
     },
 })
 
-const people = [
-  { id: 1, name: 'Durward Reynolds', unavailable: false },
-  { id: 2, name: 'Kenton Towne', unavailable: false },
-  { id: 3, name: 'Therese Wunsch', unavailable: false },
-  { id: 4, name: 'Benedict Kessler', unavailable: true },
-  { id: 5, name: 'Katelyn Rohan', unavailable: false },
-]
-
 const emit = defineEmits(['update:modelValue', 'login'])
 const setIsOpen = (value: boolean) => {
     emit('update:modelValue', value)
 };
 
-const onClickOpenLogin = () => {
-    emit('login', true)
-};
-
-const onClickBtnLogin = async () => {
+const onClickAddNegocio = async () => {
+    const res = await negocioStore.crearNegocio(frmData)
+    console.log(res)
+    if(res){
+        alert("asd")
+    }
     // const res = await userStore.signUp(frmData)
     // if (res) {
     //     setIsOpen(false)
@@ -51,7 +44,7 @@ const onClickBtnLogin = async () => {
 </script>
 
 <template>
-    <Dialog :open="props.modelValue" @close="setIsOpen" class="fixed inset-0 z-30 overflow-y-auto">
+    <Dialog :open="props.modelValue" @close="setIsOpen(false)" class="fixed inset-0 z-30 overflow-y-auto">
         <div class="flex items-center justify-center min-h-full py-8 px-1 md:p-8">
             <DialogOverlay class="fixed inset-0 bg-black opacity-30" />
             <div class="relative w-full max-w-lg mx-auto bg-white rounded-xl">
@@ -69,22 +62,15 @@ const onClickBtnLogin = async () => {
                     <div>
                         <InputText label="Nombre" v-model="frmData.nombre"></InputText>
                         <InputText label="Descripción" v-model="frmData.descripcion"></InputText>
-                        <Select label="Tipo" v-model="frmData.tipo_negocio" :items="people" item-value="id" item-text="name"></Select>
+                        <Select label="Tipo" v-model="frmData.tipo_negocio" :items="listadoTipoNegocio"></Select>
                         <!-- <div class="flex gap-2">
                             <InputText label="Apellidos" v-model="frmData.apellidos"></InputText>
                             <InputText label="Usuario" v-model="frmData.usuario"></InputText>
                         </div> -->
                     </div>
-                    <div>
-                        <BasicButton @click="onClickBtnLogin" text="Crear cuenta" block></BasicButton>
-                    </div>
-                    <div class="my-4">
-                        <div class="linea-o">o</div>
-                    </div>
-                    <div>
-                        <button @click="onClickOpenLogin" class="w-full rounded-lg text-gray-600 border border-gray-300 hover:bg-gray-100 flex items-center justify-center text-sm font-normal px-3 py-3.5 leading-none transition ease-in duration-150">
-                            Inicia sesión con el correo electrónico
-                        </button>
+                    <div class="flex gap-2">
+                        <BasicButton @click="setIsOpen(false)" text="Cancelar" block outlined></BasicButton>
+                        <BasicButton @click="onClickAddNegocio" text="Crear negocio" block></BasicButton>
                     </div>
                 </div>
             </div>
