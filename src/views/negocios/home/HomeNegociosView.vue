@@ -59,9 +59,8 @@ const getMisNegocios = computed(() => {
       </div>
     </router-link>
     <!-- Dialogs -->
-    <DialogOkCancel v-model="showModal" @submit="onSubmitCrearNegocio" titulo="Crear negocio"
-      descripcion="Promociona, vende y gestiona entradas online. Añade un negocio para empezar"></DialogOkCancel>
-    <DialogAddNegocio v-model="showModal"></DialogAddNegocio>
+    <DialogOkCancel v-model="showModal" @submit="onSubmitCrearNegocio" titulo="Crear negocio" descripcion="Promociona, vende y gestiona entradas online. Añade un negocio para empezar"></DialogOkCancel>
+    <!-- <DialogAddNegocio v-model="showModal"></DialogAddNegocio> -->
     <!-- Dialogs -->
   </div>
 </template>

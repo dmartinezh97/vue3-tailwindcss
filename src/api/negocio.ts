@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { NegocioParams, NegocioResultModel, MisNegociosResultModel, NegocioInformacionGeneralModel } from './model/negocioModel';
+import type { NegocioResultModel, MisNegociosResultModel, NegocioInformacionGeneralModel } from './model/negocioModel';
 import type { NuevoNegocio } from '../types/store';
 
 enum Api {
@@ -17,7 +17,7 @@ enum Api {
 /**
  * @description: Crear un negocio API
  */
-export function crearNegocioAPI(negocio: Partial<NegocioParams>) {
+export function crearNegocioAPI(negocio: Partial<NuevoNegocio>) {
     return axios.post<NegocioResultModel>(Api.CrearNegocio, negocio);
 }
 

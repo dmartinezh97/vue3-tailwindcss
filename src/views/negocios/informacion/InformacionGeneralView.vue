@@ -38,6 +38,7 @@ const getInfo = async (id: string) => {
     const res = await negocioStore.getInformacionGeneral(id);
     info.value = { ...res };
     infoInicial.value = { ...res };
+    info.value.ubicacion = "ubicacion"
   }
 };
 
@@ -51,22 +52,22 @@ const onChangeNombre = () => {
 const onChangeFileImgPerfil = (e: any) => {
   if (e.target.files.length > 0) {
     imgLogo.value = e.target.files[0];
-    const formData = new FormData();
-    formData.append('id_negocio', params.id.toString());
-    if (imgLogo.value != null)
+    if (imgLogo.value != null){
+      const formData = new FormData();
       formData.append('logo', imgLogo.value)
-    negocioStore.updateLogo(formData)
+      negocioStore.updateLogo(parseInt(params.id.toString()), formData)
+    }
   }
 };
 
 const onChangeFileImgCabecera = (e: any) => {
   if (e.target.files.length > 0) {
     imgCabecera.value = e.target.files[0];
-    const formData = new FormData();
-    formData.append('id_negocio', params.id.toString());
-    if (imgCabecera.value != null)
-      formData.append('logo', imgCabecera.value)
-    negocioStore.updateCabecera(formData)
+    if (imgCabecera.value != null){
+      const formData = new FormData();
+      formData.append('img_cabecera', imgCabecera.value)
+      negocioStore.updateCabecera(parseInt(params.id.toString()), formData)
+    }
   }
 };
 

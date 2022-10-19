@@ -23,8 +23,6 @@ const onClickAtras = () => {
 
 const onClickGuardarCambios = () => {
   if(negocioStore.negocio!=undefined){
-    console.log(negocioStore.negocio);
-    
     negocioStore.crearNegocio(negocioStore.negocio);
   }
   // negocioStore.negocio.descripcion = descripcion.value

@@ -41,9 +41,9 @@ export interface NuevoNegocio{
     nombre: string;
     descripcion: string;
     tipo_negocio: number;
-    // logo: any;
-    // imgCabecera: any;
-    // direccion: DireccionNegocio;
+    logo: any;
+    imgCabecera: any;
+    direccion: DireccionNegocio;
 }
 
 export interface DireccionNegocio{
