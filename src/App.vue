@@ -8,17 +8,12 @@ import DialogCookies from './components/DialogCookies.vue';
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <Navbar></Navbar>
-    <div class="flex">
-      <div class="w-full lg:p-4">
-        <router-view v-slot="{ Component }">
-          <Transition name="fade" mode="out-in">
-            <component :is="Component"></component>
-          </Transition>
-        </router-view>
-      </div>
-    </div>
+  <div id="appBase">
+    <router-view v-slot="{ Component }">
+      <Transition name="fade" mode="out-in">
+        <component :is="Component"></component>
+      </Transition>
+    </router-view>
     <Toasts></Toasts>
     <!-- Dialogs -->
     <DialogCookies></DialogCookies>

@@ -3,7 +3,7 @@ import HomeViewVue from "./HomeView.vue"
 
 const routes: RouteRecordRaw[] = [
     {
-        path: '/',
+        path: '',
         name: 'Inicio',
         component: HomeViewVue
     },

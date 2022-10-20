@@ -8,7 +8,7 @@ import { useNegocioStore } from '../../../stores/modulos/negocio';
 
 const negocioStore = useNegocioStore();
 
-const tipoNegocio = ref('')
+const tipoNegocio = ref(0)
 const tiposNegocio = ref([
   {
     value: '1',
@@ -45,13 +45,13 @@ const onClickSiguiente = () => {
 }
 
 const getIsDisabledBtnSiguiente = computed(() => {
-  return tipoNegocio.value == "" || tipoNegocio.value == undefined || tipoNegocio.value == null
+  return tipoNegocio.value == 0 || tipoNegocio.value == undefined || tipoNegocio.value == null
 })
 
 </script>
 
 <template>
-  <div class="flex flex-col h-screen-nav lg:-m-4 bg-white">
+  <div class="flex flex-col h-full bg-white">
     <div class="grow-0">
       <div class="text-center mx-auto md:max-w-4xl lg:max-w-5xl xl:max-w-5xl">
         <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl px-6 pb-12 pt-16 md:pt-20 font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-gris via-rosa to-rosaclaro leading-tight">¿Qué tipo de negocio vas a crear?</h1>

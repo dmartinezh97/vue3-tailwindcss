@@ -37,7 +37,7 @@ const getMisNegocios = computed(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-4 gap-6 gap-y-10">
+  <div class="grid grid-cols-4 gap-6 gap-y-10 p-4">
     <div @click="onClickOpenModalCrearNegocio"
       class="flex flex-col items-center justify-center w-full max-w-md mx-auto cursor-pointer">
       <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"></div>

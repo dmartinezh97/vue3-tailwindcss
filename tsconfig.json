@@ -1,7 +1,7 @@
 {
   "include": [
     // "src",
-    "./cypress.d.ts"
+    "./cypress.d.ts",
   ],
   "files": [],
   "references": [

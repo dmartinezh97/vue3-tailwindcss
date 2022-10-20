@@ -10,18 +10,10 @@ import IconTrash from './icons/IconTrash.vue';
 import IconLogout from './icons/IconLogout.vue';
 import DialogRegistro from './DialogRegistro.vue';
 import DialogLogin from './DialogLogin.vue';
+import { listadoMenuPrincipal } from '@/data/menu';
 
 const showModalRegistro = ref(false);
 const showModalLogin = ref(false);
-
-
-const menuPrincipal = reactive([
-  {
-    label: 'Negocios',
-    icon: 'store',
-    route: PageEnum.HOME_NEGOCIOS,
-  },
-])
 
 const userStore = useUserStore();
 
@@ -74,7 +66,7 @@ const onClickCerrarSesion = () => {
               </div>
               <div class="flex flex-col justify-between divide-y divide-gray-200">
               <nav class="mb-2">
-                <PopoverButton as="div" v-for="item in menuPrincipal">
+                <PopoverButton as="div" v-for="item in listadoMenuPrincipal">
                   <router-link class="flex items-center px-4 py-2" active-class="bg-gray-200" :to="{ name: item.route }">
                     <span class="mx-4 font-medium">{{item.label}}</span>
                   </router-link>
@@ -115,7 +107,7 @@ const onClickCerrarSesion = () => {
             </div>
             </div>
             <div v-if="userStore.getIsLogged" class="p-2">
-              <PopoverButton as="div" v-for="item in menuPrincipal">
+              <PopoverButton as="div" v-for="item in listadoMenuPrincipal">
                 <BasicButton text="Cerrar sesión" block @click="onClickCerrarSesion">
                   <template v-slot:icon>
                     <span class="material-icons mr-5">logout</span>
@@ -149,14 +141,14 @@ const onClickCerrarSesion = () => {
         </button>
       </div>
       <nav class="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0">
-        <router-link v-for="item in menuPrincipal" :to="{ name: item.route }">{{item.label}}</router-link>
+        <router-link v-for="item in listadoMenuPrincipal" :to="{ name: item.route }">{{item.label}}</router-link>
         <!-- <a class="text-gray-900" href>About</a>
         <a class="text-gray-900" href>Blog</a>
         <a class="text-gray-900" href>Projects</a>
         <a class="text-gray-900" href>Contact</a>-->
       </nav>
       <div class="lg:flex lg:flex-1 justify-end items-center hidden space-x-4">
-        <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.HOME_NEGOCIOS }">Modo empresa</router-link>
+        <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.DASHBOARD_NEGOCIOS }">Modo empresa</router-link>
         <Menu as="div" class="relative inline-block text-left">
           <MenuButton data-test="btnMenu" class="flex items-center border border-gray-300 shadow-sm hover:shadow-md pl-3 p-1 rounded-full">
             <span class="material-icons text-lg text-gray-400">menu</span>

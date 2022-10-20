@@ -5,6 +5,7 @@ export enum PageEnum {
     EVENTOS = '/eventos',
     /* NEGOCIO */
     BASE_NEGOCIO = 'BaseNegocio',
+    DASHBOARD_NEGOCIOS = 'DashboardNegocio',
     HOME_NEGOCIOS = 'HomeNegocio',
     SELECCIONAR_TIPO_NEGOCIO = 'SeleccionarTipoNegocio',
     DESCRIPCION_NEGOCIO = 'DescripcionNegocio',
