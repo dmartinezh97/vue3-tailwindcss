@@ -6,7 +6,7 @@ import NavbarEmpresa from "../components/NavbarEmpresa.vue";
 <template>
   <div class="flex h-full">
     <NavbarEmpresa></NavbarEmpresa>
-    <div class="flex w-full">
+    <div class="flex w-full overflow-y-auto">
       <div class="w-full">
         <router-view v-slot="{ Component }">
           <Transition name="fade" mode="out-in">
