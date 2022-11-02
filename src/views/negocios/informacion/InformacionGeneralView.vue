@@ -139,7 +139,7 @@ const getImageCabecera = computed(() => {
 
 <template>
   <div id="informaciongeneral" class="p-4">
-    <div class="max-w-7xl mx-auto overflow-hidden bg-white rounded-lg shadow-md">
+    <div class="overflow-hidden bg-white rounded-lg shadow-md">
         <div class="relative">
           <img v-if="imgCabecera" class="object-cover w-full h-64" :src="getImageCabecera" alt="Foto cabecera">
           <div v-else class="object-cover w-full h-64 bg-gray-200" alt="Foto cabecera"></div>

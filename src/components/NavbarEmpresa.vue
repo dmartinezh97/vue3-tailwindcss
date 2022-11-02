@@ -2,7 +2,7 @@
 import { PageEnum } from '@/enums/pageEnum';
 import { router } from '@/router';
 import { Menu, MenuButton, MenuItems, MenuItem, Popover, PopoverButton, PopoverPanel, PopoverOverlay, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
-import { computed, ref, reactive } from 'vue';
+import { computed, ref, reactive, onBeforeMount } from 'vue';
 import { useUserStore } from '../stores/modulos/user';
 import BasicButton from './Forms/BasicButton.vue';
 import SidebarEmpresa from './SidebarEmpresa.vue';
@@ -11,20 +11,15 @@ import IconLogout from './icons/IconLogout.vue';
 import DialogRegistro from './DialogRegistro.vue';
 import DialogLogin from './DialogLogin.vue';
 import { listadoMenuNegocios } from '@/data/menu';
-
-const showModalRegistro = ref(false);
-const showModalLogin = ref(false);
-
-
-const menuPrincipal = reactive([
-  {
-    label: 'Negocios',
-    icon: 'store',
-    route: PageEnum.HOME_NEGOCIOS,
-  },
-])
+import { useNegocioStore } from '@/stores/modulos/negocio';
+import Select from '@/components/Forms/Select.vue';
 
 const userStore = useUserStore();
+const negocioStore = useNegocioStore()
+
+onBeforeMount(() => {
+  negocioStore.misNegocios()
+})
 
 const onClickBtnInicio = () => {
   router.push({
@@ -32,19 +27,13 @@ const onClickBtnInicio = () => {
   });
 };
 
-const onClickBtnLogin = () => {
-  showModalRegistro.value = false;
-  showModalLogin.value = true;
-};
-
-const onClickBtnRegistro = () => {
-  showModalLogin.value = false;
-  showModalRegistro.value = true;
-};
-
 const onClickCerrarSesion = () => {
   userStore.resetState();
 };
+
+const getMisNegocios = computed(() => {
+  return negocioStore.negocios
+})
 
 </script>
 
@@ -54,15 +43,40 @@ const onClickCerrarSesion = () => {
       <div @click="onClickBtnInicio" class="flex justify-center items-center cursor-pointer">
         <img src="@/assets/logo.svg" alt="Logo App" class="w-16 h-16" />
       </div>
-      <ul class="overflow-y-auto space-y-2 mt-4">
+      <div class="mt-4">
+        <Select label="" :items="['asd', 'aaaa']"></Select>
+        <button type="button" class="flex items-center w-full p-2 text-base font-normal border border-gray-300 text-gray-600 rounded-md hover:bg-gray-100" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+          <span class="material-icons" sidebar-toggle-item="">add</span>
+          <span class="flex-1 ml-3 text-left whitespace-nowrap">Añadir negocio</span>
+          <svg v-if="getMisNegocios.length > 0" sidebar-toggle-item="" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+        <ul id="dropdown-example" class="hidden py-2 space-y-2">
+              <li>
+                  <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
+              </li>
+              <li>
+                  <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Billing</a>
+              </li>
+              <li>
+                  <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Invoice</a>
+              </li>
+        </ul>
+      </div>
+      <ul class="overflow-y-auto space-y-2 mt-4 pt-4 border-t border-gray-200">
         <li v-for="item in listadoMenuNegocios">
-          <router-link :to="{ name: item.route }" active-class="bg-gray-200 hover:bg-gray-200"
-            class="flex items-center p-2 text-base font-normal text-gray-600 rounded-lg hover:bg-gray-100">
+          <router-link :to="{ name: item.route }" active-class="bg-gray-200 hover:bg-gray-200" class="flex items-center p-2 text-base font-normal text-gray-600 rounded-lg hover:bg-gray-100">
             <span class="material-icons">{{item.icon}}</span>
             <span class="flex-1 ml-3 whitespace-nowrap">{{item.label}}</span>
             <!-- <span class="inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span> -->
             <!-- <span class="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">3</span> -->
           </router-link>
+          <!-- <template v-else>
+            <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-600 rounded-lg hover:bg-gray-100" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+              <span class="material-icons" sidebar-toggle-item="">{{item.icon}}</span>
+              <span class="flex-1 ml-3 text-left whitespace-nowrap">{{item.label}}</span>
+              <svg sidebar-toggle-item="" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+          </template> -->
         </li>
         <!-- <template >
       <router-link class="flex items-center px-4 py-2" active-class="bg-gray-200" >
