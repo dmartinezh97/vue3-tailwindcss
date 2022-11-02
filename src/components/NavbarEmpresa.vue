@@ -47,7 +47,7 @@ const onClickChangeNegocio = () => {
       name: PageEnum.VER_NEGOCIO,
       params: {
         id: negocioSeleccionado.value.idnegocio
-      }
+      },
     })
   }
 };
