@@ -23,7 +23,7 @@ const routes: RouteRecordRaw[] = [
         name: PageEnum.BASE_NEGOCIO,
         component: BaseNegociosViewVue,
         redirect: {
-            name: PageEnum.DASHBOARD_NEGOCIOS
+            name: PageEnum.HOME_NEGOCIOS
         },
         children: [
             {

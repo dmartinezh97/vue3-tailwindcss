@@ -148,7 +148,7 @@ const onClickCerrarSesion = () => {
         <a class="text-gray-900" href>Contact</a>-->
       </nav>
       <div class="lg:flex lg:flex-1 justify-end items-center hidden space-x-4">
-        <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.DASHBOARD_NEGOCIOS }">Modo empresa</router-link>
+        <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.HOME_NEGOCIOS }">Modo empresa</router-link>
         <Menu as="div" class="relative inline-block text-left">
           <MenuButton data-test="btnMenu" class="flex items-center border border-gray-300 shadow-sm hover:shadow-md pl-3 p-1 rounded-full">
             <span class="material-icons text-lg text-gray-400">menu</span>

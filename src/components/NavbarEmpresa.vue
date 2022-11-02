@@ -13,9 +13,13 @@ import DialogLogin from './DialogLogin.vue';
 import { listadoMenuNegocios } from '@/data/menu';
 import { useNegocioStore } from '@/stores/modulos/negocio';
 import Select from '@/components/Forms/Select.vue';
+import DialogOkCancel from './Dialogs/DialogOkCancel.vue';
+import type { MisNegociosResultModel } from '@/api/model/negocioModel';
 
 const userStore = useUserStore();
 const negocioStore = useNegocioStore()
+let showModal = ref(false);
+let negocioSeleccionado = ref<MisNegociosResultModel>();
 
 onBeforeMount(() => {
   negocioStore.misNegocios()
@@ -27,8 +31,25 @@ const onClickBtnInicio = () => {
   });
 };
 
-const onClickCerrarSesion = () => {
-  userStore.resetState();
+const onClickOpenModalCrearNegocio = () => {
+  showModal.value = !showModal.value;
+};
+
+const onSubmitCrearNegocio = () => {
+  router.push({
+    name: PageEnum.SELECCIONAR_TIPO_NEGOCIO
+  })
+};
+
+const onClickChangeNegocio = () => {
+  if(negocioSeleccionado.value){
+    router.push({
+      name: PageEnum.VER_NEGOCIO,
+      params: {
+        id: negocioSeleccionado.value.idnegocio
+      }
+    })
+  }
 };
 
 const getMisNegocios = computed(() => {
@@ -44,23 +65,17 @@ const getMisNegocios = computed(() => {
         <img src="@/assets/logo.svg" alt="Logo App" class="w-16 h-16" />
       </div>
       <div class="mt-4">
-        <Select label="" :items="['asd', 'aaaa']"></Select>
-        <button type="button" class="flex items-center w-full p-2 text-base font-normal border border-gray-300 text-gray-600 rounded-md hover:bg-gray-100" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-          <span class="material-icons" sidebar-toggle-item="">add</span>
-          <span class="flex-1 ml-3 text-left whitespace-nowrap">Añadir negocio</span>
-          <svg v-if="getMisNegocios.length > 0" sidebar-toggle-item="" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-        </button>
-        <ul id="dropdown-example" class="hidden py-2 space-y-2">
-              <li>
-                  <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
-              </li>
-              <li>
-                  <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Billing</a>
-              </li>
-              <li>
-                  <a href="#" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Invoice</a>
-              </li>
-        </ul>
+        <Select v-model="negocioSeleccionado" :return-object="true" @change="onClickChangeNegocio" label="" placeholder="Selecciona un negocio" :items="getMisNegocios" item-text="nombre" item-value="idnegocio" item-img="img_logo" :image-option="true">
+          <!-- <template #header>
+            <li @click="onClickOpenModalCrearNegocio" class="relative cursor-pointer select-none hover:bg-uno-100 hover:text-uno-900 text-gray-900 py-2 pl-10 pr-4">
+              <span class="absolute top-1/2 left-2 transform -translate-y-1/2 material-icons mr-3">add</span>
+              <span class="block truncate normal">Añadir negocio</span>
+            </li>
+          </template> -->
+          <!-- <template #icon-placeholder>
+            <span class="material-icons mr-3">add</span>
+          </template> -->
+        </Select>
       </div>
       <ul class="overflow-y-auto space-y-2 mt-4 pt-4 border-t border-gray-200">
         <li v-for="item in listadoMenuNegocios">
@@ -127,5 +142,8 @@ const getMisNegocios = computed(() => {
     </li> -->
       </ul>
     </div>
+    <!-- Dialogs -->
+    <DialogOkCancel v-model="showModal" @submit="onSubmitCrearNegocio" titulo="Crear negocio" descripcion="Promociona, vende y gestiona entradas online. Añade un negocio para empezar"></DialogOkCancel>
+    <!-- Dialogs -->
   </div>
 </template>
