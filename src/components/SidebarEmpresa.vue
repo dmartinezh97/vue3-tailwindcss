@@ -20,7 +20,7 @@ const list = reactive({
   menu: [
     {
       text: "Negocios",
-      ruta: PageEnum.HOME_NEGOCIOS
+      ruta: PageEnum.SELECCIONAR_NEGOCIO
     },
   ]
 })

@@ -15,9 +15,11 @@ import { useNegocioStore } from '@/stores/modulos/negocio';
 import Select from '@/components/Forms/Select.vue';
 import DialogOkCancel from './Dialogs/DialogOkCancel.vue';
 import type { MisNegociosResultModel } from '@/api/model/negocioModel';
+import { useRoute } from 'vue-router';
 
 const userStore = useUserStore();
 const negocioStore = useNegocioStore()
+const { params } = useRoute();
 let showModal = ref(false);
 let negocioSeleccionado = ref<MisNegociosResultModel>();
 
@@ -52,10 +54,6 @@ const onClickChangeNegocio = () => {
   }
 };
 
-const getMisNegocios = computed(() => {
-  return negocioStore.negocios
-})
-
 </script>
 
 <template>
@@ -64,20 +62,28 @@ const getMisNegocios = computed(() => {
       <div @click="onClickBtnInicio" class="flex justify-center items-center cursor-pointer">
         <img src="@/assets/logo.svg" alt="Logo App" class="w-16 h-16" />
       </div>
-      <div class="mt-4">
+      <!-- <div class="mt-4">
         <Select v-model="negocioSeleccionado" :return-object="true" @change="onClickChangeNegocio" label="" placeholder="Selecciona un negocio" :items="getMisNegocios" item-text="nombre" item-value="idnegocio" item-img="img_logo" :image-option="true">
-          <!-- <template #header>
+          <template #header>
             <li @click="onClickOpenModalCrearNegocio" class="relative cursor-pointer select-none hover:bg-uno-100 hover:text-uno-900 text-gray-900 py-2 pl-10 pr-4">
               <span class="absolute top-1/2 left-2 transform -translate-y-1/2 material-icons mr-3">add</span>
               <span class="block truncate normal">Añadir negocio</span>
             </li>
-          </template> -->
-          <!-- <template #icon-placeholder>
+          </template>
+          <template #icon-placeholder>
             <span class="material-icons mr-3">add</span>
-          </template> -->
+          </template>
         </Select>
+      </div> -->
+      <div class="border-t border-b py-4 my-4 border-gray-200">
+        <router-link :to="{ name: PageEnum.SELECCIONAR_NEGOCIO }" active-class="bg-gray-200 hover:bg-gray-200" class="flex items-center p-2 text-base font-normal text-gray-600 rounded-lg hover:bg-gray-100">
+          <span class="material-icons">store</span>
+          <span class="flex-1 ml-3 whitespace-nowrap">Seleccionar negocio</span>
+          <!-- <span class="inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span> -->
+          <!-- <span class="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">3</span> -->
+        </router-link>
       </div>
-      <ul class="overflow-y-auto space-y-2 mt-4 pt-4 border-t border-gray-200">
+      <ul class="overflow-y-auto space-y-2">
         <li v-for="item in listadoMenuNegocios">
           <router-link :to="{ name: item.route }" active-class="bg-gray-200 hover:bg-gray-200" class="flex items-center p-2 text-base font-normal text-gray-600 rounded-lg hover:bg-gray-100">
             <span class="material-icons">{{item.icon}}</span>

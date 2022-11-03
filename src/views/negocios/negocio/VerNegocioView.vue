@@ -6,11 +6,11 @@ import { router } from '@/router/index';
 import { useRoute } from "vue-router";
 
 const negocioStore = useNegocioStore();
-const route = useRoute();
+const { params } = useRoute();
 
 onBeforeMount(async () => {
-  if(route.params.id){
-    await negocioStore.esMiNegocio(route.params.id.toString());
+  if(params.id){
+    await negocioStore.esMiNegocio(params.id.toString());
   }
 })
 

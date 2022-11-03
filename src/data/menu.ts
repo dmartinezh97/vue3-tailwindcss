@@ -4,7 +4,7 @@ export const listadoMenuPrincipal = [
   {
     label: 'Negocios',
     icon: 'store',
-    route: PageEnum.HOME_NEGOCIOS,
+    route: PageEnum.SELECCIONAR_NEGOCIO,
   },
 ]
 
@@ -13,18 +13,15 @@ export const listadoMenuNegocios = [
     label: 'Dashboard',
     icon: 'dashboard',
     route: PageEnum.DASHBOARD_NEGOCIOS,
-    children: []
   },
   {
-    label: 'Negocios',
-    icon: 'store',
-    route: PageEnum.HOME_NEGOCIOS,
-    children: [
-      {
-        label: 'Información',
-        icon: 'dashboard',
-        route: PageEnum.INFORMACION_GENERAL_NEGOCIO,
-      },
-    ]
+    label: 'Información',
+    icon: 'description',
+    route: PageEnum.INFORMACION_GENERAL_NEGOCIO,
+  },
+  {
+    label: 'Eventos',
+    icon: 'description',
+    route: PageEnum.EVENTOS_NEGOCIO,
   },
 ]

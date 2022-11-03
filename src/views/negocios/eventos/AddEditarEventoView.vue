@@ -40,9 +40,8 @@ const getInfo = async () => {
     // TODO: Mirar a ver porqué sigue siendo reactivo con el objeto servicios
     // Arreglar botón de guardar cambios que no compara el objeto servicios :)
     info.value = { ...res };
-    info.value.nombre = "Test"
-    infoInicial.value = { ...res }; //Does not work
-    infoInicial.value = unref(res) //It works
+    // infoInicial.value = { ...res }; //Does not work
+    // infoInicial.value = unref(res) //It works
   }
 }
 
@@ -101,8 +100,8 @@ const unchanged = computed(() => {
 </script>
 
 <template>
-  <div id="addeditarevento">
-    <div v-if="info" class="max-w-7xl mx-auto overflow-hidden bg-white rounded-lg shadow-md">
+  <div id="addeditarevento" class="p-4">
+    <div v-if="info" class="mx-auto overflow-hidden bg-white rounded-lg shadow-md">
       <div class="relative">
         <img
           v-if="getImageCabecera"

@@ -37,7 +37,6 @@ onMounted(async () => {
   await getInfo(params.id.toString())
   /* Para obtener varios valores watch([nombre], ([newValue1], [oldValue1]) => { */
   watch([nombre, slug, descripcion, ubicacion], ([newNombre, newSlug, newDescripcion, newUbicacion]) => {
-    console.log("cambios")
     if(info.value){
       info.value.nombre = newNombre
       info.value.slug = newSlug

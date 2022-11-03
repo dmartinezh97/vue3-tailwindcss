@@ -94,7 +94,7 @@ const onClickCerrarSesion = () => {
               </nav>
               <nav class="mb-2">
                 <PopoverButton as="div">
-                  <router-link active-class="bg-gray-200" :to="{ name: PageEnum.HOME_NEGOCIOS }" class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
+                  <router-link active-class="bg-gray-200" :to="{ name: PageEnum.SELECCIONAR_NEGOCIO }" class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
                     <span class="material-icons">post_add</span>  
                     <span class="mx-4 font-medium">Añade tu negocio</span>
                   </router-link>
@@ -148,7 +148,7 @@ const onClickCerrarSesion = () => {
         <a class="text-gray-900" href>Contact</a>-->
       </nav>
       <div class="lg:flex lg:flex-1 justify-end items-center hidden space-x-4">
-        <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.HOME_NEGOCIOS }">Modo empresa</router-link>
+        <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.SELECCIONAR_NEGOCIO }">Modo empresa</router-link>
         <Menu as="div" class="relative inline-block text-left">
           <MenuButton data-test="btnMenu" class="flex items-center border border-gray-300 shadow-sm hover:shadow-md pl-3 p-1 rounded-full">
             <span class="material-icons text-lg text-gray-400">menu</span>

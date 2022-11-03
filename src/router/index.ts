@@ -8,7 +8,7 @@ import { profileModule } from '@/views/profile';
 import { signupModule } from '@/views/signup';
 import { testModule } from '@/views/test';
 import BaseViewVue from '@/views/BaseView.vue';
-import NegocioViewVue from '@/views/NegocioView.vue';
+import BaseNegocioViewVue from '@/views/BaseNegocioView.vue';
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,17 +23,10 @@ export const router = createRouter({
         ...signupModule.routes,
         ...discoverModule.routes,
         ...profileModule.routes,
-        ...testModule.routes
+        ...testModule.routes,
       ]
     },
-    {
-      path: '/negocios',
-      name: "BaseNegocios",
-      component: NegocioViewVue,
-      children: [
-        ...negocioModule.routes,
-      ]
-    },
+    ...negocioModule.routes
   ]
 })
 
