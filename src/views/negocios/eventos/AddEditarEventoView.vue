@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, reactive, unref } from 'vue';
+import { ref, computed, onMounted, reactive, unref, watch } from 'vue';
+import { onBeforeRouteUpdate } from 'vue-router'
 import InputText from '../../../components/Forms/InputText.vue';
 import InputTextarea from '@/components/Forms/InputTextarea.vue';
 import type { EventoInformacionModel, ServicioModel } from "@/api/model/eventoModel";
@@ -23,26 +24,52 @@ import BasicButton from '../../../components/Forms/BasicButton.vue'
 const eventoStore = useEventoStore();
 const { params } = useRoute();
 
-let idevento = ref("0");
-let imgCabecera = ref(null)
 let info = ref<EventoInformacionModel>();
+let idevento = ref("0")
+/* Info */
+let nombre = ref("")
+let descripcion = ref("")
+let showModalGuardarCambios = ref(false)
+let btnDisabled = ref(true)
+
+let imgCabecera = ref(null)
 let infoInicial = ref<EventoInformacionModel>();
 let showModalAddServicio = ref(false)
 
 onMounted(async () => {
-  idevento.value = params.idevento.toString();
-  await getInfo()
+  idevento.value = params.idevento.toString()
+  await getInfo(params.idevento.toString())
+  /* Para obtener varios valores watch([nombre], ([newValue1], [oldValue1]) => { */
+    watch([nombre, descripcion], ([newNombre, newDescripcion]) => {
+    if(info.value){
+      info.value.nombre = newNombre
+      info.value.descripcion = newDescripcion
+    }
+    btnDisabled.value = false
+  })
 });
 
-const getInfo = async () => {
-  if (idevento.value != "0" && idevento.value != undefined && idevento.value != null) {
-    const res = await eventoStore.getInformacion(idevento.value);
-    // TODO: Mirar a ver porqué sigue siendo reactivo con el objeto servicios
-    // Arreglar botón de guardar cambios que no compara el objeto servicios :)
-    info.value = { ...res };
-    // infoInicial.value = { ...res }; //Does not work
-    // infoInicial.value = unref(res) //It works
+onBeforeRouteUpdate(async (onRouteChange)=> {
+  //Cambiamos de ruta y actualizamos toda la info :)
+  idevento.value = onRouteChange.params.idevento.toString()
+  await getInfo(onRouteChange.params.idevento.toString())
+  btnDisabled.value = true
+})
+
+const getInfo = async (id: string) => {
+  if(id){
+    const res = await eventoStore.getInformacion(id);
+    if(res){
+      info.value = res;
+      nombre.value = res.nombre;
+      descripcion.value = res.descripcion;
+    }
   }
+}
+
+const onClickBtnConfirmarGuardarCambios = () => {
+  //TODO: Hacer petición abrir dialog y preguntar si se quieren guardar los cambios
+  showModalGuardarCambios.value = true
 }
 
 const onChangeFileImgCabecera = (e: any) => {
@@ -57,12 +84,12 @@ const onChangeFileImgCabecera = (e: any) => {
 };
 
 const onClickAddServicio = async () => {
-  if(!unchanged.value) {
+  if(!btnDisabled.value) {
     await onClickBtnActualizarEvento()
   }
   const res = await eventoStore.crearServicio(idevento.value)
   if (res) {
-    await getInfo()
+    await getInfo(idevento.value)
   }
 }
 
@@ -75,12 +102,13 @@ const onClickBtnActualizarEvento = async () => {
 const onClickEliminarServicio = async (servicio: ServicioModel) => {
   const res = await eventoStore.eliminarServicio(servicio.idservicio)
   if(res){
-    await getInfo()
+    await getInfo(idevento.value)
   }
 }
 
-const onClickBtnGuardarCambios = () => {
-  showModalAddServicio.value = true
+const onClickBtnGuardarCambios = async () => {
+  await onClickBtnActualizarEvento()
+  //showModalAddServicio.value = true
 }
 
 const getImageCabecera = computed(() => {
@@ -92,10 +120,6 @@ const getImageCabecera = computed(() => {
   } else return "";
 })
 
-const unchanged = computed(() => {
-  return JSON.stringify(info.value) === JSON.stringify(infoInicial.value)
-})
-
 
 </script>
 
@@ -105,11 +129,11 @@ const unchanged = computed(() => {
       <div class="relative">
         <img
           v-if="getImageCabecera"
-          class="object-cover w-full h-96"
+          class="object-cover w-full h-64"
           :src="getImageCabecera"
           alt="Foto cabecera"
         />
-        <div v-else class="object-cover w-full h-96 bg-gray-200" alt="Foto cabecera"></div>
+        <div v-else class="object-cover w-full h-64 bg-gray-200" alt="Foto cabecera"></div>
         <label
           for="foto-cabecera"
           class="absolute z-20 top-3 md:top-auto md:bottom-3 right-3 p-2 bg-primary text-gray-600 md:bg-uno-500 md:text-white border md:border-uno-500 md:hover:bg-dos rounded-lg cursor-pointer font-medium md:px-3 md:py-2 transition ease-in duration-150"
@@ -124,11 +148,11 @@ const unchanged = computed(() => {
         </label>
       </div>
       <div>
-        <div class="p-6 pt-3">
-          <InputText label="Nombre" v-model="info.nombre" class="mb-4"></InputText>
-          <InputTextarea label="Descripción" v-model="info.descripcion">
+        <div class="p-6">
+          <InputText label="Nombre" v-model="nombre" class="mb-4"></InputText>
+          <InputTextarea label="Descripción" v-model="descripcion">
             <template v-slot:content>
-              <p class="mt-2 text-gray-600">{{ info.descripcion }}</p>
+              <p class="mt-2 text-gray-600">{{ descripcion }}</p>
             </template>
           </InputTextarea>
         </div>
@@ -276,7 +300,7 @@ const unchanged = computed(() => {
         </div>
         <div class="p-6">
           <div class="flex justify-end">
-            <BasicButton text="Guardar cambios" @click="onClickBtnGuardarCambios" :disabled="unchanged">
+            <BasicButton text="Guardar cambios" @click="onClickBtnConfirmarGuardarCambios" :disabled="btnDisabled">
               <template v-slot:icon>
                 <IconSave class="w-5 h-5 mr-2"></IconSave>
               </template>
@@ -292,6 +316,7 @@ const unchanged = computed(() => {
       titulo="¿Desea guardar los cambios?"
       descripcion="Si quieres guardar algún cambio que hayas hecho, tan solo debes hacer clic sobre el botón Aceptar."
     ></DialogOkCancel>
+    <DialogOkCancel v-model="showModalGuardarCambios" @submit="onClickBtnGuardarCambios" titulo="¿Desea guardar los cambios?" descripcion="Si quieres guardar algún cambio que hayas hecho, tan solo debes hacer clic sobre el botón Aceptar."></DialogOkCancel>
     <!-- DIALOGS -->
   </div>
 </template>
