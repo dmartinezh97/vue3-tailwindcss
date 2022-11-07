@@ -1,42 +1,23 @@
 <script setup lang="ts">
 
-const props = defineProps({
-  label: {
-    type: String,
-    required: false
+const props = withDefaults(defineProps<{
+  label?: string,
+  type?: string,
+  class?: string,
+  placeholder?: string,
+  iconRight?: string,
+  disabled?: boolean,
+  readonly?: boolean,
+  modelValue: String,
+}>(), {
+  type: "text",
+  iconRight: "",
+  disabled: false,
+  readonly: false,
+  modelValue(props) {
+    return props.modelValue || ''
   },
-  type: {
-    type: String,
-    default: 'text',
-    required: false
-  },
-  class: {
-    type: String,
-    required: false
-  },
-  placeholder: {
-    type: String,
-    required: false
-  },
-  iconRight: {
-    type: String,
-    default: '',
-    required: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  readonly: {
-    type: Boolean,
-    default: false
-  },
-  modelValue: {
-    type: [String, Number],
-    default: '',
-    required: false
-  },
-})
+});
 
 const emit = defineEmits(['update:modelValue'])
 const updateValue = (e: Event) => {

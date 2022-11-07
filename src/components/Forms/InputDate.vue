@@ -6,42 +6,21 @@ import { ButtonTypeEnum } from '../../enums/buttonEnum';
 import IconEye from '../icons/IconEye.vue';
 import IconEyeCerrado from '../icons/IconEyeCerrado.vue';
 
-const props = defineProps({
-  label: {
-    type: String,
-    required: false
+const props = withDefaults(defineProps<{
+  label?: string,
+  class?: string,
+  placeholder?: string,
+  datetime?: boolean,
+  disabled?: boolean,
+  readonly?: boolean,
+  editable?: boolean,
+  modelValue: [String, Date],
+}>(), {
+  editable: true,
+  modelValue(props) {
+    return props.modelValue || ''
   },
-  class: {
-    type: String,
-    required: false
-  },
-  placeholder: {
-    type: String,
-    required: false
-  },
-  datetime: {
-    type: Boolean,
-    required: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  readonly: {
-    type: Boolean,
-    default: false
-  },
-  editable: {
-    type: Boolean,
-    default: true,
-    required: false
-  },
-  modelValue: {
-    type: [String, Date],
-    default: '',
-    required: true
-  },
-})
+});
 
 const emit = defineEmits(['update:modelValue'])
 const updateValue = (e: Event) => {

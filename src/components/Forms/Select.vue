@@ -10,47 +10,65 @@ let selectText = ref("");
 let selectImage = ref("");
 let selectValue = ref();
 
-const props = defineProps({
-  label: {
-    type: String,
-    required: false
-  },
-  placeholder: {
-    type: String,
-    default: '- Selecciona una opción -',
-    required: false
-  },
-  items: {
-    type: Object,
-    required: true
-  },
-  imageOption: {
-    type: Boolean,
-    required: false
-  },
-  returnObject: {
-    type: Boolean,
-    default: false,
-    required: false
-  },
-  itemImg: {
-    type: String,
-    default: 'img',
-    required: false
-  },
-  itemText: {
-    type: [String, Array, Function] as PropType<SelectItemKey>,
-    default: 'text',
-  },
-  itemValue: {
-    type: [String, Array, Function] as PropType<SelectItemKey>,
-    default: 'value',
-  },
-  modelValue: {
-    type: [String, Number, Object],
-    required: false
-  },
-})
+const props = withDefaults(defineProps<{
+  label?: string,
+  placeholder?: string,
+  items: object[],
+  imageOption?: boolean,
+  returnObject?: boolean,
+  itemImg?: string,
+  itemText?: string,
+  itemValue?: string,
+  modelValue: [string, Number, Object],
+}>(), {
+  placeholder: "- Selecciona una opción -",
+  returnObject: false,
+  itemImg: "img",
+  itemText: "text",
+  itemValue: "value",
+});
+
+// const props = defineProps({
+//   label: {
+//     type: String,
+//     required: false
+//   },
+//   placeholder: {
+//     type: String,
+//     default: '- Selecciona una opción -',
+//     required: false
+//   },
+//   items: {
+//     type: Object,
+//     required: true
+//   },
+//   imageOption: {
+//     type: Boolean,
+//     required: false
+//   },
+//   returnObject: {
+//     type: Boolean,
+//     default: false,
+//     required: false
+//   },
+//   itemImg: {
+//     type: String,
+//     default: 'img',
+//     required: false
+//   },
+//   itemText: {
+//     type: [String, Array, Function] as PropType<SelectItemKey>,
+//     default: 'text',
+//   },
+//   itemValue: {
+//     type: [String, Array, Function] as PropType<SelectItemKey>,
+//     default: 'value',
+//   },
+//   modelValue: {
+//     type: [String, Number, Object],
+//     required: false
+//   },
+// })
 
 onMounted(() => {
   selectValue.value = props.items.find((element: Object) => {
@@ -109,7 +127,7 @@ const updateValue = (e: Event) => {
         <ListboxOptions
           class="absolute z-1 mt-1 max-h-60 border border-gray-200 divide-y divide-gray-200 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
           <slot name="header"></slot>
-          <ListboxOption v-slot="{ active, selected }" v-for="item in props.items" :value="item" :key="item"
+          <ListboxOption v-slot="{ active, selected }" v-for="item in props.items" :value="item" :key="getValue(item)">
             as="template">
             <li :class="[
               active ? 'bg-uno-100 text-uno-900' : 'text-gray-900',
