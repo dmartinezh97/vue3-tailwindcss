@@ -13,12 +13,9 @@ const frmData: LoginParams = reactive({
     password: "1234"
 })
 
-const props = defineProps({
-    modelValue: {
-        type: [Boolean],
-        required: true
-    },
-})
+const props = defineProps<{
+    modelValue: boolean
+}>();
 
 const emit = defineEmits(['update:modelValue', 'registro'])
 const setIsOpen = (value: boolean) => {

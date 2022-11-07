@@ -75,11 +75,11 @@ const onClickBtnConfirmarGuardarCambios = () => {
 const onChangeFileImgCabecera = (e: any) => {
   if (e.target.files.length > 0) {
     imgCabecera.value = e.target.files[0];
-    const formData = new FormData();
-    // formData.append('idevento', params.id.toString());
-    // if (imgCabecera.value != null)
-    //   formData.append('logo', imgCabecera.value)
-    //negocioStore.updateCabecera(formData)
+    if (imgCabecera.value != null){
+      const formData = new FormData();
+      formData.append('img_cabecera', imgCabecera.value);
+      eventoStore.updateCabecera(parseInt(params.idevento.toString()), formData)
+    }
   }
 };
 

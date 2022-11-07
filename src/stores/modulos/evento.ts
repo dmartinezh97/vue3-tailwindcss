@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useToastStore } from './toast';
-import { crearEventoAPI, eliminarServicioAPI, getInformacionAPI, misEventosAPI, updateInformacionEventoAPI } from '@/api/evento';
+import { crearEventoAPI, eliminarServicioAPI, getInformacionAPI, misEventosAPI, updateImgCabeceraEventoAPI, updateInformacionEventoAPI } from '@/api/evento';
 import { router } from '@/router';
 import { PageEnum } from '@/enums/pageEnum';
 import type { EventoState } from '@/types/store';
@@ -87,6 +87,18 @@ export const useEventoStore = defineStore({
         async eliminarServicio(idservicio: number): Promise<boolean> {
             try {
                 await eliminarServicioAPI(idservicio)
+                return true;
+            } catch (error) {
+                return Promise.reject(error)
+            }
+        },
+        /**
+         * @description: Actualiza la imagen de cabecera del evento
+         */
+         async updateCabecera(idevento: number, dataFrm: FormData): Promise<boolean> {
+            try {
+                await updateImgCabeceraEventoAPI(idevento, dataFrm)
+                useToastStore().success("¡Portada actualizada!")
                 return true;
             } catch (error) {
                 return Promise.reject(error)

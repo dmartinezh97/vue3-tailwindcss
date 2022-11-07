@@ -1,31 +1,16 @@
 <script setup lang="ts">
 import BasicButton from "../Forms/BasicButton.vue";
 
-const props = defineProps({
-    titulo: {
-        type: String,
-        required: false
-    },
-    descripcion: {
-        type: String,
-        required: false
-    },
-    ok: {
-        type: String,
-        default: 'Aceptar',
-        required: false
-    },
-    cancelar: {
-        type: String,
-        default: 'Cancelar',
-        required: false
-    },
-    modelValue: {
-        type: Boolean,
-        default: '',
-        required: true
-    },
-})
+const props = withDefaults(defineProps<{
+    titulo?: string,
+    descripcion?: string,
+    ok?: string,
+    cancelar?: string
+    modelValue: boolean,
+}>(), {
+    ok: "Aceptar",
+    cancelar: "Cancelar"
+});
 
 const emit = defineEmits(['update:modelValue', 'submit'])
 const close = (e: Event) => {

@@ -6,22 +6,14 @@ import { ButtonStyleEnum, ButtonShadowEnum } from '../../enums/buttonEnum';
 
 const valueLocal = ref("F")
 
-const props = defineProps({
-  text: {
-    type: String,
-    required: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-    required: false
-  },
-  modelValue: {
-    type: Boolean,
-    default: false,
-    required: false
-  },
-})
+const props = withDefaults(defineProps<{
+  text?: string,
+  disabled?: boolean,
+  modelValue: boolean,
+}>(), {
+  disabled: false,
+  modelValue: false,
+});
 
 onMounted(() => {
   valueLocal.value = props.modelValue ? "T" : "F"

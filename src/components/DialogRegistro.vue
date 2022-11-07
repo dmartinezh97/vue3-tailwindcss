@@ -17,12 +17,9 @@ const frmData: SignupParams = reactive({
     confirmPassword: "",
 })
 
-const props = defineProps({
-    modelValue: {
-        type: [Boolean],
-        required: true
-    },
-})
+const props = defineProps<{
+    modelValue: boolean
+}>();
 
 const emit = defineEmits(['update:modelValue', 'login'])
 const setIsOpen = (value: boolean) => {

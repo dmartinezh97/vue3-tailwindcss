@@ -4,42 +4,22 @@ import { computed, onMounted, type CSSProperties, type PropType } from 'vue';
 import { SizeEnum } from '../../enums/sizeEnum';
 import { ButtonStyleEnum, ButtonShadowEnum } from '../../enums/buttonEnum';
 
-const props = defineProps({
-  text: {
-    type: String,
-    required: true
-  },
-  block: {
-    type: Boolean,
-    default: false,
-    required: false
-  },
-  rounded: {
-    type: Boolean,
-    default: true,
-    required: false
-  },
-  outlined: {
-    type: Boolean,
-    default: false,
-    required: false
-  },
-  shadow: {
-    type: Boolean,
-    default: false,
-    required: false
-  },
-  submit: {
-    type: Boolean,
-    default: false,
-    required: false
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-    required: false
-  },
-})
+const props = withDefaults(defineProps<{
+  text: string,
+  block?: boolean,
+  rounded?: boolean,
+  outlined?: boolean,
+  shadow?: boolean,
+  submit?: boolean,
+  disabled?: boolean,
+}>(), {
+  block: false,
+  rounded: true,
+  outlined: false,
+  shadow: false,
+  submit: false,
+  disabled: false,
+});
 
 const emit = defineEmits(['click'])
 const onClick = () => {

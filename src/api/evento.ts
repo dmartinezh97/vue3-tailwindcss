@@ -9,6 +9,7 @@ enum Api {
     CrearServicio = '/Evento/CrearServicio',
     UpdateEvento = '/Evento/ActualizarEvento',
     EliminarServicio = '/Evento/EliminarServicio',
+    UpdateCabecera = '/Evento/UpdateCabecera',
 }
 
 /**
@@ -70,6 +71,20 @@ export function eliminarServicioAPI(idservicio: number) {
     return axios.delete<boolean>(Api.EliminarServicio, {
         params: {
             idservicio
+        }
+    });
+}
+
+/**
+ * @description: Actualiza la imagen de cabecera de un negocio
+ */
+ export function updateImgCabeceraEventoAPI(idevento: number, frmData: FormData) {
+    return axios.put<boolean>(Api.UpdateCabecera, frmData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        params: {
+            idevento
         }
     });
 }
