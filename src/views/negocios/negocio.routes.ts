@@ -28,28 +28,46 @@ const routes: RouteRecordRaw[] = [
                 path: 'tipo-negocio',
                 name: PageEnum.SELECCIONAR_TIPO_NEGOCIO,
                 component: SeleccionarTipoNegocioViewVue,
+                meta: {
+                    requiresAuth: true
+                }
             },
             {
                 path: 'descripcion',
                 name: PageEnum.DESCRIPCION_NEGOCIO,
                 component: DescripcionNegocioViewVue,
+                meta: {
+                    requiresAuth: true
+                }
             },
             {
                 path: 'fotos',
                 name: PageEnum.FOTOS_NEGOCIO,
                 component: FotosNegocioViewVue,
+                meta: {
+                    requiresAuth: true
+                }
             },
             {
                 path: 'ubicacion',
                 name: PageEnum.UBICACION_NEGOCIO,
                 component: UbicacionNegocioViewVue,
+                meta: {
+                    requiresAuth: true
+                }
             },
             {
                 path: 'revisar',
                 name: PageEnum.REVISAR_NEGOCIO,
                 component: RevisarNegocioViewVue,
+                meta: {
+                    requiresAuth: true
+                }
             },
-        ]
+        ],
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/negocios',
@@ -60,6 +78,9 @@ const routes: RouteRecordRaw[] = [
                 path: ':id',
                 name: PageEnum.VER_NEGOCIO,
                 component: VerNegocioViewVue,
+                meta: {
+                    requiresAuth: true
+                },
                 redirect: {
                     name: PageEnum.DASHBOARD_NEGOCIOS,
                 },
@@ -68,25 +89,40 @@ const routes: RouteRecordRaw[] = [
                         path: 'dashboard',
                         name: PageEnum.DASHBOARD_NEGOCIOS,
                         component: DashboardNegocioViewVue,
+                        meta: {
+                            requiresAuth: true
+                        }
                     },
                     {
                         path: 'informacion',
                         name: PageEnum.INFORMACION_GENERAL_NEGOCIO,
                         component: InformacionGeneralViewVue,
+                        meta: {
+                            requiresAuth: true
+                        }
                     },
                     {
                         path: 'eventos/listar',
                         name: PageEnum.EVENTOS_NEGOCIO,
                         component: ListarEventosViewVue,
+                        meta: {
+                            requiresAuth: true
+                        }
                     },
                     {
                         path: 'eventos/editar/:idevento',
                         name: PageEnum.EDITAR_EVENTO,
                         component: AddEditarEventoViewVue,
+                        meta: {
+                            requiresAuth: true
+                        }
                     },
                 ]
             },
-        ]
+        ],
+        meta: {
+            requiresAuth: true
+        }
     },
     // {
     //     path: 'crear',

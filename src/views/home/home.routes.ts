@@ -13,6 +13,9 @@ const routes: RouteRecordRaw[] = [
         path: 'seleccionar-negocio',
         name: PageEnum.SELECCIONAR_NEGOCIO,
         component: SeleccionarNegocioViewVue,
+        meta: {
+            requiresAuth: true
+        }
     },
 ]
 

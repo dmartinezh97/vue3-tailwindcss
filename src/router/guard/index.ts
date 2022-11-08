@@ -6,15 +6,15 @@ import { createPermissionGuard } from "./permissionGuard";
 
 // No cambiar el orden de creación
 export function setupRouterGuard(router: Router) {
-    createPageGuard(router);
-    createPageLoadingGuard(router);
-    // createHttpGuard(router);
-    createScrollGuard(router);
-    // createMessageGuard(router);
-    // createProgressGuard(router);
+    //createPageGuard(router);
+    //createPageLoadingGuard(router);
+    //createHttpGuard(router);
+    //createScrollGuard(router); /* Funcionaba antes de tener la página con un div interior en flex */
+    //createMessageGuard(router);
+    //createProgressGuard(router);
     createPermissionGuard(router);
-    // createParamMenuGuard(router); // must after createPermissionGuard (menu has been built.)
-    // createStateGuard(router);
+    //createParamMenuGuard(router); // must after createPermissionGuard (menu has been built.)
+    //createStateGuard(router);
 }
 
 /**
@@ -79,7 +79,7 @@ function createScrollGuard(router: Router) {
 
     router.afterEach(async (to) => {
         // scroll top
-        isHash((to as RouteLocationNormalized & { href: string })?.href) && body.scrollTo(0, 0);
+        isHash((to as RouteLocationNormalized & { href: string })?.href) && body.scrollTo(800, 800);
         return true;
     });
 }
