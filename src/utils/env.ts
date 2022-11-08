@@ -3,8 +3,8 @@
  * @returns:
  * @example:
  */
-export function getEnv(): string {
-    return import.meta.env.MODE;
+export function getEnv(): ImportMetaEnv {
+    return import.meta.env;
 }
 
 /**

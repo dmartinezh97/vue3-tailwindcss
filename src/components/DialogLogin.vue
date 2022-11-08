@@ -5,6 +5,7 @@ import BasicButton from './Forms/BasicButton.vue'
 import InputText from './Forms/InputText.vue'
 import type { LoginParams } from '@/api/model/userModel';
 import { useUserStore } from '@/stores/modulos/user';
+import { getEnv } from '@/utils/env';
 
 const userStore = useUserStore();
 
@@ -51,7 +52,7 @@ const onClickBtnLogin = async () => {
                 </div>
                 <div class="p-6">
                     <div class="mb-8">
-                        <h3 class="font-semibold text-xl">¡Te damos la bienvenida a {nombreApp}!</h3>
+                        <h3 class="font-semibold text-xl">¡Te damos la bienvenida a {{ getEnv().VITE_APP_NAME }}!</h3>
                     </div>
                     <div>
                         <InputText label="Correo electrónico" data-test="inputEmail" v-model="frmData.username" type="email"></InputText>
