@@ -7,7 +7,7 @@ import { setupStore } from './stores'
 import { setupAxios } from './utils/http/axios/index';
 import { setupRouterGuard } from './router/guard/index';
 import { router } from './router/index';
-import filters from './utils/filters';
+import filters from './utils/shared/filtersUtils';
 
 const app = createApp(App)
 

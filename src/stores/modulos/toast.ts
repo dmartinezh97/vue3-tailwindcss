@@ -11,7 +11,7 @@ import { reactive, ref, toRefs } from 'vue';
 import type { ToastProps } from '../../components/Toasts/typing';
 import type { SizeEnum } from '@/enums/sizeEnum';
 import { ToastTypeEnum } from '../../enums/toastEnum';
-import { buildShortUUID } from '../../utils/uuid';
+import { buildShortUUID } from '../../utils/shared/uuidUtils';
 
 
 export const useToastStore = defineStore({

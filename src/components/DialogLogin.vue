@@ -5,7 +5,7 @@ import BasicButton from './Forms/BasicButton.vue'
 import InputText from './Forms/InputText.vue'
 import type { LoginParams } from '@/api/model/userModel';
 import { useUserStore } from '@/stores/modulos/user';
-import { getEnv } from '@/utils/env';
+import { getEnv } from '@/utils/shared/envUtils';
 
 const userStore = useUserStore();
 

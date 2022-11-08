@@ -1,7 +1,7 @@
 import axios from 'axios';
 import VueAxios from "vue-axios";
 import type { App } from "vue";
-import { getEnv, isDevMode } from '@/utils/env';
+import { getEnv, isDevMode } from '@/utils/shared/envUtils';
 import { Http } from './Http';
 
 export function setupAxios(app: App<Element>) {

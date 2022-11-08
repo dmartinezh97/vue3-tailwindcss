@@ -4,7 +4,7 @@ import { RouterView } from 'vue-router'
 import Toasts from './components/Toasts/Toasts.vue'
 import Navbar from './components/Navbar.vue'
 import DialogCookies from './components/DialogCookies.vue';
-import { getEnv } from './utils/env';
+import { getEnv } from './utils/shared/envUtils';
 
 onMounted(() => {
   console.log(getEnv().VITE_APP_NAME)

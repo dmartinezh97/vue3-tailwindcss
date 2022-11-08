@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, type CSSProperties, type PropType } from 'vue';
 import { Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
-import { getPropertyFromItem } from '../../utils/helpers'
+import { getPropertyFromItem } from '../../utils/shared/helpershelpers'
 import IconArrowDown from '../icons/IconArrowDown.vue';
 import IconCheck from '../icons/IconCheck.vue';
 import type { SelectItemKey } from "@/types/app"
