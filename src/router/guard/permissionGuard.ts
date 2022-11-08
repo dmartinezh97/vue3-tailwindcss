@@ -6,23 +6,20 @@ import { PageEnum } from '../../enums/pageEnum';
 export function createPermissionGuard(router: Router) {
     const userStore = useUserStore();
     router.beforeEach(async (to, from, next) => {
-        const isLogged = userStore.getIsLogged
-        const requiresAuth = from.meta.requiresAuth
-
-        if(requiresAuth && !isLogged){
-            router.push({ name: PageEnum.INICIO })
-        }else{
-            next();
+        
+        /* Utilizamos to.matched para no tener que repetir el meta.requiresAuth en todas las rutas */
+        if(to.matched.some((record) => record.meta.requiresAuth)){
+            if(!userStore.getIsLogged){
+                //TODO: Enviar a pantalla con mensaje informativo para iniciar sesión, parametro ?redirect= con la url de donde viene
+                next({ name: PageEnum.INICIO })
+                return
+            }
         }
 
-        //console.log("Logeado:" + userStore.getIsLogged);
-
-        // if (to.path == PageEnum.INICIO && !userStore.getIsLogged) {
-        //     router.push(PageEnum.BIENVENIDA)
+        // if(requiresAuth && !isLogged){
+        // }else{
+        //     next();
         // }
-        // if ((to.path == PageEnum.LOGIN || to.path == PageEnum.REGISTRO) && userStore.getIsLogged) {
-        //     router.push(PageEnum.INICIO)
-        // }
-        //next();
+        next();
     });
 }

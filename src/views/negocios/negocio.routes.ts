@@ -73,14 +73,14 @@ const routes: RouteRecordRaw[] = [
         path: '/negocios',
         name: "BaseNegocio",
         component: BaseNegocioViewVue,
+        meta: {
+            requiresAuth: true
+        },
         children: [
             {
                 path: ':id',
                 name: PageEnum.VER_NEGOCIO,
                 component: VerNegocioViewVue,
-                meta: {
-                    requiresAuth: true
-                },
                 redirect: {
                     name: PageEnum.DASHBOARD_NEGOCIOS,
                 },
@@ -89,127 +89,26 @@ const routes: RouteRecordRaw[] = [
                         path: 'dashboard',
                         name: PageEnum.DASHBOARD_NEGOCIOS,
                         component: DashboardNegocioViewVue,
-                        meta: {
-                            requiresAuth: true
-                        }
                     },
                     {
                         path: 'informacion',
                         name: PageEnum.INFORMACION_GENERAL_NEGOCIO,
                         component: InformacionGeneralViewVue,
-                        meta: {
-                            requiresAuth: true
-                        }
                     },
                     {
                         path: 'eventos/listar',
                         name: PageEnum.EVENTOS_NEGOCIO,
                         component: ListarEventosViewVue,
-                        meta: {
-                            requiresAuth: true
-                        }
                     },
                     {
                         path: 'eventos/editar/:idevento',
                         name: PageEnum.EDITAR_EVENTO,
                         component: AddEditarEventoViewVue,
-                        meta: {
-                            requiresAuth: true
-                        }
                     },
                 ]
             },
         ],
-        meta: {
-            requiresAuth: true
-        }
     },
-    // {
-    //     path: 'crear',
-    //     name: PageEnum.BASE_NEGOCIO,
-    //     // component: BaseNegocioViewVue,
-    //     redirect: {
-    //         name: PageEnum.SELECCIONAR_TIPO_NEGOCIO
-    //     },
-    //     children: [
-    //         {
-    //             path: 'tipo-negocio',
-    //             name: PageEnum.SELECCIONAR_TIPO_NEGOCIO,
-    //             component: SeleccionarTipoNegocioViewVue,
-    //         },
-    //         {
-    //             path: 'descripcion',
-    //             name: PageEnum.DESCRIPCION_NEGOCIO,
-    //             component: DescripcionNegocioViewVue,
-    //         },
-    //         {
-    //             path: 'fotos',
-    //             name: PageEnum.FOTOS_NEGOCIO,
-    //             component: FotosNegocioViewVue,
-    //         },
-    //         {
-    //             path: 'ubicacion',
-    //             name: PageEnum.UBICACION_NEGOCIO,
-    //             component: UbicacionNegocioViewVue,
-    //         },
-    //         {
-    //             path: 'revisar',
-    //             name: PageEnum.REVISAR_NEGOCIO,
-    //             component: RevisarNegocioViewVue,
-    //         },
-    //         // {
-    //         //     path: 'listado',
-    //         //     name: PageEnum.LISTAR_NEGOCIOS,
-    //         //     component: ListarNegociosViewVue,
-    //         // },
-
-    //         {
-    //             path: 'add',
-    //             name: PageEnum.ADD_NEGOCIO,
-    //             component: AddNegocioViewVue,
-    //         },
-    //         // {
-    //         //     path: ':id',
-    //         //     name: PageEnum.VER_NEGOCIO,
-    //         //     component: VerNegocioViewVue,
-    //         //     redirect: {
-    //         //         name: PageEnum.INFORMACION_GENERAL_NEGOCIO
-    //         //     },
-    //         //     children: [
-    //         //         {
-    //         //             path: 'informacion',
-    //         //             name: PageEnum.INFORMACION_GENERAL_NEGOCIO,
-    //         //             component: InformacionGeneralViewVue,
-    //         //         },
-    //         //         {
-    //         //             path: 'eventos',
-    //         //             name: PageEnum.BASE_EVENTOS,
-    //         //             component: BaseEventosViewVue,
-    //         //             redirect: {
-    //         //                 name: PageEnum.EVENTOS_NEGOCIO
-    //         //             },
-    //         //             children: [
-    //         //                 {
-    //         //                     path: 'listado',
-    //         //                     name: PageEnum.EVENTOS_NEGOCIO,
-    //         //                     component: ListarEventosViewVue,
-    //         //                 },
-    //         //                 // {
-    //         //                 //     path: 'editar',
-    //         //                 //     name: PageEnum.ADD_EVENTO,
-    //         //                 //     component: AddEditarEventoViewVue,
-    //         //                 // },
-    //         //                 {
-    //         //                     path: 'editar/:idevento',
-    //         //                     name: PageEnum.EDITAR_EVENTO,
-    //         //                     component: AddEditarEventoViewVue,
-    //         //                 },
-    //         //             ]
-    //         //         },
-    //         //     ]
-    //         // }
-    //     ]
-    // },
 ]
 
 export default routes
