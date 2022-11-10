@@ -10,10 +10,6 @@ import DialogOkCancel from '../../../components/Dialogs/DialogOkCancel.vue';
 const negocioStore = useNegocioStore();
 let showModal = ref(false);
 
-onBeforeMount(() => {
-  negocioStore.misNegocios()
-})
-
 // const onClickSeleccionarNegocio = () => {
 //   router.push({
 //     name: PageEnum.ADD_NEGOCIO

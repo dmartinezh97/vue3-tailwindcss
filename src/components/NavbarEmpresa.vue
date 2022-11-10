@@ -24,7 +24,7 @@ let showModal = ref(false);
 let negocioSeleccionado = ref<MisNegociosResultModel>();
 
 onBeforeMount(() => {
-  negocioStore.misNegocios()
+  //negocioStore.misNegocios()
 })
 
 const onClickBtnInicio = () => {
