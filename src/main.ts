@@ -6,6 +6,7 @@ import { setupRouter } from './router'
 import { setupStore } from './stores'
 import { setupAxios } from './utils/http/axios/index';
 import { setupRouterGuard } from './router/guard/index';
+import { setupI18n } from './locales/setupI18n'
 import { router } from './router/index';
 import filters from './utils/shared/filtersUtils';
 
@@ -16,6 +17,7 @@ setupStore(app)
 
 //Configuración idioma
 //TODO: 18n
+//setupI18n(app)
 
 //Configuración Axios HTTP
 setupAxios(app)

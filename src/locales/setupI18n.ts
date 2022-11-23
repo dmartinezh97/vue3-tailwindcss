@@ -2,12 +2,12 @@ import type { App } from 'vue';
 import type { I18n, I18nOptions } from 'vue-i18n';
 
 import { createI18n } from 'vue-i18n';
-// import { setHtmlPageLang, setLoadLocalePool } from './helper';
-// import { localeSetting } from '/@/settings/localeSetting';
-// import { useLocaleStoreWithOut } from '/@/store/modules/locale';
+import { localeSetting } from '@/settings/localeSettings';
+import { useLocaleStoreWithOut } from '@/stores/modulos/locale';
+import { setHtmlPageLang } from './helper';
 
 
-//const { fallback, availableLocales } = localeSetting;
+const { fallback, availableLocales } = localeSetting;
 
 export let i18n: ReturnType<typeof createI18n>;
 
@@ -17,7 +17,7 @@ async function createI18nOptions(): Promise<I18nOptions> {
     const defaultLocal = await import(`./lang/${locale}.ts`);
     const message = defaultLocal.default?.message ?? {};
 
-    // setHtmlPageLang(locale);
+    setHtmlPageLang(locale);
     // setLoadLocalePool((loadLocalePool) => {
     //     loadLocalePool.push(locale);
     // });
@@ -40,6 +40,6 @@ async function createI18nOptions(): Promise<I18nOptions> {
 // setup i18n instance with glob
 export async function setupI18n(app: App) {
     const options = await createI18nOptions();
-    i18n = createI18n(options) as I18n;
+    i18n = createI18n(options);
     app.use(i18n);
 }

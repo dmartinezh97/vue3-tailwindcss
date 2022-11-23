@@ -1,6 +1,8 @@
 // clave token
 export const TOKEN_KEY = 'TOKEN__';
 
+export const LOCALE_KEY = 'LOCALE__';
+
 // clave cookies aceptadas
 export const COOKIES_KEY = 'COOKIES__';
 
