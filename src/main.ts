@@ -9,6 +9,7 @@ import { setupRouterGuard } from './router/guard/index';
 import { setupI18n } from './locales/setupI18n'
 import { router } from './router/index';
 import filters from './utils/shared/filtersUtils';
+import { setupErrorHandle } from './logica/gestion-errores'
 
 const app = createApp(App)
 
@@ -27,6 +28,9 @@ setupRouter(app)
 
 //Configuración de rutas protegidas
 setupRouterGuard(router);
+
+//Configuración global gestión errores
+setupErrorHandle(app);
 
 //Añadimos los filtros
 app.config.globalProperties.$filters = filters

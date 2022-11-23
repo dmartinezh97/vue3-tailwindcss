@@ -44,7 +44,6 @@ export const useLocaleStore = defineStore({
       },
 })
 
-// Need to be used outside the setup
 export function useLocaleStoreWithOut() {
     return useLocaleStore(store);
 }
