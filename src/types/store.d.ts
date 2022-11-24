@@ -1,6 +1,7 @@
 import { ToastProps } from '../components/Toasts/typing';
 import { MisNegociosResultModel } from '../api/model/negocioModel';
 import type { MisEventosResultModel } from '@/api/model/eventoModel';
+import type { ErrorTypeEnum } from '@/enums/exceptionEnum';
 
 export interface FrmLogin {
     email: string;
@@ -85,3 +86,23 @@ export interface EventInfo {
     img: string;
     ubicacion?: string;
 }
+
+// Información log errores
+export interface ErrorLogInfo {
+    // Tipo de error
+    type: ErrorTypeEnum;
+    // Fichero error
+    file: string;
+    // Nombre error
+    name?: string;
+    // Mensaje error
+    message: string;
+    // Stack error
+    stack?: string;
+    // Detalles del error
+    detail: string;
+    // Url error
+    url: string;
+    // Fecha error
+    time?: string;
+  }
