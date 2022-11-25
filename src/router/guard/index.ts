@@ -42,6 +42,14 @@ function createPageLoadingGuard(router: Router) {
     const userStore = useUserStore();
     const appStore = useAppStore();
     //const { getOpenPageLoading } = useTransitionSetting();
+
+    // router.beforeResolve(async (to) => {
+    //     if(to.name){
+    //         appStore.setPageLoading(true);
+    //     }
+    //     return true;
+    // });
+
     router.beforeEach(async (to) => {
         if (!userStore.getToken) {
             return true;
@@ -49,6 +57,8 @@ function createPageLoadingGuard(router: Router) {
         if (to.meta.loaded) {
             return true;
         }
+        //appStore.setPageLoading(true);
+
 
         // if (unref(getOpenPageLoading)) {
         //     appStore.setPageLoadingAction(true);
@@ -58,6 +68,9 @@ function createPageLoadingGuard(router: Router) {
         return true;
     });
     router.afterEach(async () => {
+        // setTimeout(() => {
+        //     appStore.setPageLoading(false);
+        // }, 220);
         // if (unref(getOpenPageLoading)) {
         //     // TODO Looking for a better way
         //     // The timer simulates the loading time to prevent flashing too fast,

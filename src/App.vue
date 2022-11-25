@@ -4,6 +4,10 @@ import { RouterView } from 'vue-router'
 import Toasts from './components/Toasts/Toasts.vue'
 import Navbar from './components/Navbar.vue'
 import DialogCookies from './components/DialogCookies.vue';
+import Loading from './components/Loading.vue';
+import { useAppStore } from './stores/modulos/app';
+
+const appStore = useAppStore();
 
 </script>
 
@@ -14,6 +18,7 @@ import DialogCookies from './components/DialogCookies.vue';
         <component :is="Component"></component>
       </Transition>
     </router-view>
+    <Loading v-model="appStore.getPageLoading"></Loading>
     <Toasts></Toasts>
     <!-- Dialogs -->
     <DialogCookies></DialogCookies>

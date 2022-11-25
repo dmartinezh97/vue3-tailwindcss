@@ -1,7 +1,7 @@
 import type { LocaleSetting, LocaleType } from "@/types/config";
 
 export const LOCALE: { [key: string]: LocaleType } = {
-  ES_ES: 'es',
+  ES_ES: 'es_ES',
   EN_US: 'en',
 };
 

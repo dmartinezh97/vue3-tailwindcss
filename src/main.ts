@@ -10,11 +10,15 @@ import { setupI18n } from './locales/setupI18n'
 import { router } from './router/index';
 import filters from './utils/shared/filtersUtils';
 import { setupErrorHandle } from './logica/gestion-errores'
+import { initAppConfigStore } from './logica/initAppConfig'
 
 const app = createApp(App)
 
 //Configuración store
 setupStore(app)
+
+//Inicializar la configuración interna del sistema
+initAppConfigStore()
 
 //Configuración idioma
 //TODO: 18n

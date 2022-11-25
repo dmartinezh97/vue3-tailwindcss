@@ -6,6 +6,9 @@ import { router } from '@/router';
 import { PageEnum } from '@/enums/pageEnum';
 import DialogAddNegocio from '../../components/Negocio/DialogAddNegocio.vue';
 import DialogOkCancel from '../../components/Dialogs/DialogOkCancel.vue';
+import CardNegocio from '../../components/Cards/CardNegocio.vue';
+import CardNegocioSkeleton from '../../components/Cards/CardNegocioSkeleton.vue';
+
 
 const negocioStore = useNegocioStore();
 let showModal = ref(false);
@@ -47,7 +50,7 @@ const getMisNegocios = computed(() => {
           Añadir negocio </h3>
       </div>
     </div>
-    <router-link v-for="negocio in getMisNegocios" :key="'negocio-' + negocio.idnegocio"
+    <!-- <router-link v-for="negocio in getMisNegocios" :key="'negocio-' + negocio.idnegocio"
       :to="{ name: PageEnum.VER_NEGOCIO, params: { id: negocio.idnegocio } }"
       class="flex flex-col items-center justify-center w-full max-w-md mx-auto">
       <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
@@ -56,11 +59,16 @@ const getMisNegocios = computed(() => {
         <h3
           class="py-2 px-4 font-bold capitalize tracking-wide whitespace-nowrap text-ellipsis overflow-hidden text-center text-gray-800">
           {{ negocio.nombre }} </h3>
-      </div>
-    </router-link>
+        </div>
+      </router-link> -->
+      <router-link v-for="negocio in getMisNegocios" :to="{ name: PageEnum.VER_NEGOCIO, params: { id: negocio.idnegocio } }">
+        <CardNegocio :nombre="negocio.nombre" :img-cabecera="negocio.img_cabecera"></CardNegocio>
+        <!-- <CardNegocioSkeleton></CardNegocioSkeleton> -->
+      </router-link>
+    
+    
     <!-- Dialogs -->
-    <DialogOkCancel v-model="showModal" @submit="onSubmitCrearNegocio" titulo="Crear negocio"
-      descripcion="Promociona, vende y gestiona entradas online. Añade un negocio para empezar"></DialogOkCancel>
+    <DialogOkCancel v-model="showModal" @submit="onSubmitCrearNegocio" titulo="Crear negocio" descripcion="Promociona, vende y gestiona entradas online. Añade un negocio para empezar"></DialogOkCancel>
     <!-- <DialogAddNegocio v-model="showModal"></DialogAddNegocio> -->
     <!-- Dialogs -->
   </div>

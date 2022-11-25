@@ -2,10 +2,8 @@
 import IconStar from "../../components/icons/IconStar.vue";
 import IconBookmark from "../../components/icons/IconBookmark.vue";
 import IconBookmarkOutlined from "../../components/icons/IconBookmarkOutlined.vue";
-import CardLocal from "../../components/Cards/CardLocal.vue";
 import type { EventInfo, LocalInfo } from '../../types/store';
 import { reactive, ref } from 'vue';
-import CardEvent from '../../components/Cards/CardEvent.vue';
 import AppHeader from '../../components/AppHeader.vue';
 
 
