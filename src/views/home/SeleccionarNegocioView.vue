@@ -62,14 +62,8 @@ const getMisNegocios = computed(() => {
         </div>
       </router-link> -->
       <router-link v-for="negocio in getMisNegocios" :to="{ name: PageEnum.VER_NEGOCIO, params: { id: negocio.idnegocio } }">
-        <Suspense>
-          <CardNegocio :nombre="negocio.nombre" :img-cabecera="negocio.img_cabecera"></CardNegocio>
-          <template #fallback>
-            <CardNegocioSkeleton></CardNegocioSkeleton>
-          </template>
-        </Suspense>
+        <CardNegocio :nombre="negocio.nombre" :img-cabecera="negocio.img_cabecera"></CardNegocio>
       </router-link>
-    
     
     <!-- Dialogs -->
     <DialogOkCancel v-model="showModal" @submit="onSubmitCrearNegocio" titulo="Crear negocio" descripcion="Promociona, vende y gestiona entradas online. Añade un negocio para empezar"></DialogOkCancel>

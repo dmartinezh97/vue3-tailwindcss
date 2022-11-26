@@ -3,6 +3,7 @@ import IconBookmark from '../icons/IconBookmark.vue';
 import IconStar from '../icons/IconStar.vue';
 import type { LocalInfo } from '../../types/store';
 import { onMounted } from 'vue';
+import type AnimatedPlaceholder from '../AnimatedPlaceholder.vue';
 
 defineProps({
     nombre: {
@@ -18,12 +19,26 @@ defineProps({
 </script>
 
 <template>
-    <div class="negocio-card">
-        <div class="card-header" :style="'background-image: url(' + imgCabecera + ')'"></div>
-        <div class="card-body">
-            <h3 class="title"> {{ nombre }} </h3>
-        </div>
-    </div>
+    <Suspense>
+        <template #default>
+            <div class="negocio-card">
+                <div class="card-header" :style="'background-image: url(' + imgCabecera + ')'"></div>
+                <div class="card-body">
+                    <h3 class="title"> {{ nombre }} </h3>
+                </div>
+            </div>
+        </template>
+        <template #fallback>
+            <div class="negocio-card">
+                <div class="card-header">
+                    <AnimatedPlaceholder height="100%" width="100%" />
+                </div>
+                <div class="card-body">
+                    <AnimatedPlaceholder height="40px" width="100%" />
+                </div>
+            </div>
+        </template>
+    </Suspense>
 </template>
 
 <style>
