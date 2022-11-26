@@ -5,9 +5,11 @@ import AnimatedPlaceholder from "../AnimatedPlaceholder.vue";
 
 <template>
     <div class="negocio-card">
-        <div class="card-header"></div>
+        <div class="card-header">
+            <AnimatedPlaceholder height="100%" width="100%" />
+        </div>
         <div class="card-body">
-            <h3 class="title"></h3>
+            <AnimatedPlaceholder height="40px" width="100%" />
         </div>
     </div>
 </template>

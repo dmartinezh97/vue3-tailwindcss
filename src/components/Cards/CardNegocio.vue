@@ -2,7 +2,7 @@
 import IconBookmark from '../icons/IconBookmark.vue';
 import IconStar from '../icons/IconStar.vue';
 import type { LocalInfo } from '../../types/store';
-import type { PropType } from 'vue';
+import { onMounted } from 'vue';
 
 defineProps({
     nombre: {
@@ -12,6 +12,8 @@ defineProps({
         type: String,
     },
 });
+
+// await new Promise((res) => setTimeout(res, 60000));
 
 </script>
 
@@ -34,7 +36,7 @@ defineProps({
 }
 
 .negocio-card .card-body {
-    @apply w-56 -mt-5 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800;
+    @apply w-56 h-10 -mt-5 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800;
 }
 
 .negocio-card .card-body .title {

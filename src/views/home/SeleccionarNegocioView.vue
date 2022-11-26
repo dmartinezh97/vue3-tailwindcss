@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
 import { useNegocioStore } from '../../stores/modulos/negocio';
-import { onBeforeMount, computed, ref } from 'vue';
+import { onBeforeMount, computed, ref, Suspense } from 'vue';
 import { router } from '@/router';
 import { PageEnum } from '@/enums/pageEnum';
 import DialogAddNegocio from '../../components/Negocio/DialogAddNegocio.vue';
@@ -62,8 +62,12 @@ const getMisNegocios = computed(() => {
         </div>
       </router-link> -->
       <router-link v-for="negocio in getMisNegocios" :to="{ name: PageEnum.VER_NEGOCIO, params: { id: negocio.idnegocio } }">
-        <CardNegocio :nombre="negocio.nombre" :img-cabecera="negocio.img_cabecera"></CardNegocio>
-        <!-- <CardNegocioSkeleton></CardNegocioSkeleton> -->
+        <Suspense>
+          <CardNegocio :nombre="negocio.nombre" :img-cabecera="negocio.img_cabecera"></CardNegocio>
+          <template #fallback>
+            <CardNegocioSkeleton></CardNegocioSkeleton>
+          </template>
+        </Suspense>
       </router-link>
     
     
