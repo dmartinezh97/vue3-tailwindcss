@@ -7,6 +7,7 @@ import { useRoute } from 'vue-router';
 import { useEventoStore } from '@/stores/modulos/evento';
 import type { MisEventosResultModel } from '@/api/model/eventoModel';
 import DialogOkCancel from '@/components/Dialogs/DialogOkCancel.vue';
+import CardEvento from '@/components/Cards/CardEvento.vue';
 
 const eventoStore = useEventoStore();
 const { params } = useRoute();
@@ -50,19 +51,8 @@ const getMisEventos = computed(() => {
           Añadir evento </h3>
       </div>
     </div>
-    <router-link v-for="evento in getMisEventos" :key="'evento-' + evento.idevento"
-      :to="{ name: PageEnum.EDITAR_EVENTO, params: { idevento: evento.idevento } }"
-      class="flex flex-col items-center justify-center w-full max-w-md mx-auto">
-      <div class="w-full h-64 bg-gray-300 bg-center bg-cover rounded-lg shadow-md"
-        :style="'background-image: url(' + evento.img_cabecera + ')'"></div>
-      <div class="w-56 -mt-10 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
-        <h3
-          class="h-10 py-2 px-3 font-bold tracking-wide whitespace-nowrap text-ellipsis overflow-hidden text-center text-gray-800 uppercase dark:text-white">
-          {{ evento.nombre }} </h3>
-        <div class="text-center capitalize px-3 py-2 bg-gray-200 dark:bg-gray-700">
-          {{ $filters.formatDate(evento.fecha_creacion, "date") }}
-        </div>
-      </div>
+    <router-link v-for="evento in getMisEventos" :to="{ name: PageEnum.EDITAR_EVENTO, params: { idevento: evento.idevento } }">
+      <CardEvento :nombre="evento.nombre" :imgCabecera="evento.img_cabecera" :fecha="evento.fecha_creacion"></CardEvento>
     </router-link>
     <!-- Dialogs -->
     <DialogOkCancel v-model="showModal" @submit="onClickAddEvento" titulo="Crear evento" descripcion="Promociona, vende y gestiona entradas online. Añade un negocio para empezar"></DialogOkCancel>
