@@ -6,7 +6,7 @@ import { router } from '@/router';
 import { PageEnum } from '@/enums/pageEnum';
 import DialogAddNegocio from '../../components/Negocio/DialogAddNegocio.vue';
 import DialogOkCancel from '../../components/Dialogs/DialogOkCancel.vue';
-import CardNegocio from '../../components/Cards/CardNegocio.vue';
+import CardNegocio from '../../components/app/negocio/CardNegocio.vue';
 
 
 const negocioStore = useNegocioStore();

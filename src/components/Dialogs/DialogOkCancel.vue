@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BasicButton from "../Forms/BasicButton.vue";
+import BasicButton from "../ui/BasicButton.vue";
 
 const props = withDefaults(defineProps<{
     titulo?: string,

@@ -21,7 +21,7 @@ const filters = {
     currencyEUR(value: any) {
         return value + '€'
     },
-    formatDate(value: string, type: string) {
+    formatDateBeautiful(value: string, type: string) {
         const fechaTemp = new Date(value)
         if (type === 'date') {
             return fechaTemp.toLocaleDateString("es-ES", {

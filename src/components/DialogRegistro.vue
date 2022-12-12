@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onDeactivated, reactive } from 'vue';
 import { Dialog, DialogOverlay, DialogTitle, DialogDescription } from '@headlessui/vue'
-import BasicButton from './Forms/BasicButton.vue'
-import InputText from './Forms/InputText.vue'
+import BasicButton from './ui/BasicButton.vue'
+import InputText from './ui/InputText.vue'
 import { useUserStore } from '@/stores/modulos/user';
 import type { SignupParams } from '@/api/model/userModel';
 

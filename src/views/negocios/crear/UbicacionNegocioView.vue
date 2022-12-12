@@ -2,10 +2,10 @@
 import { RadioGroup, RadioGroupOption } from '@headlessui/vue';
 import { ref, computed, onMounted } from 'vue';
 import { router } from '@/router';
-import BasicButton from '../../../components/Forms/BasicButton.vue';
+import BasicButton from '../../../components/ui/BasicButton.vue';
 import { PageEnum } from '../../../enums/pageEnum';
 import { useNegocioStore } from '../../../stores/modulos/negocio';
-import InputText from '../../../components/Forms/InputText.vue';
+import InputText from '../../../components/ui/InputText.vue';
 import DialogGoogleMaps from '../../../components/Dialogs/DialogGoogleMaps.vue';
 import type { DireccionNegocio } from '../../../types/store';
 

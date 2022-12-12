@@ -4,7 +4,7 @@ import { router } from '@/router';
 import { Menu, MenuButton, MenuItems, MenuItem, Popover, PopoverButton, PopoverPanel, PopoverOverlay, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { computed, ref, reactive } from 'vue';
 import { useUserStore } from '../stores/modulos/user';
-import BasicButton from './Forms/BasicButton.vue';
+import BasicButton from './ui/BasicButton.vue';
 import SidebarEmpresa from './SidebarEmpresa.vue';
 import IconTrash from './icons/IconTrash.vue';
 import IconLogout from './icons/IconLogout.vue';
@@ -71,26 +71,6 @@ const onClickCerrarSesion = () => {
                     <span class="mx-4 font-medium">{{item.label}}</span>
                   </router-link>
                 </PopoverButton>
-
-                  <!-- <a class="flex items-center px-4 py-2 text-gray-700 bg-gray-200 dark:bg-gray-700 dark:text-gray-200" href="#">
-                      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                      <span class="mx-4 font-medium">Dashboard</span>
-                  </a>
-                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
-                      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                      <span class="mx-4 font-medium">Accounts</span>
-                  </a>
-                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
-                      <span class="mx-4 font-medium">Añade tu negocio</span>
-                  </a>
-                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700" href="#">
-                      <span class="mx-4 font-medium">Ayuda</span>
-                  </a> -->
               </nav>
               <nav class="mb-2">
                 <PopoverButton as="div">
@@ -147,9 +127,10 @@ const onClickCerrarSesion = () => {
         <a class="text-gray-900" href>Projects</a>
         <a class="text-gray-900" href>Contact</a>-->
       </nav>
-      <div class="lg:flex lg:flex-1 justify-end items-center hidden space-x-4">
+      <div class="lg:flex lg:flex-1 justify-end items-center hidden">
         <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.SELECCIONAR_NEGOCIO }">Modo empresa</router-link>
-        <Menu as="div" class="relative inline-block text-left">
+        <span class="material-icons text-lg text-gray-400 hover:bg-gray-200/60 p-3 rounded-full leading-none">language</span>
+        <Menu as="div" class="relative inline-block text-left ml-2">
           <MenuButton data-test="btnMenu" class="flex items-center border border-gray-300 shadow-sm hover:shadow-md pl-3 p-1 rounded-full">
             <span class="material-icons text-lg text-gray-400">menu</span>
             <span class="material-icons text-3xl leading-none text-gray-400 ml-3 rounded-full">account_circle</span>

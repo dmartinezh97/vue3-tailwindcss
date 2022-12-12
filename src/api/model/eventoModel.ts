@@ -17,8 +17,8 @@ export interface MisEventosResultModel {
     nombre: string;
     descripcion: string;
     img_cabecera: string;
-    fecha_creacion: Date;
-    fecha_modificacion: Date;
+    fecha_creacion: string;
+    fecha_modificacion: string;
 }
 
 

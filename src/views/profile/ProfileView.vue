@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from "vue";
-import InputText from "../../components/Forms/InputText.vue";
-import BasicButton from "../../components/Forms/BasicButton.vue";
+import InputText from "../../components/ui/InputText.vue";
+import BasicButton from "../../components/ui/BasicButton.vue";
 import ButtonsAuth from "../../components/ButtonsAuth.vue"
 import { SizeEnum } from "@/enums/sizeEnum";
 import { ButtonTypeEnum } from "@/enums/buttonEnum";

@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, reactive, unref, watch } from 'vue';
 import { onBeforeRouteUpdate } from 'vue-router'
-import InputText from '../../../components/Forms/InputText.vue';
-import InputTextarea from '@/components/Forms/InputTextarea.vue';
+import InputText from '../../../components/ui/InputText.vue';
+import InputTextarea from '@/components/ui/InputTextarea.vue';
 import type { EventoInformacionModel, ServicioModel } from "@/api/model/eventoModel";
 import { useEventoStore } from '../../../stores/modulos/evento';
 import { useRoute } from 'vue-router';
-import InputDate from '../../../components/Forms/InputDate.vue';
+import InputDate from '../../../components/ui/InputDate.vue';
 import IconPencilAlt from '../../../components/icons/IconPencilAlt.vue';
 import IconCamera from '../../../components/icons/IconCamera.vue';
-import ButtonSwitch from '../../../components/Forms/ButtonSwitch.vue';
+import ButtonSwitch from '../../../components/ui/ButtonSwitch.vue';
 import IconPlus from '../../../components/icons/IconPlus.vue';
 import DialogOkCancel from '../../../components/Dialogs/DialogOkCancel.vue';
 import IconSave from '../../../components/icons/IconSave.vue';
@@ -18,7 +18,7 @@ import IconOption from '../../../components/icons/IconOption.vue';
 import IconMoreVertical from '../../../components/icons/IconMoreVertical.vue';
 import { Menu, MenuButton, MenuItems, MenuItem, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import IconTrash from '../../../components/icons/IconTrash.vue'
-import BasicButton from '../../../components/Forms/BasicButton.vue'
+import BasicButton from '../../../components/ui/BasicButton.vue'
 
 
 const eventoStore = useEventoStore();

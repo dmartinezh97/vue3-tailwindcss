@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import InputText from "../../components/Forms/InputText.vue";
-import BasicButton from "../../components/Forms/BasicButton.vue";
+import InputText from "../../components/ui/InputText.vue";
+import BasicButton from "../../components/ui/BasicButton.vue";
 import { SizeEnum } from "@/enums/sizeEnum";
 import { ButtonTypeEnum } from "@/enums/buttonEnum";
 import type { FrmSignup } from '../../types/store';

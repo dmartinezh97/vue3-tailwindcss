@@ -7,7 +7,7 @@ import { useRoute } from 'vue-router';
 import { useEventoStore } from '@/stores/modulos/evento';
 import type { MisEventosResultModel } from '@/api/model/eventoModel';
 import DialogOkCancel from '@/components/Dialogs/DialogOkCancel.vue';
-import CardEvento from '@/components/Cards/CardEvento.vue';
+import CardEvento from '@/components/app/evento/CardEvento.vue';
 
 const eventoStore = useEventoStore();
 const { params } = useRoute();

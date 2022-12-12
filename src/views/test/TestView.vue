@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import InputText from "../../components/Forms/InputText.vue";
-import BasicButton from "../../components/Forms/BasicButton.vue";
+import InputText from "../../components/ui/InputText.vue";
+import BasicButton from "../../components/ui/BasicButton.vue";
 import { SizeEnum } from "@/enums/sizeEnum";
 import { ButtonStyleEnum } from "@/enums/buttonEnum";
 import IconApp from "../../components/icons/IconApp.vue";

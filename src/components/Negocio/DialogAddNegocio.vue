@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onDeactivated, reactive } from 'vue';
 import { Dialog, DialogOverlay, DialogTitle, DialogDescription } from '@headlessui/vue'
-import BasicButton from '../Forms/BasicButton.vue'
-import InputText from '../Forms/InputText.vue'
+import BasicButton from '../ui/BasicButton.vue'
+import InputText from '../ui/InputText.vue'
 import type { NegocioParams } from '@/api/model/negocioModel';
-import Select from '../Forms/Select.vue';
+import Select from '../ui/Select.vue';
 import { listadoTipoNegocio } from '@/data/app'
 import { useNegocioStore } from '@/stores/modulos/negocio';
 
@@ -62,7 +62,7 @@ const onClickAddNegocio = async () => {
                     <div>
                         <InputText label="Nombre" v-model="frmData.nombre"></InputText>
                         <InputText label="Descripción" v-model="frmData.descripcion"></InputText>
-                        <Select label="Tipo" v-model="frmData.tipo_negocio" :items="listadoTipoNegocio"></Select>
+                        <!-- <Select label="Tipo" v-model="frmData.tipo_negocio" :items="listadoTipoNegocio"></Select> -->
                         <!-- <div class="flex gap-2">
                             <InputText label="Apellidos" v-model="frmData.apellidos"></InputText>
                             <InputText label="Usuario" v-model="frmData.usuario"></InputText>

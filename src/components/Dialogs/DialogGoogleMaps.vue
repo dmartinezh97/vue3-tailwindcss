@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BasicButton from "../Forms/BasicButton.vue";
-import InputText from "../Forms/InputText.vue";
+import BasicButton from "../ui/BasicButton.vue";
+import InputText from "../ui/InputText.vue";
 import { ref, computed, onMounted } from 'vue';
 
 const direccion = ref("");
