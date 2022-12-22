@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from "vue-router"
 import { PageEnum } from '../../enums/pageEnum';
 import AddNegocioViewVue from "./negocio/AddNegocioView.vue";
-import BaseNegocioViewVue from "../BaseNegocioView.vue";
+import BaseNegocioViewVue from "../admin/BaseAdminView.vue";
 import VerNegocioViewVue from "./negocio/VerNegocioView.vue";
 import InformacionGeneralViewVue2 from "./informacion/InformacionGeneralView.vue";
 import InformacionGeneralViewVue from "./informacion/InformacionGeneralView.vue";
@@ -15,7 +15,7 @@ import FotosNegocioViewVue from "./crear/FotosNegocioView.vue";
 import UbicacionNegocioViewVue from "./crear/UbicacionNegocioView.vue";
 import RevisarNegocioViewVue from "./crear/RevisarNegocioView.vue";
 import DashboardNegocioViewVue from "./dashboard/DashboardNegocioView.vue";
-import BaseViewVue from "../BaseView.vue";
+import BaseViewVue from "../app/BaseView.vue";
 import BaseCrearNegocioViewVue from "../BaseCrearNegocioView.vue";
 
 const routes: RouteRecordRaw[] = [

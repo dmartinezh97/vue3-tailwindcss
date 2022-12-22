@@ -18,10 +18,10 @@ onBeforeMount(() => {
 
 const list = reactive({
   menu: [
-    {
-      text: "Negocios",
-      ruta: PageEnum.SELECCIONAR_NEGOCIO
-    },
+    // {
+    //   text: "Negocios",
+    //   ruta: PageEnum.SELECCIONAR_NEGOCIO
+    // },
   ]
 })
 

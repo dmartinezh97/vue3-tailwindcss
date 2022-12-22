@@ -3,13 +3,13 @@ import { PageEnum } from '@/enums/pageEnum';
 import { router } from '@/router';
 import { Menu, MenuButton, MenuItems, MenuItem, Popover, PopoverButton, PopoverPanel, PopoverOverlay, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { computed, ref, reactive } from 'vue';
-import { useUserStore } from '../stores/modulos/user';
-import BasicButton from './ui/BasicButton.vue';
-import SidebarEmpresa from './SidebarEmpresa.vue';
-import IconTrash from './icons/IconTrash.vue';
-import IconLogout from './icons/IconLogout.vue';
-import DialogRegistro from './DialogRegistro.vue';
-import DialogLogin from './DialogLogin.vue';
+import { useUserStore } from '../../stores/modulos/user';
+import BasicButton from '../ui/BasicButton.vue';
+import SidebarEmpresa from '../SidebarEmpresa.vue';
+import IconTrash from '../icons/IconTrash.vue';
+import IconLogout from '../icons/IconLogout.vue';
+import DialogRegistro from '../DialogRegistro.vue';
+import DialogLogin from '../DialogLogin.vue';
 import { listadoMenuPrincipal } from '@/data/menu';
 
 const showModalRegistro = ref(false);
@@ -37,14 +37,18 @@ const onClickCerrarSesion = () => {
   userStore.resetState();
 };
 
+const onClickGoToPanelAdministrador = () => {
+  //TODO: Añadir ruta para ir al panel de administrador
+  router.push({
+    name: PageEnum.ADMIN_DASHBOARD
+  });
+};
+
 </script>
 
 <template>
   <header class="sticky top-0 z-30 bg-white shadow-md">
     <div class="container h-16 flex items-center justify-between px-6 mx-auto">
-      <!-- <div class="flex flex-1 w-0 lg:hidden">
-        <span class="material-icons text-gray-600 bg-gray-100 rounded-full p-2">menu</span>
-      </div> -->
       <Popover class="flex flex-1 w-0 lg:hidden">
         <PopoverButton as="div">
           <span class="material-icons text-gray-600 bg-gray-100 rounded-full p-2">menu</span>
@@ -62,7 +66,7 @@ const onClickCerrarSesion = () => {
           <PopoverPanel class="fixed top-0 left-0 z-40 bg-white w-64 h-full flex flex-col justify-between">
             <div class="flex flex-col">
               <div @click="onClickBtnInicio" class="flex justify-center items-center">
-                <img src="@/assets/logo.svg" alt="Logo App" class="w-20 h-20" />
+                <img src="@/assets/img/svg/logo.svg" alt="Logo App" class="w-20 h-20" />
               </div>
               <div class="flex flex-col justify-between divide-y divide-gray-200">
               <nav class="mb-2">
@@ -73,12 +77,12 @@ const onClickCerrarSesion = () => {
                 </PopoverButton>
               </nav>
               <nav class="mb-2">
-                <PopoverButton as="div">
+                <!-- <PopoverButton as="div">
                   <router-link active-class="bg-gray-200" :to="{ name: PageEnum.SELECCIONAR_NEGOCIO }" class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
                     <span class="material-icons">post_add</span>  
                     <span class="mx-4 font-medium">Añade tu negocio</span>
                   </router-link>
-                </PopoverButton>
+                </PopoverButton> -->
                 <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
                   <span class="material-icons">help_outline</span>
                   <span class="mx-4 font-medium">Ayuda</span>
@@ -109,7 +113,7 @@ const onClickCerrarSesion = () => {
         </transition>
       </Popover>
       <div @click="onClickBtnInicio" class="flex items-center lg:flex-1 space-x-4 cursor-pointer">
-        <img src="@/assets/logo.svg" alt="Logo App" class="w-16 h-16" />
+        <img src="@/assets/img/svg/logo.svg" alt="Logo App" class="w-16 h-16" />
       </div>
       <div class="flex justify-end flex-1 w-0 lg:hidden">
         <button class="p-2 text-gray-500 bg-gray-100 rounded-full" type="button">
@@ -122,13 +126,9 @@ const onClickCerrarSesion = () => {
       </div>
       <nav class="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0">
         <router-link v-for="item in listadoMenuPrincipal" :to="{ name: item.route }">{{item.label}}</router-link>
-        <!-- <a class="text-gray-900" href>About</a>
-        <a class="text-gray-900" href>Blog</a>
-        <a class="text-gray-900" href>Projects</a>
-        <a class="text-gray-900" href>Contact</a>-->
       </nav>
       <div class="lg:flex lg:flex-1 justify-end items-center hidden">
-        <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.SELECCIONAR_NEGOCIO }">Modo empresa</router-link>
+        <!-- <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.SELECCIONAR_NEGOCIO }">Panel administrador</router-link> -->
         <span class="material-icons text-lg text-gray-400 hover:bg-gray-200/60 p-3 rounded-full leading-none">language</span>
         <Menu as="div" class="relative inline-block text-left ml-2">
           <MenuButton data-test="btnMenu" class="flex items-center border border-gray-300 shadow-sm hover:shadow-md pl-3 p-1 rounded-full">
@@ -143,6 +143,13 @@ const onClickCerrarSesion = () => {
               class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div class="py-2">
                 <template v-if="userStore.getIsLogged">
+                  <MenuItem v-slot="{ active }">
+                  <button @click="onClickGoToPanelAdministrador" data-test="btnPanelAdministrador"
+                    :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
+                    <span class="material-icons text-lg mr-4 text-gray-600">admin_panel_settings</span>
+                    Panel administrador
+                  </button>
+                  </MenuItem>
                   <MenuItem v-slot="{ active }">
                   <button @click="onClickCerrarSesion" data-test="btnCerrarSesion"
                     :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
@@ -169,13 +176,6 @@ const onClickCerrarSesion = () => {
                 </template>
               </div>
               <div class="py-2">
-                <MenuItem v-slot="{ active }">
-                <button
-                  :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">
-                  <span class="material-icons text-lg mr-4 text-gray-600">post_add</span>
-                  Añade tu negocio
-                </button>
-                </MenuItem>
                 <MenuItem v-slot="{ active }">
                 <button
                   :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']">

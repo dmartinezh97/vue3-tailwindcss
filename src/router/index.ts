@@ -1,32 +1,35 @@
 import type { App } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router'
-import { discoverModule } from '@/views/discover';
 import { homeModule } from '@/views/home';
-import { loginModule } from '@/views/login';
 import { negocioModule } from '@/views/negocios';
 import { profileModule } from '@/views/profile';
-import { signupModule } from '@/views/signup';
-import { testModule } from '@/views/test';
-import BaseViewVue from '@/views/BaseView.vue';
-import BaseNegocioViewVue from '@/views/BaseNegocioView.vue';
+import BaseViewVue from '@/views/app/BaseView.vue';
+import BaseNegocioViewVue from '@/views/admin/BaseAdminView.vue';
+import BaseAdminViewVue from '@/views/admin/BaseAdminView.vue';
+import { adminModule } from '@/views/admin';
+import { PageEnum } from '@/enums/pageEnum';
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '',
-      name: "BaseInicio",
+      name: PageEnum.BASE_INICIO,
       component: BaseViewVue,
       children: [
         ...homeModule.routes,
-        ...loginModule.routes,
-        ...signupModule.routes,
-        ...discoverModule.routes,
-        ...profileModule.routes,
-        ...testModule.routes,
+        //...profileModule.routes,
       ]
     },
-    ...negocioModule.routes
+    {
+      path: '/admin',
+      name: PageEnum.BASE_ADMIN,
+      component: BaseAdminViewVue,
+      children: [
+        ...adminModule.routes,
+      ]
+    },
+    //...negocioModule.routes
   ]
 })
 

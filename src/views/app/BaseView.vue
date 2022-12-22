@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import NavbarEmpresa from "../components/NavbarEmpresa.vue";
+import Navbar from "../../components/layouts/Navbar.vue";
+
 </script>
 
 <template>
-  <div class="flex h-full">
-    <NavbarEmpresa></NavbarEmpresa>
-    <div class="flex w-full overflow-y-auto">
-      <div class="w-full">
+  <div class="flex flex-col">
+    <Navbar></Navbar>
+    <div class="flex">
+      <div class="w-full lg:p-4">
         <router-view v-slot="{ Component }">
           <Transition name="fade" mode="out-in">
             <component :is="Component"></component>

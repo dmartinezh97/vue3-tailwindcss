@@ -1,27 +1,37 @@
 import { PageEnum } from "@/enums/pageEnum";
 
 export const listadoMenuPrincipal = [
-  {
-    label: 'Negocios',
-    icon: 'store',
-    route: PageEnum.SELECCIONAR_NEGOCIO,
-  },
+  // {
+  //   label: 'Negocios',
+  //   icon: 'store',
+  //   route: PageEnum.SELECCIONAR_NEGOCIO,
+  // },
 ]
 
-export const listadoMenuNegocios = [
+export const listadoMenuPanelAdministrador = [
   {
     label: 'Dashboard',
     icon: 'dashboard',
-    route: PageEnum.DASHBOARD_NEGOCIOS,
+    route: PageEnum.ADMIN_DASHBOARD,
   },
   {
-    label: 'Información',
-    icon: 'description',
-    route: PageEnum.INFORMACION_GENERAL_NEGOCIO,
+    label: 'Usuarios',
+    icon: 'group',
+    route: PageEnum.ADMIN_USUARIOS,
   },
   {
-    label: 'Eventos',
-    icon: 'description',
-    route: PageEnum.EVENTOS_NEGOCIO,
+    label: 'Logs',
+    icon: 'warning',
+    route: PageEnum.ADMIN_LOGS,
   },
+  // {
+  //   label: 'Información',
+  //   icon: 'description',
+  //   route: PageEnum.INFORMACION_GENERAL_NEGOCIO,
+  // },
+  // {
+  //   label: 'Eventos',
+  //   icon: 'description',
+  //   route: PageEnum.EVENTOS_NEGOCIO,
+  // },
 ]

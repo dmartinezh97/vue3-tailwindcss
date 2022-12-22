@@ -1,18 +1,24 @@
 export enum PageEnum {
+    BASE_INICIO = 'BaseInicio',
     ROOT = 'Root',
     INICIO = 'Inicio',
     BIENVENIDA = '/bienvenida',
     EVENTOS = '/eventos',
     /* NEGOCIO */
-    SELECCIONAR_NEGOCIO = 'SeleccionarNegocio',
+    //SELECCIONAR_NEGOCIO = 'SeleccionarNegocio',
     HOME_NEGOCIOS = 'HomeNegocio',
     BASE_NEGOCIO = 'BaseNegocio',
-    DASHBOARD_NEGOCIOS = 'DashboardNegocio',
     SELECCIONAR_TIPO_NEGOCIO = 'SeleccionarTipoNegocio',
     DESCRIPCION_NEGOCIO = 'DescripcionNegocio',
     FOTOS_NEGOCIO = 'FotosNegocio',
     UBICACION_NEGOCIO = 'UbicacionNegocio',
     REVISAR_NEGOCIO = 'RevisarNegocio',
+
+    /* Panel Administración */
+    BASE_ADMIN = 'BaseInicioAdmin',
+    ADMIN_DASHBOARD = 'AdminDashboard',
+    ADMIN_USUARIOS = 'AdminUsuarios',
+    ADMIN_LOGS = 'AdminLogs',
 
 
 

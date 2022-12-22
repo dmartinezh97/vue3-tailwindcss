@@ -71,22 +71,6 @@ export interface UserInfo {
     Token: string;
 }
 
-//TODO: Temporal
-export interface LocalInfo {
-    nombre: string;
-    direccion: string;
-    img: string;
-    puntuacion: string;
-}
-
-//TODO: Temporal
-export interface EventInfo {
-    nombre: string;
-    fecha: string;
-    img: string;
-    ubicacion?: string;
-}
-
 // Información log errores
 export interface ErrorLogInfo {
     // Tipo de error

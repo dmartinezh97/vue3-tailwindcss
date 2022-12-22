@@ -21,7 +21,7 @@ const onSubmitCrearNegocio = () => {
 
 <template>
   <div id="inicio" class="text-center">
-    <h1 @click="onSubmitCrearNegocio">Inicio</h1>
+    <h1>Inicio</h1>
   </div>
 </template>
 

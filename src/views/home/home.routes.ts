@@ -10,14 +10,14 @@ const routes: RouteRecordRaw[] = [
         name: 'Inicio',
         component: HomeViewVue
     },
-    {
-        path: 'seleccionar-negocio',
-        name: PageEnum.SELECCIONAR_NEGOCIO,
-        component: SeleccionarNegocioViewVue,
-        meta: {
-            requiresAuth: true
-        }
-    },
+    // {
+    //     path: 'seleccionar-negocio',
+    //     name: PageEnum.SELECCIONAR_NEGOCIO,
+    //     component: SeleccionarNegocioViewVue,
+    //     meta: {
+    //         requiresAuth: true
+    //     }
+    // },
     {
         path: 'test2',
         name: 'Test2',

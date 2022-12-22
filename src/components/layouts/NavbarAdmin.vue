@@ -3,17 +3,17 @@ import { PageEnum } from '@/enums/pageEnum';
 import { router } from '@/router';
 import { Menu, MenuButton, MenuItems, MenuItem, Popover, PopoverButton, PopoverPanel, PopoverOverlay, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { computed, ref, reactive, onBeforeMount } from 'vue';
-import { useUserStore } from '../stores/modulos/user';
-import BasicButton from './ui/BasicButton.vue';
-import SidebarEmpresa from './SidebarEmpresa.vue';
-import IconTrash from './icons/IconTrash.vue';
-import IconLogout from './icons/IconLogout.vue';
-import DialogRegistro from './DialogRegistro.vue';
-import DialogLogin from './DialogLogin.vue';
-import { listadoMenuNegocios } from '@/data/menu';
+import { useUserStore } from '../../stores/modulos/user';
+import BasicButton from '../ui/BasicButton.vue';
+import SidebarEmpresa from '../SidebarEmpresa.vue';
+import IconTrash from '../icons/IconTrash.vue';
+import IconLogout from '../icons/IconLogout.vue';
+import DialogRegistro from '../DialogRegistro.vue';
+import DialogLogin from '../DialogLogin.vue';
+import { listadoMenuPanelAdministrador } from '@/data/menu';
 import { useNegocioStore } from '@/stores/modulos/negocio';
 import Select from '@/components/ui/Select.vue';
-import DialogOkCancel from './Dialogs/DialogOkCancel.vue';
+import DialogOkCancel from '../Dialogs/DialogOkCancel.vue';
 import type { MisNegociosResultModel } from '@/api/model/negocioModel';
 import { useRoute } from 'vue-router';
 
@@ -60,7 +60,7 @@ const onClickChangeNegocio = () => {
   <div class="w-64">
     <div class="w-64 py-2 px-3 h-full bg-white border-r-2 border-gray-100">
       <div @click="onClickBtnInicio" class="flex justify-center items-center cursor-pointer">
-        <img src="@/assets/logo.svg" alt="Logo App" class="w-16 h-16" />
+        <img src="@/assets/img/svg/logo.svg" alt="Logo App" class="w-16 h-16" />
       </div>
       <!-- <div class="mt-4">
         <Select v-model="negocioSeleccionado" :return-object="true" @change="onClickChangeNegocio" label="" placeholder="Selecciona un negocio" :items="getMisNegocios" item-text="nombre" item-value="idnegocio" item-img="img_logo" :image-option="true">
@@ -76,15 +76,15 @@ const onClickChangeNegocio = () => {
         </Select>
       </div> -->
       <div class="border-t border-b py-4 my-4 border-gray-200">
-        <router-link :to="{ name: PageEnum.SELECCIONAR_NEGOCIO }" active-class="bg-gray-200 hover:bg-gray-200" class="flex items-center p-2 text-base font-normal text-gray-600 rounded-lg hover:bg-gray-100">
-          <span class="material-icons">store</span>
-          <span class="flex-1 ml-3 whitespace-nowrap">Seleccionar negocio</span>
+        <router-link :to="{ name: PageEnum.ADMIN_DASHBOARD }" active-class="bg-gray-200 hover:bg-gray-200" class="flex items-center p-2 text-base font-normal text-gray-600 rounded-lg hover:bg-gray-100">
+          <span class="material-icons">dashboard</span>
+          <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
           <!-- <span class="inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span> -->
           <!-- <span class="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">3</span> -->
         </router-link>
       </div>
       <ul class="overflow-y-auto space-y-2">
-        <li v-for="item in listadoMenuNegocios">
+        <li v-for="item in listadoMenuPanelAdministrador">
           <router-link :to="{ name: item.route }" active-class="bg-gray-200 hover:bg-gray-200" class="flex items-center p-2 text-base font-normal text-gray-600 rounded-lg hover:bg-gray-100">
             <span class="material-icons">{{item.icon}}</span>
             <span class="flex-1 ml-3 whitespace-nowrap">{{item.label}}</span>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NavbarEmpresa from '@/components/NavbarEmpresa.vue';
+import NavbarEmpresa from '@/components/layouts/NavbarAdmin.vue';
 import { RouterView } from 'vue-router';
 </script>
 
