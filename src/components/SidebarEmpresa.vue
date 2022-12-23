@@ -4,7 +4,7 @@ import { router } from '@/router';
 import { useNegocioStore } from '@/stores/modulos/negocio';
 import { computed, onBeforeMount, onMounted, reactive } from 'vue';
 import { useUserStore } from '../stores/modulos/user';
-import BasicButton from './ui/BasicButton.vue';
+import BasicButton from './ui/buttons/BasicButton.vue';
 import IconAdd from './icons/IconAdd.vue';
 import { useRoute } from 'vue-router';
 

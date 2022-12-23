@@ -1,23 +1,22 @@
 <script setup lang="ts">
-import { isString } from '@vue/shared';
-import { computed, onMounted, type CSSProperties, type PropType } from 'vue';
-import { SizeEnum } from '../../enums/sizeEnum';
-import { ButtonStyleEnum, ButtonShadowEnum } from '../../enums/buttonEnum';
+import type { ButtonType } from '@/enums/buttonEnum';
+import { computed, type PropType } from 'vue';
 
 const props = withDefaults(defineProps<{
+  type: ButtonType,
   text: string,
   block?: boolean,
   rounded?: boolean,
   outlined?: boolean,
   shadow?: boolean,
-  submit?: boolean,
   disabled?: boolean,
 }>(), {
+  type: "button",
+  to: null,
   block: false,
   rounded: true,
   outlined: false,
   shadow: false,
-  submit: false,
   disabled: false,
 });
 
@@ -39,7 +38,7 @@ const classObject = computed(() => ({
 
 <template>
   <button
-    :type="submit ? 'submit' :'button'"
+    :type="props.type"
     :class="classObject"
     :disabled="props.disabled"
     class="flex items-center justify-center font-semibold px-6 py-3 leading-none transition ease-in duration-150"

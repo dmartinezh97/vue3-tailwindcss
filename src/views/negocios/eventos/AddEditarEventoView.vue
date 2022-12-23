@@ -18,7 +18,7 @@ import IconOption from '../../../components/icons/IconOption.vue';
 import IconMoreVertical from '../../../components/icons/IconMoreVertical.vue';
 import { Menu, MenuButton, MenuItems, MenuItem, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import IconTrash from '../../../components/icons/IconTrash.vue'
-import BasicButton from '../../../components/ui/BasicButton.vue'
+import BasicButton from '../../../components/ui/buttons/BasicButton.vue'
 
 
 const eventoStore = useEventoStore();

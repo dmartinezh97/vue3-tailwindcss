@@ -4,7 +4,7 @@ import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import { useNegocioStore } from '@/stores/modulos/negocio';
 import type { NegocioInformacionGeneralModel } from '@/api/model/negocioModel';
 import IconCamera from '../../../components/icons/IconCamera.vue';
-import BasicButton from '../../../components/ui/BasicButton.vue';
+import BasicButton from '../../../components/ui/buttons/BasicButton.vue';
 import InputText from '../../../components/ui/InputText.vue';
 import InputTextarea from '../../../components/ui/InputTextarea.vue';
 import DialogGoogleMaps from '../../../components/Dialogs/DialogGoogleMaps.vue';

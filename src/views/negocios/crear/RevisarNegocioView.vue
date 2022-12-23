@@ -2,7 +2,7 @@
 import { RadioGroup, RadioGroupOption } from '@headlessui/vue';
 import { ref, computed, onMounted } from 'vue';
 import { router } from '@/router';
-import BasicButton from '../../../components/ui/BasicButton.vue';
+import BasicButton from '../../../components/ui/buttons/BasicButton.vue';
 import { PageEnum } from '../../../enums/pageEnum';
 import { useNegocioStore } from '../../../stores/modulos/negocio';
 import InputText from '../../../components/ui/InputText.vue';

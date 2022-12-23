@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BasicButton from "../../components/ui/BasicButton.vue";
+import BasicButton from "../../components/ui/buttons/BasicButton.vue";
 import { ButtonStyleEnum, ButtonShadowEnum } from "@/enums/buttonEnum";
 import AnimationApp from "../../components/icons/AnimationApp.vue";
 import { router } from '../../router/index';

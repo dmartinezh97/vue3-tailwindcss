@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BasicButton from "@/components/ui/BasicButton.vue";
+import BasicButton from "@/components/ui/buttons/BasicButton.vue";
 import { ButtonStyleEnum, ButtonShadowEnum } from "@/enums/buttonEnum";
 import AnimationApp from "@/components/icons/AnimationApp.vue";
 import { router } from '@/router/index';
@@ -108,7 +108,7 @@ const getImgCabeceraNegocio = computed(() => {
               class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
             />
           </label>
-          <BasicButton text="Crear negocio" submit block shadow></BasicButton>
+          <BasicButton text="Crear negocio" type="submit" block shadow></BasicButton>
         </form>
       </div>
 

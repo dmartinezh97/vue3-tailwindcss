@@ -4,7 +4,7 @@ import { router } from '@/router';
 import { Menu, MenuButton, MenuItems, MenuItem, Popover, PopoverButton, PopoverPanel, PopoverOverlay, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { computed, ref, reactive } from 'vue';
 import { useUserStore } from '../../stores/modulos/user';
-import BasicButton from '../ui/BasicButton.vue';
+import BasicButton from '../ui/buttons/BasicButton.vue';
 import SidebarEmpresa from '../SidebarEmpresa.vue';
 import IconTrash from '../icons/IconTrash.vue';
 import IconLogout from '../icons/IconLogout.vue';

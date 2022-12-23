@@ -5,12 +5,14 @@ export enum ButtonStyleEnum {
     TEXT = 'text',
 }
 
-export enum ButtonTypeEnum {
-    TEXT = 'text',
-    EMAIL = 'email',
-    PASSWORD = 'password',
-    FECHA = 'date'
-}
+export type ButtonType = "button" | "submit" | "reset" | undefined;
+
+// export enum ButtonTypeEnum {
+//     TEXT = 'text',
+//     EMAIL = 'email',
+//     PASSWORD = 'password',
+//     FECHA = 'date'
+// }
 
 export enum ButtonShadowEnum {
     NONE = 'none',
