@@ -5,6 +5,8 @@ import { computed, type PropType } from 'vue';
 const props = withDefaults(defineProps<{
   type: ButtonType,
   text: string,
+  to?: object,
+  target?: string,
   block?: boolean,
   rounded?: boolean,
   outlined?: boolean,
@@ -12,7 +14,8 @@ const props = withDefaults(defineProps<{
   disabled?: boolean,
 }>(), {
   type: "button",
-  to: null,
+  to: undefined,
+  target: undefined,
   block: false,
   rounded: true,
   outlined: false,
@@ -37,15 +40,18 @@ const classObject = computed(() => ({
 </script>
 
 <template>
-  <button
-    :type="props.type"
-    :class="classObject"
-    :disabled="props.disabled"
+  <button v-if="!props.to" :type="props.type" :class="classObject" :disabled="props.disabled"
     class="flex items-center justify-center font-semibold px-6 py-3 leading-none transition ease-in duration-150"
-    @click="onClick"
-  >
-  <slot name="icon">
-  </slot>
-  {{ text }}
+    @click="onClick">
+    <slot name="icon">
+    </slot>
+    {{ text }}
   </button>
+  <router-link v-else :to="props.to" :class="classObject" :disabled="props.disabled" :target="props.target"
+    class="flex items-center justify-center font-semibold px-6 py-3 leading-none transition ease-in duration-150"
+    @click="onClick">
+    <slot name="icon">
+    </slot>
+    {{ text }}
+  </router-link>
 </template>
