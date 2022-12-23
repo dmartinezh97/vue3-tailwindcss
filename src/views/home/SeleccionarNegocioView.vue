@@ -5,7 +5,7 @@ import { onBeforeMount, computed, ref, Suspense } from 'vue';
 import { router } from '@/router';
 import { PageEnum } from '@/enums/pageEnum';
 import DialogAddNegocio from '../../components/Negocio/DialogAddNegocio.vue';
-import DialogOkCancel from '../../components/layouts/dialogs/DialogOkCancel.vue';
+import DialogOkCancel from '../../components/ui/dialogs/DialogOkCancel.vue';
 import CardNegocio from '../../components/app/negocio/CardNegocio.vue';
 
 

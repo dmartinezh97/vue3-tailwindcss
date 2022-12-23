@@ -6,7 +6,7 @@ import { PageEnum } from "@/enums/pageEnum";
 import { useRoute } from 'vue-router';
 import { useEventoStore } from '@/stores/modulos/evento';
 import type { MisEventosResultModel } from '@/api/model/eventoModel';
-import DialogOkCancel from '@/components/layouts/dialogs/DialogOkCancel.vue';
+import DialogOkCancel from '@/components/ui/dialogs/DialogOkCancel.vue';
 import CardEvento from '@/components/app/evento/CardEvento.vue';
 
 const eventoStore = useEventoStore();
