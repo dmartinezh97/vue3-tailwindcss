@@ -5,7 +5,7 @@ import { onBeforeMount, computed, ref } from 'vue';
 import { router } from '@/router';
 import { PageEnum } from '@/enums/pageEnum';
 import DialogAddNegocio from '../../../components/Negocio/DialogAddNegocio.vue';
-import DialogOkCancel from '../../../components/Dialogs/DialogOkCancel.vue';
+import DialogOkCancel from '../../../components/layouts/dialogs/DialogOkCancel.vue';
 
 const negocioStore = useNegocioStore();
 let showModal = ref(false);

@@ -11,7 +11,7 @@ import DialogGoogleMaps from '../../../components/Dialogs/DialogGoogleMaps.vue';
 import IconDanger from '../../../components/icons/IconDanger.vue';
 import IconPencilAlt from '../../../components/icons/IconPencilAlt.vue';
 import IconSave from '../../../components/icons/IconSave.vue';
-import DialogOkCancel from '../../../components/Dialogs/DialogOkCancel.vue';
+import DialogOkCancel from '../../../components/layouts/dialogs/DialogOkCancel.vue';
 import { convertToSlug } from '../../../utils/slug';
 
 const negocioStore = useNegocioStore();

@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { RouterView } from 'vue-router'
 import Toasts from './components/Toasts/Toasts.vue'
-import Navbar from './components/layouts/Navbar.vue'
-import DialogCookies from './components/DialogCookies.vue';
 import Loading from './components/Loading.vue';
 import { useAppStore } from './stores/modulos/app';
+import DialogCookies from './components/layouts/dialogs/DialogCookies.vue';
 
 const appStore = useAppStore();
 

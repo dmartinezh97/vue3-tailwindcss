@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BasicButton from './ui/BasicButton.vue'
+import BasicButton from '@/components/ui/BasicButton.vue';
 import { useUserStore } from '@/stores/modulos/user';
 
 const userStore = useUserStore();

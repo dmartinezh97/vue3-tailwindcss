@@ -11,7 +11,7 @@ import IconPencilAlt from '../../../components/icons/IconPencilAlt.vue';
 import IconCamera from '../../../components/icons/IconCamera.vue';
 import ButtonSwitch from '../../../components/ui/ButtonSwitch.vue';
 import IconPlus from '../../../components/icons/IconPlus.vue';
-import DialogOkCancel from '../../../components/Dialogs/DialogOkCancel.vue';
+import DialogOkCancel from '../../../components/layouts/dialogs/DialogOkCancel.vue';
 import IconSave from '../../../components/icons/IconSave.vue';
 import { useToastStore } from '@/stores/modulos/toast';
 import IconOption from '../../../components/icons/IconOption.vue';

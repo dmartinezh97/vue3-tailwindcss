@@ -3,7 +3,7 @@ import { RouterView } from 'vue-router';
 import { useNegocioStore } from '../../../stores/modulos/negocio';
 import { onBeforeMount, computed, ref } from 'vue';
 import { PageEnum } from '@/enums/pageEnum';
-import DialogOkCancel from '../../../components/Dialogs/DialogOkCancel.vue';
+import DialogOkCancel from '../../../components/layouts/dialogs/DialogOkCancel.vue';
 
 const negocioStore = useNegocioStore();
 let showModal = ref(false);

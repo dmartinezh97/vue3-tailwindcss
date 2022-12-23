@@ -13,7 +13,7 @@ import DialogLogin from '../DialogLogin.vue';
 import { listadoMenuPanelAdministrador } from '@/data/menu';
 import { useNegocioStore } from '@/stores/modulos/negocio';
 import Select from '@/components/ui/Select.vue';
-import DialogOkCancel from '../Dialogs/DialogOkCancel.vue';
+import DialogOkCancel from './dialogs/DialogOkCancel.vue';
 import type { MisNegociosResultModel } from '@/api/model/negocioModel';
 import { useRoute } from 'vue-router';
 

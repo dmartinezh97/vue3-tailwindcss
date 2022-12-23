@@ -3,6 +3,7 @@ import type { RouteRecordRaw } from "vue-router"
 import HomeViewVue from "./HomeView.vue"
 import SeleccionarNegocioViewVue from "./SeleccionarNegocioView.vue"
 import TestViewVue from "./TestView.vue"
+import ComponentViewVue from "./ComponentView.vue"
 
 const routes: RouteRecordRaw[] = [
     {
@@ -10,14 +11,11 @@ const routes: RouteRecordRaw[] = [
         name: 'Inicio',
         component: HomeViewVue
     },
-    // {
-    //     path: 'seleccionar-negocio',
-    //     name: PageEnum.SELECCIONAR_NEGOCIO,
-    //     component: SeleccionarNegocioViewVue,
-    //     meta: {
-    //         requiresAuth: true
-    //     }
-    // },
+    {
+        path: 'componentes',
+        name: 'ComponentView',
+        component: ComponentViewVue
+    },
     {
         path: 'test2',
         name: 'Test2',

@@ -4,6 +4,7 @@ export enum PageEnum {
     INICIO = 'Inicio',
     BIENVENIDA = '/bienvenida',
     EVENTOS = '/eventos',
+    COMPONENTES = 'ComponentView',
     /* NEGOCIO */
     //SELECCIONAR_NEGOCIO = 'SeleccionarNegocio',
     HOME_NEGOCIOS = 'HomeNegocio',
@@ -30,7 +31,6 @@ export enum PageEnum {
     /* EVENTOS DE UN NEGOCIO */
     BASE_EVENTOS = 'BaseEventos',
     VER_EVENTO_NEGOCIO = 'VerEventoNegocio',
-    EVENTOS_NEGOCIO = 'EventosNegocio',
     ADD_EVENTO = 'AddEvento',
     EDITAR_EVENTO = 'EditarEvento',
 
