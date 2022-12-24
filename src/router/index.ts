@@ -1,7 +1,6 @@
 import type { App } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router'
 import { homeModule } from '@/views/home';
-import { negocioModule } from '@/views/negocios';
 import { profileModule } from '@/views/profile';
 import BaseViewVue from '@/views/app/BaseView.vue';
 import BaseNegocioViewVue from '@/views/admin/BaseAdminView.vue';

@@ -4,7 +4,6 @@ import InputText from "../../components/ui/InputText.vue";
 import BasicButton from "../../components/ui/buttons/BasicButton.vue";
 import ButtonsAuth from "../../components/ButtonsAuth.vue"
 import { SizeEnum } from "@/enums/sizeEnum";
-import { ButtonTypeEnum } from "@/enums/buttonEnum";
 import { useUserStore } from "@/stores/modulos/user";
 import type { LoginParams } from '../../api/model/userModel';
 import IconEye from '../../components/icons/IconEye.vue';

@@ -2,7 +2,6 @@
 import { isString } from '@vue/shared';
 import { computed, onMounted, ref, type CSSProperties, type PropType } from 'vue';
 import { SizeEnum } from '../../enums/sizeEnum';
-import { ButtonTypeEnum } from '../../enums/buttonEnum';
 import IconEye from '../icons/IconEye.vue';
 import IconEyeCerrado from '../icons/IconEyeCerrado.vue';
 
