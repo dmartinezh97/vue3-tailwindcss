@@ -6,8 +6,6 @@ import { computed, ref, reactive } from 'vue';
 import { useUserStore } from '../../stores/modulos/user';
 import BasicButton from '../ui/buttons/BasicButton.vue';
 import SidebarEmpresa from '../SidebarEmpresa.vue';
-import IconTrash from '../icons/IconTrash.vue';
-import IconLogout from '../icons/IconLogout.vue';
 import DialogRegistro from '../DialogRegistro.vue';
 import DialogLogin from '../DialogLogin.vue';
 import { listadoMenuPrincipal } from '@/data/menu';
@@ -49,46 +47,43 @@ const onClickGoToPanelAdministrador = () => {
 <template>
   <header class="sticky top-0 z-30 bg-white shadow-md">
     <div class="container h-16 flex items-center justify-between px-6 mx-auto">
+      <!-- Navbar móvil -->
       <Popover class="flex flex-1 w-0 lg:hidden">
         <PopoverButton as="div">
           <span class="material-icons text-gray-600 bg-gray-100 rounded-full p-2">menu</span>
         </PopoverButton>
         <PopoverOverlay class="bg-black opacity-30 z-40 fixed inset-0" />
 
-        <transition
-          enter-active-class="transition duration-200 ease-out"
-          enter-from-class="translate-y-1 opacity-0"
-          enter-to-class="translate-y-0 opacity-100"
-          leave-active-class="transition duration-100 ease-in"
-          leave-from-class="translate-y-0 opacity-100"
-          leave-to-class="translate-y-1 opacity-0"
-        >
+        <transition enter-active-class="transition duration-200 ease-out" enter-from-class="translate-y-1 opacity-0"
+          enter-to-class="translate-y-0 opacity-100" leave-active-class="transition duration-100 ease-in"
+          leave-from-class="translate-y-0 opacity-100" leave-to-class="translate-y-1 opacity-0">
           <PopoverPanel class="fixed top-0 left-0 z-40 bg-white w-64 h-full flex flex-col justify-between">
             <div class="flex flex-col">
               <div @click="onClickBtnInicio" class="flex justify-center items-center">
                 <img src="@/assets/img/svg/logo.svg" alt="Logo App" class="w-20 h-20" />
               </div>
               <div class="flex flex-col justify-between divide-y divide-gray-200">
-              <nav class="mb-2">
-                <PopoverButton as="div" v-for="item in listadoMenuPrincipal">
-                  <router-link class="flex items-center px-4 py-2" active-class="bg-gray-200" :to="{ name: item.route }">
-                    <span class="mx-4 font-medium">{{item.label}}</span>
-                  </router-link>
-                </PopoverButton>
-              </nav>
-              <nav class="mb-2">
-                <!-- <PopoverButton as="div">
+                <nav class="mb-2">
+                  <PopoverButton as="div" v-for="item in listadoMenuPrincipal">
+                    <router-link class="flex items-center px-4 py-2" active-class="bg-gray-200"
+                      :to="{ name: item.route }">
+                      <span class="mx-4 font-medium">{{ item.label }}</span>
+                    </router-link>
+                  </PopoverButton>
+                </nav>
+                <nav class="mb-2">
+                  <!-- <PopoverButton as="div">
                   <router-link active-class="bg-gray-200" :to="{ name: PageEnum.SELECCIONAR_NEGOCIO }" class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
                     <span class="material-icons">post_add</span>  
                     <span class="mx-4 font-medium">Añade tu negocio</span>
                   </router-link>
                 </PopoverButton> -->
-                <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
-                  <span class="material-icons">help_outline</span>
-                  <span class="mx-4 font-medium">Ayuda</span>
-                </a>
-              </nav>
-            </div>
+                  <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform">
+                    <span class="material-icons">help_outline</span>
+                    <span class="mx-4 font-medium">Ayuda</span>
+                  </a>
+                </nav>
+              </div>
             </div>
             <div v-if="userStore.getIsLogged" class="p-2">
               <PopoverButton as="div" v-for="item in listadoMenuPrincipal">
@@ -112,9 +107,11 @@ const onClickGoToPanelAdministrador = () => {
           </PopoverPanel>
         </transition>
       </Popover>
+      <!-- Fin Navbar móvil -->
       <div @click="onClickBtnInicio" class="flex items-center lg:flex-1 space-x-4 cursor-pointer">
         <img src="@/assets/img/svg/logo.svg" alt="Logo App" class="w-16 h-16" />
       </div>
+      <!-- Lupa -->
       <div class="flex justify-end flex-1 w-0 lg:hidden">
         <button class="p-2 text-gray-500 bg-gray-100 rounded-full" type="button">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -124,14 +121,16 @@ const onClickGoToPanelAdministrador = () => {
           </svg>
         </button>
       </div>
+      <!-- Fin Lupa -->
       <nav class="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0">
-        <router-link v-for="item in listadoMenuPrincipal" :to="{ name: item.route }">{{item.label}}</router-link>
+        <router-link v-for="item in listadoMenuPrincipal" :to="{ name: item.route }">{{ item.label }}</router-link>
       </nav>
       <div class="lg:flex lg:flex-1 justify-end items-center hidden">
-        <!-- <router-link class="text-sm font-semibold hover:bg-gray-200/60 p-3 rounded-full leading-none" :to="{ name: PageEnum.SELECCIONAR_NEGOCIO }">Panel administrador</router-link> -->
-        <span class="material-icons text-lg text-gray-400 hover:bg-gray-200/60 p-3 rounded-full leading-none">language</span>
+        <span
+          class="material-icons text-lg text-gray-400 hover:bg-gray-200/60 p-3 rounded-full leading-none">language</span>
         <Menu as="div" class="relative inline-block text-left ml-2">
-          <MenuButton data-test="btnMenu" class="flex items-center border border-gray-300 shadow-sm hover:shadow-md pl-3 p-1 rounded-full">
+          <MenuButton data-test="btnMenu"
+            class="flex items-center border border-gray-300 shadow-sm hover:shadow-md pl-3 p-1 rounded-full">
             <span class="material-icons text-lg text-gray-400">menu</span>
             <span class="material-icons text-3xl leading-none text-gray-400 ml-3 rounded-full">account_circle</span>
           </MenuButton>
@@ -191,14 +190,5 @@ const onClickGoToPanelAdministrador = () => {
     </div>
     <DialogLogin v-model="showModalLogin" @registro="onClickBtnRegistro"></DialogLogin>
     <DialogRegistro v-model="showModalRegistro" @login="onClickBtnLogin"></DialogRegistro>
-    <!-- <SidebarEmpresa></SidebarEmpresa> -->
-    <!-- <div class="border-t border-gray-100 lg:hidden">
-      <nav class="flex items-center justify-center p-4 overflow-x-auto text-sm font-medium">
-        <a class="flex-shrink-0 pl-4 text-gray-900">About</a>
-        <a class="flex-shrink-0 pl-4 text-gray-900">Blog</a>
-        <a class="flex-shrink-0 pl-4 text-gray-900">Projects</a>
-        <a class="flex-shrink-0 pl-4 text-gray-900">Contact</a>
-      </nav>
-    </div> -->
   </header>
 </template>

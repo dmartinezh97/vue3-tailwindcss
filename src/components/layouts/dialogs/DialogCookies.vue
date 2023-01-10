@@ -19,10 +19,10 @@ const onClickAbrirPreferenciaDeCookies = () => {
 </script>
 
 <template>
-    <div v-if="!userStore.getIsCookiesAcepted" class="fixed bottom-0 z-30 overflow-y-auto w-full">
-        <div class="flex items-end justify-center p-4 md:p-8">
+    <div v-if="!userStore.getIsCookiesAcepted" class="fixed bottom-0 z-30 left-1/2 p-6 md:p-8 -translate-x-1/2 w-full max-w-screen-2xl">
+        <div class="flex items-end justify-center">
             <!-- <DialogOverlay class="fixed inset-0 bg-black opacity-0" /> -->
-            <div class="relative flex flex-col gap-y-4 lg:flex-row w-full max-w-screen-2xl mx-auto p-6 bg-white rounded-xl shadow-2xl">
+            <div class="relative flex flex-col gap-y-4 lg:flex-row p-6 bg-white rounded-xl shadow-2xl">
                 <div class="flex">
                     <div class="flex flex-col pr-4">
                         <div class="flex items-center text-base leading-none tracking-tight font-extrabold mb-2">
