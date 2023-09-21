@@ -5,7 +5,7 @@ import { defineStore } from 'pinia'
 export const useAppStore = defineStore({
     id: 'app',
     state: (): AppState => ({
-        pageLoading: true,
+        pageLoading: false,
     }),
     getters: {
         getPageLoading(): boolean {
