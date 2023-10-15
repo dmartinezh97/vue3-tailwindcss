@@ -4,6 +4,7 @@
 
 <template>
   <div id="inicio" class="text-center">
-    <h1>Inicio</h1>
+    <h1>Iniciooo</h1>
+    <VButton text="asd"></VButton>
   </div>
 </template>
