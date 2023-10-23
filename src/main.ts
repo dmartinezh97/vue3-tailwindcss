@@ -11,11 +11,11 @@ import { router } from './router/index';
 import filters from './utils/shared/filtersUtils';
 import { setupErrorHandle } from './logica/gestion-errores'
 import { initAppConfigStore } from './logica/initAppConfig'
-import plugin from 'vue-ui-dani-lib'
+import { install } from 'vue-ui-dani-lib'
 
 const app = createApp(App)
 
-app.use(plugin)
+app.use(install)
 
 //Configuración store
 setupStore(app)
