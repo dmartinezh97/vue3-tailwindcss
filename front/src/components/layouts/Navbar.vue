@@ -45,7 +45,7 @@ const onClickGoToPanelAdministrador = () => {
 </script>
 
 <template>
-  <header class="sticky top-0 z-30 bg-white shadow-md">
+  <header class="sticky top-0 z-30 bg-secondary">
     <div class="container h-16 flex items-center justify-between px-6 mx-auto">
       <!-- Navbar móvil -->
       <Popover class="flex flex-1 w-0 lg:hidden">
@@ -60,7 +60,7 @@ const onClickGoToPanelAdministrador = () => {
           <PopoverPanel class="fixed top-0 left-0 z-40 bg-white w-64 h-full flex flex-col justify-between">
             <div class="flex flex-col">
               <div @click="onClickBtnInicio" class="flex justify-center items-center">
-                <img src="@/assets/img/svg/logo.svg" alt="Logo App" class="w-20 h-20" />
+                <img src="@/assets/img/svg/logo-bold.svg" alt="Logo App" class="w-20 h-20" />
               </div>
               <div class="flex flex-col justify-between divide-y divide-gray-200">
                 <nav class="mb-2">
@@ -109,7 +109,7 @@ const onClickGoToPanelAdministrador = () => {
       </Popover>
       <!-- Fin Navbar móvil -->
       <div @click="onClickBtnInicio" class="flex items-center lg:flex-1 space-x-4 cursor-pointer">
-        <img src="@/assets/img/svg/logo.svg" alt="Logo App" class="w-16 h-16" />
+        <img src="@/assets/img/svg/logo-bold.svg" alt="Logo App" class="h-16 p-2 py-3" />
       </div>
       <!-- Lupa -->
       <div class="flex justify-end flex-1 w-0 lg:hidden">
@@ -122,9 +122,9 @@ const onClickGoToPanelAdministrador = () => {
         </button>
       </div>
       <!-- Fin Lupa -->
-      <nav class="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0">
+      <!-- <nav class="items-center justify-center hidden space-x-8 text-sm font-medium lg:flex lg:flex-1 lg:w-0">
         <router-link v-for="item in listadoMenuPrincipal" :to="{ name: item.route }">{{ item.label }}</router-link>
-      </nav>
+      </nav> -->
       <div class="lg:flex lg:flex-1 justify-end items-center hidden">
         <span
           class="material-icons text-lg text-gray-400 hover:bg-gray-200/60 p-3 rounded-full leading-none">language</span>
