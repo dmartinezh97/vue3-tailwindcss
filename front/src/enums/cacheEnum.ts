@@ -1,5 +1,6 @@
 // clave token
 export const TOKEN_KEY = 'TOKEN__';
+export const TOKENS_INFO_KEY = 'TOKENS__INFO__'
 
 export const LOCALE_KEY = 'LOCALE__';
 

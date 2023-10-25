@@ -23,8 +23,11 @@ export namespace Http {
                     //appStore.setPageLoading(true);
                     const userStore = useUserStore();
                     const token = userStore.getToken;
+                    if(token && config && config.headers){
+                        config.headers.Authorization = "Bearer " + token;
+                        // config.headers.common["Authorization"] = "Bearer " + token;
+                    }
                     //TODO: Filtrar por permiso de rutas si es Auth para enviar token
-                    config.headers.common["Authorization"] = "Bearer " + token;
 
                     return config;
                 },
@@ -43,14 +46,16 @@ export namespace Http {
                 },
                 (error: any) => {
                     const toastStore = useToastStore();
-                    //TODO: Si da un 401, redireccionar a una página personalizada
-                    switch (error.response.status) {
-                        case 400:
-                            toastStore.error(error.response.data.error);
-                            break;
-                        default:
-                            toastStore.warning(error.response.data.error);
-                            break;
+                    if(error && error.response && error.response.status){
+                        //TODO: Si da un 401, redireccionar a una página personalizada
+                        switch (error.response.status) {
+                            case 400:
+                                toastStore.error(error.response.data.message);
+                                break;
+                            default:
+                                toastStore.warning(error.response.data.message);
+                                break;
+                        }
                     }
                     return Promise.reject(error);
                 }

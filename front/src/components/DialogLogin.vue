@@ -59,7 +59,7 @@ const onClickBtnLogin = async () => {
                         <InputText label="Contraseña" data-test="inputPassword" v-model="frmData.password" type="password"></InputText>
                     </div>
                     <div>
-                        <BasicButton @click="onClickBtnLogin" data-test="btnIniciarSesion" text="Iniciar sesión" block></BasicButton>
+                        <BasicButton @click="onClickBtnLogin" text="Iniciar sesión" block></BasicButton>
                     </div>
                     <div class="my-4">
                         <div class="linea-o">o</div>

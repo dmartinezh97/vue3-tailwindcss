@@ -1,6 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { convertBytesToReadableSize }  from '@/utils/convert'
+import BasicButton from './ui/buttons/BasicButton.vue';
+import axios from 'axios'
+import { useToastStore } from '@/stores/modulos/toast';
+
+interface SubirNuevoArchivo {
+    archivo: File
+    name: string
+    size: number
+    type: string
+}
+
+const toastStore = useToastStore();
 
 const props = defineProps({
     open: {
@@ -8,6 +21,70 @@ const props = defineProps({
         required: true
     }
 })
+
+const emit = defineEmits(['close'])
+
+const inputFile = ref<HTMLInputElement | null>(null)
+const listFiles = ref<SubirNuevoArchivo[]>([])
+const nombreColeccion = ref('bold-workplanner')
+const loadingDocs = ref(false)
+
+
+const onClickShowExplorador = () => {
+  if (!loadingDocs.value && inputFile.value)
+    inputFile.value.click()
+}
+
+const onFileChanged = ($event: Event) => {
+  const target = $event.target as HTMLInputElement
+
+  if (target && target.files) {
+    for (let i = 0; i < target.files.length; i++) {
+      listFiles.value.push({
+        archivo: target.files[i],
+        name: target.files[i].name,
+        size: target.files[i].size,
+        type: target.files[i].type,
+      })
+    }
+  }
+}
+
+const onClickGuardarDocumento = () => {
+    loadingDocs.value = true
+    console.log('Guardar documento')
+
+    const data = new FormData()
+
+    data.append('title', nombreColeccion.value)
+    listFiles.value.forEach(file => {
+        data.append('file', file.archivo)
+    })
+
+    axios.post('/docs/new', data)
+        .then((res) => {
+            toastStore.success('Los documentos se han subido con éxito')
+
+            // res.data.title = `Chat: ${res.data.title}`
+            // res.data.icon = {
+            //   icon: 'tabler-message',
+            // }
+            // res.data.to = { name: 'chats-id', params: { id: res.data.id } }
+            // res.data.action = 'read'
+            // res.data.subject = 'Auth'
+
+            // chatStore.addChat(res.data)
+            // router.push({ name: 'chats-id', params: { id: res.data.id } })
+        })
+        .catch((err: Error) => {
+            toastStore.error('Algo ha ido mal.. :/')
+        })
+        .finally(() => {
+            loadingDocs.value = false
+            emit('close')
+            listFiles.value = []
+        })
+}
 
 const numFicheros = ref(1)
 </script>
@@ -54,7 +131,7 @@ const numFicheros = ref(1)
                                         <div class="relative px-2 h-full-nav overflow-y-scroll">
                                             <!-- mt-6 flex-1 px-4 sm:px-6 -->
                                             <!-- Your content -->
-                                            <li v-for="x in numFicheros"
+                                            <li v-for="(fichero, index) in listFiles"
                                                 class="flex items-center justify-between py-2 px-4 text-sm leading-6 hover:bg-gray-600/10 rounded-lg">
                                                 <div class="flex w-0 flex-1 items-center">
                                                     <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20"
@@ -65,8 +142,8 @@ const numFicheros = ref(1)
                                                     </svg>
                                                     <div class="ml-4 flex min-w-0 flex-1 gap-2">
                                                         <span
-                                                            class="truncate font-medium"> {{ x }} - resume_mucho_mas_largo_back_end_developer.pdf</span>
-                                                        <span class="flex-shrink-0 text-gray-400">2.4mb</span>
+                                                            class="truncate font-medium">{{ index+1 }} - {{ fichero.name }}</span>
+                                                        <span class="flex-shrink-0 text-gray-400">{{ convertBytesToReadableSize(fichero.size) }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="ml-4 flex-shrink-0">
@@ -79,12 +156,15 @@ const numFicheros = ref(1)
                                                 </div>
                                             </li>
                                             <!-- Botón para subir ficheros -->
-                                            <div class="sticky bg-white bottom-0" @click="numFicheros++">
+                                            <div :class="[!listFiles.length ? 'grid-cols-1' : 'grid-cols-2', 'sticky grid gap-x-2 bg-white bottom-0']">
                                                 <div
+                                                    @click="onClickShowExplorador"
                                                     class="flex items-center justify-center bg-gray-600/10 py-2 rounded-lg cursor-pointer mt-2">
                                                     <span class="material-icons text-xl text-gray-600">file_upload</span>
                                                 </div>
+                                                <BasicButton v-if="listFiles.length > 0" @click="onClickGuardarDocumento" :loading="loadingDocs" text="Subir ficheros" block class="mt-2"></BasicButton>
                                             </div>
+                                            <input ref="inputFile" type="file" multiple accept="application/pdf, text/plain" class="hidden" @change="onFileChanged">
                                         </div>
                                     </div>
                                 </DialogPanel>

@@ -30,6 +30,7 @@ const onClickOpenLogin = () => {
 const onClickBtnLogin = async () => {
     const res = await userStore.signUp(frmData)
     if (res) {
+        console.log(res)
         setIsOpen(false)
         /* TODO: Redireccionar a otro formulario para hacer la comprobación por correo o SMS */
     }

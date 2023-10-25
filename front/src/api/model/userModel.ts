@@ -1,3 +1,5 @@
+import type { UserInfo, UserTokens } from "@/types/store";
+
 /**
  * @description: Parametros para iniciar sesión
  */
@@ -19,14 +21,8 @@ export interface SignupParams {
  * @description: Los valores de retorno cuando inicia sesión
  */
 export interface LoginResultModel {
-    IdUsuario: string;
-    Nombre: string;
-    Apellidos: string;
-    Usuario: string;
-    Telefono: string;
-    Email: string;
-    Rol: string;
-    Token: string;
+    user: UserInfo
+    tokens: UserTokens
 }
 
 /**

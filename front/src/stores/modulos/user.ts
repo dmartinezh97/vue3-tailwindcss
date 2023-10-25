@@ -1,7 +1,7 @@
-import { TOKEN_KEY, USER_INFO_KEY, COOKIES_KEY } from '@/enums/cacheEnum';
+import { TOKEN_KEY, USER_INFO_KEY, COOKIES_KEY, TOKENS_INFO_KEY } from '@/enums/cacheEnum';
 import type { UserState } from '@/types/store'
 import { defineStore } from 'pinia'
-import type { UserInfo } from '../../types/store';
+import type { UserInfo, UserTokens } from '../../types/store';
 import { StorageSerializers, useStorage } from '@vueuse/core';
 import axios from 'axios';
 import { loginApi, infoUserApi, updateInfoUserApi, signUpApi } from '../../api/user';
@@ -15,6 +15,7 @@ export const useUserStore = defineStore({
     id: 'user',
     state: (): UserState => ({
         user: useStorage<UserInfo>(USER_INFO_KEY, null, undefined, { serializer: StorageSerializers.object }),
+        tokens: useStorage<string | null>(TOKENS_INFO_KEY, null, undefined, { serializer: StorageSerializers.object }),
         token: useStorage<string>(TOKEN_KEY, ""),
         cookiesAceptadas: useStorage<boolean>(COOKIES_KEY, false),
     }),
@@ -54,8 +55,12 @@ export const useUserStore = defineStore({
         setUserInfo(info: UserInfo | null) {
             this.user = info;
         },
-        setToken(info: string | undefined) {
-            this.token = info ? info : ''; // for null or undefined value
+        setToken(token: string) {
+            this.token = token
+        },
+        setTokens(tokens: UserTokens) {
+            this.tokens = tokens
+            this.setToken(tokens.access.token)
         },
         setCookies(value: boolean) {
             this.cookiesAceptadas = value
@@ -67,8 +72,10 @@ export const useUserStore = defineStore({
             try {
                 const result = await loginApi(param)
                 const { data } = result
-                this.setUserInfo(data)
-                this.setToken(data.Token)
+                const { user, tokens } = data
+
+                this.setUserInfo(user)
+                this.setTokens(tokens)
                 router.push({
                     name: PageEnum.INICIO
                 })

@@ -17,8 +17,9 @@ export interface FrmSignup {
 }
 
 interface UserState {
-    user: Nullable<UserInfo>;
-    token: RemovableRef<string>;
+    user: Nullable<UserInfo>
+    tokens: Nullable<UserTokens>
+    token: RemovableRef<string>
     cookiesAceptadas: RemovableRef<boolean>;
     //roleList: RoleEnum[];
     // sessionTimeout?: boolean;
@@ -61,14 +62,22 @@ export interface EventoState {
 }
 
 export interface UserInfo {
-    IdUsuario: string;
-    Nombre: string;
-    Apellidos: string;
-    Usuario: string;
-    Telefono: string;
-    Email: string;
-    Rol: string;
-    Token: string;
+    id: number
+    email: string
+    name: string
+    isEmailVerified: boolean
+    role: string
+    avatar?: string
+}
+
+export interface JwToken {
+    token: string
+    expires: string
+}
+
+export interface UserTokens {
+    access: JwToken
+    refresh: JwToken
 }
 
 // Información log errores

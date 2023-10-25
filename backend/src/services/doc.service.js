@@ -5,6 +5,7 @@ const { OpenAI } = require('langchain/llms/openai');
 const { OpenAIEmbeddings } = require('langchain/embeddings/openai');
 const { DirectoryLoader } = require('langchain/document_loaders/fs/directory');
 const { PDFLoader } = require('langchain/document_loaders/fs/pdf');
+const { TextLoader } = require('langchain/document_loaders/fs/text');
 const { CustomPDFLoader } = require('../utils/customPDFLoaders');
 const { RecursiveCharacterTextSplitter } = require('langchain/text_splitter');
 const { PineconeStore } = require('langchain/vectorstores/pinecone')
@@ -32,6 +33,7 @@ const createDocPDF = async (user_id, title) => {
   try {
     const directoryLoader = new DirectoryLoader(pathUserWithCollection, {
       '.pdf': (path) => new PDFLoader(path),
+      '.txt': (path) => new TextLoader(path),
     });
 
     const rawDocs = await directoryLoader.load();
@@ -95,7 +97,7 @@ const askPDF = async (user_id, collection_name, question, mode, initial_prompt) 
     //     question: sanitizedQuestion, chat_history: [],
     // });
 
-    return response
+    return {chain, response}
   } catch (error) {
     throw new ApiError(httpStatus.BAD_REQUEST, error);
   }

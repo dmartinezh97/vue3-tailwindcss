@@ -1,10 +1,31 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue';
 import SubirDocumentos from "../../components/SubirDocumentos.vue";
+import { useToastStore } from '@/stores/modulos/toast';
+import axios from 'axios'
+import LoadingHamster from '@/components/ui/loaders/LoadingHamster.vue';
+
+const toastStore = useToastStore();
+
+// Definición de los tipos
+type Humano = {
+  tipo: 'humano'
+  text: string
+}
+
+type Asistente = {
+  tipo: 'asistente'
+  text: string
+}
+
+type ConversacionItem = Humano | Asistente
 
 const showDialogSubirDocumentos = ref(false)
 const modoChat = ref(false)
 const currentQuestion = ref("");
+const question = ref("")
+const questionLoading = ref(false)
+const nombreColeccion = ref('bold-workplanner')
 let indexAskRandom = ref(0)
 let isDeleting = ref(false);
 const questions = reactive([
@@ -12,6 +33,8 @@ const questions = reactive([
   '¿Cuántas veces al día?',
   '¿Recomendarías nuestra app?'
 ])
+
+const conversacion = reactive<ConversacionItem[]>([])
 
 const updateQuestion = () => {
   // Si estamos eliminando, quitamos un carácter
@@ -45,7 +68,46 @@ const selectNewIndex = () => {
 
 
 const onClickBtnSearch = () => {
-  modoChat.value = !modoChat.value
+  modoChat.value = true
+  questionLoading.value = true
+
+  console.log('Hacer pregunta')
+  conversacion.push({ tipo: 'humano', text: question.value })
+  conversacion.push({ tipo: 'asistente', text: '' })
+  let questionToSend = question.value
+  question.value = ''
+
+  // conversacion.push({ tipo: 'humano', text: 'Hola, WorkPlanAssist IA!' })
+  // conversacion.push({ tipo: 'asistente', text: '¡Hola! ¿En qué puedo ayudarte?' })
+
+
+  axios.post('/docs/ask', { collection_name: nombreColeccion.value, question: questionToSend })
+      .then((res) => {
+        // const { text } = res.data
+        // conversacion[conversacion.length-1].text = text
+        // conversacion.push({ tipo: 'asistente', text })
+
+        // toastStore.success('Los documentos se han subido con éxito')
+
+        // res.data.title = `Chat: ${res.data.title}`
+        // res.data.icon = {
+        //   icon: 'tabler-message',
+        // }
+        // res.data.to = { name: 'chats-id', params: { id: res.data.id } }
+        // res.data.action = 'read'
+        // res.data.subject = 'Auth'
+
+        // chatStore.addChat(res.data)
+        // router.push({ name: 'chats-id', params: { id: res.data.id } })
+      })
+      .catch((err: Error) => {
+          // toastStore.error('Algo ha ido mal.. :/')
+      })
+      .finally(() => {
+        questionLoading.value = false
+          // loadingDocs.value = false
+          // emit('close')
+      })
 }
 
 const onClickBtnFiles = () => {
@@ -71,7 +133,7 @@ onMounted(() => {
       </p>
       <div :class="[modoChat ? 'max-w-xl': 'max-w-md', 'w-full space-y-4 ease-in-out animate-in fade-in slide-in-from-bottom-4 transition-all duration-1000']">
         <div class="flex h-fit w-full flex-row items-center rounded-xl bg-black px-1 shadow-lg">
-          <input type="search" @keyup.enter="onClickBtnSearch" :placeholder="currentQuestion"
+          <input v-model="question" :disabled="questionLoading" type="search" @keyup.enter="onClickBtnSearch" :placeholder="currentQuestion"
             class="h-10 w-full resize-none bg-transparent px-2 py-2.5 font-mono text-sm text-white outline-none ring-0 transition-all duration-300 placeholder:text-gray-400"
             name="prompt">
           <!-- BUTTON -->
@@ -94,24 +156,32 @@ onMounted(() => {
         </div>
         <div v-show="modoChat" class="flex flex-col text-gray-800">
           <div class="mx-auto w-full space-y-4">
-            <div class="flex justify-end">
-              <div class="flex w-11/12 flex-row-reverse">
-                <div class="relative max-w-xl rounded-xl rounded-tr-none bg-blue-600 px-4 py-2">
-                  <span class="text-sm font-medium text-white">
-                    Aquí va la pregunta que acabamos de hacer
-                  </span>
+            <template v-for="chat in conversacion">
+              <!-- Humano -->
+              <div v-if="chat.tipo == 'humano'" class="flex justify-end">
+                <div class="flex w-11/12 flex-row-reverse">
+                  <div class="relative max-w-xl rounded-xl rounded-tr-none bg-blue-600 px-4 py-2">
+                    <span class="text-sm font-medium text-white">
+                      {{ chat.text }}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="flex justify-start">
-              <div class="flex w-11/12">
-                <div class="relative max-w-xl rounded-xl rounded-tl-none bg-gray-300 px-4 py-2">
-                  <span class="text-sm font-medium text-heading">
-                    Aquí va la respuesta. :)
-                  </span>
+              <!-- Asistente -->
+              <div v-else class="flex justify-start">
+                <div class="flex w-11/12">
+                  <div class="relative max-w-xl rounded-xl rounded-tl-none bg-gray-300 px-4 py-2">
+                    <span v-if="chat.text != ''" class="text-sm font-medium text-heading">
+                      {{ chat.text }}
+                    </span>
+                    <LoadingHamster v-else></LoadingHamster>
+                    <!-- <span v-else class="text-sm font-medium text-heading">
+                      {{ chat }} - Cargando...
+                    </span> -->
+                  </div>
                 </div>
               </div>
-            </div>
+            </template>
           </div>
           <!-- Component Start -->
 	<!-- <div class="flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden">
