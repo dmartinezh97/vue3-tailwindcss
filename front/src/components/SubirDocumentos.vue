@@ -65,7 +65,7 @@ const numFicheros = ref(1)
                                                     </svg>
                                                     <div class="ml-4 flex min-w-0 flex-1 gap-2">
                                                         <span
-                                                            class="truncate font-medium">resume_mucho_mas_largo_back_end_developer.pdf</span>
+                                                            class="truncate font-medium"> {{ x }} - resume_mucho_mas_largo_back_end_developer.pdf</span>
                                                         <span class="flex-shrink-0 text-gray-400">2.4mb</span>
                                                     </div>
                                                 </div>
