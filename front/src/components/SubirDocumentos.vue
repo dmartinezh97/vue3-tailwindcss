@@ -39,7 +39,7 @@ const props = defineProps({
                                 </div>
                             </TransitionChild> -->
                                     <div
-                                        class="flex h-full rounded-tl-3xl flex-col overflow-y-scroll bg-white py-4 shadow-xl">
+                                        class="flex h-full rounded-tl-3xl flex-col overflow-y-scroll bg-white py-4 shadow-xl overflow-hidden">
                                         <div class="flex items-center justify-between px-4 sm:px-6">
                                             <DialogTitle class="text-base font-semibold leading-6 text-gray-900">Documentos
                                             </DialogTitle>
