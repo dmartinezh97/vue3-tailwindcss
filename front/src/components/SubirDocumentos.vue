@@ -51,7 +51,7 @@ const numFicheros = ref(1)
                                             </button>
                                         </div>
                                         <hr class="my-2">
-                                        <div class="relative px-2 pb-4 h-full-nav overflow-y-scroll">
+                                        <div class="relative px-2 h-full-nav overflow-y-scroll">
                                             <!-- mt-6 flex-1 px-4 sm:px-6 -->
                                             <!-- Your content -->
                                             <li v-for="x in numFicheros"
