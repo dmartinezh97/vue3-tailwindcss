@@ -71,7 +71,7 @@ onMounted(() => {
       </p>
       <div :class="[modoChat ? 'max-w-xl': 'max-w-md', 'w-full space-y-4 ease-in-out animate-in fade-in slide-in-from-bottom-4 transition-all duration-1000']">
         <div class="flex h-fit w-full flex-row items-center rounded-xl bg-black px-1 shadow-lg">
-          <input type="search" :placeholder="currentQuestion"
+          <input type="search" @keyup.enter="onClickBtnSearch" :placeholder="currentQuestion"
             class="h-10 w-full resize-none bg-transparent px-2 py-2.5 font-mono text-sm text-white outline-none ring-0 transition-all duration-300 placeholder:text-gray-400"
             name="prompt">
           <!-- BUTTON -->
@@ -92,11 +92,95 @@ onMounted(() => {
             </button>
           <!-- BUTTON -->
         </div>
-        <div>
-          <ul>
-            <li>Pregunta 1</li>
-            <li>Respuesta 1</li>
-          </ul>
+        <div v-show="modoChat" class="flex flex-col items-center justify-center min-h-screen bg-red-100 text-gray-800">
+          <!-- Component Start -->
+	<div class="flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden">
+		<div class="flex flex-col flex-grow h-0 p-4 overflow-auto">
+			<div class="flex w-full mt-2 space-x-3 max-w-xs">
+				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+				<div>
+					<div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+						<p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					</div>
+					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
+				</div>
+			</div>
+			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+				<div>
+					<div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+						<p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
+					</div>
+					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
+				</div>
+				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+			</div>
+			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+				<div>
+					<div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+						<p class="text-sm">Lorem ipsum dolor sit amet.</p>
+					</div>
+					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
+				</div>
+				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+			</div>
+			<div class="flex w-full mt-2 space-x-3 max-w-xs">
+				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+				<div>
+					<div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+						<p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+					</div>
+					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
+				</div>
+			</div>
+			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+				<div>
+					<div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+						<p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+					</div>
+					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
+				</div>
+				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+			</div>
+			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+				<div>
+					<div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+						<p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+					</div>
+					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
+				</div>
+				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+			</div>
+			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+				<div>
+					<div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+						<p class="text-sm">Lorem ipsum dolor sit amet.</p>
+					</div>
+					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
+				</div>
+				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+			</div>
+			<div class="flex w-full mt-2 space-x-3 max-w-xs">
+				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+				<div>
+					<div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
+						<p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+					</div>
+					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
+				</div>
+			</div>
+			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
+				<div>
+					<div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
+						<p class="text-sm">Lorem ipsum dolor sit.</p>
+					</div>
+					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
+				</div>
+				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
+			</div>
+		</div>
+	</div>
+	<!-- Component End  -->
+
         </div>
       </div>
     </div>
