@@ -92,9 +92,29 @@ onMounted(() => {
             </button>
           <!-- BUTTON -->
         </div>
-        <div v-show="modoChat" class="flex flex-col items-center justify-center min-h-screen bg-red-100 text-gray-800">
+        <div v-show="modoChat" class="flex flex-col text-gray-800">
+          <div class="mx-auto w-full space-y-4">
+            <div class="flex justify-end">
+              <div class="flex w-11/12 flex-row-reverse">
+                <div class="relative max-w-xl rounded-xl rounded-tr-none bg-blue-600 px-4 py-2">
+                  <span class="text-sm font-medium text-white">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. 1
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-start">
+              <div class="flex w-11/12">
+                <div class="relative max-w-xl rounded-xl rounded-tl-none bg-muted-1 px-4 py-2">
+                  <span class="text-sm font-medium text-heading">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. 2
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- Component Start -->
-	<div class="flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden">
+	<!-- <div class="flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden">
 		<div class="flex flex-col flex-grow h-0 p-4 overflow-auto">
 			<div class="flex w-full mt-2 space-x-3 max-w-xs">
 				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
@@ -178,7 +198,7 @@ onMounted(() => {
 				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!-- Component End  -->
 
         </div>
