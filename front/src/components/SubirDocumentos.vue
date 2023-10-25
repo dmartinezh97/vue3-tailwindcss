@@ -8,6 +8,8 @@ const props = defineProps({
         required: true
     }
 })
+
+const numFicheros = ref(1)
 </script>
 
 <template>
@@ -39,7 +41,7 @@ const props = defineProps({
                                 </div>
                             </TransitionChild> -->
                                     <div
-                                        class="flex h-full rounded-tl-3xl flex-col overflow-y-scroll bg-white py-4 shadow-xl overflow-hidden">
+                                        class="flex h-full rounded-tl-3xl flex-col bg-white py-4 shadow-xl">
                                         <div class="flex items-center justify-between px-4 sm:px-6">
                                             <DialogTitle class="text-base font-semibold leading-6 text-gray-900">Documentos
                                             </DialogTitle>
@@ -52,7 +54,7 @@ const props = defineProps({
                                         <div class="relative px-2 pb-4 h-full-nav overflow-y-scroll">
                                             <!-- mt-6 flex-1 px-4 sm:px-6 -->
                                             <!-- Your content -->
-                                            <li
+                                            <li v-for="x in numFicheros"
                                                 class="flex items-center justify-between py-2 px-4 text-sm leading-6  hover:bg-gray-600/10 py-2 rounded-lg">
                                                 <div class="flex w-0 flex-1 items-center">
                                                     <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20"
@@ -77,9 +79,11 @@ const props = defineProps({
                                                 </div>
                                             </li>
                                             <!-- Botón para subir ficheros -->
-                                            <div
-                                                class="flex items-center justify-center bg-gray-600/10 py-2 rounded-lg cursor-pointer mt-2">
-                                                <span class="material-icons text-xl text-gray-600">file_upload</span>
+                                            <div class="sticky bg-white bottom-0" @click="numFicheros++">
+                                                <div
+                                                    class="flex items-center justify-center bg-gray-600/10 py-2 rounded-lg cursor-pointer mt-2">
+                                                    <span class="material-icons text-xl text-gray-600">file_upload</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
