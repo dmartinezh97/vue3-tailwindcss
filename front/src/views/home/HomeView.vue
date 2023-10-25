@@ -105,7 +105,7 @@ onMounted(() => {
             </div>
             <div class="flex justify-start">
               <div class="flex w-11/12">
-                <div class="relative max-w-xl rounded-xl rounded-tl-none bg-muted-1 px-4 py-2">
+                <div class="relative max-w-xl rounded-xl rounded-tl-none bg-gray-300 px-4 py-2">
                   <span class="text-sm font-medium text-heading">
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. 2
                   </span>
