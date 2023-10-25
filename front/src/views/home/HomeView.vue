@@ -62,14 +62,14 @@ onMounted(() => {
 <template>
   <div id="inicio">
     <!-- :class="[active ? 'bg-gray-200' : 'text-gray-900', 'group flex items-center w-full px-4 py-2 text-sm']"> -->
-    <div :class="[modoChat ? 'py-[5vh]': 'py-[15vh] sm:py-[20vh]', 'flex flex-col items-center justify-center transition-all duration-[5000ms]']">
+    <div :class="[modoChat ? 'py-[5vh]': 'py-[15vh] sm:py-[20vh]', 'flex flex-col items-center justify-center transition-all duration-1000']">
       <h1
         class="mb-3 text-4xl font-medium text-black duration-1000 ease-in-out animate-in fade-in slide-in-from-bottom-3">
         WorkPlanAssist IA</h1>
       <p class="mb-12 text-base text-gray-500 duration-1200 ease-in-out animate-in fade-in slide-in-from-bottom-4 max-w-sm text-center">
         Nuestra IA analiza y comprende tus consultas para ofrecerte respuestas rápidas y relevantes.
       </p>
-      <div :class="[modoChat ? 'max-w-xl': 'max-w-md', 'w-full space-y-4 duration-1200 ease-in-out animate-in fade-in slide-in-from-bottom-4 transition-all duration-[5000ms]']">
+      <div :class="[modoChat ? 'max-w-xl': 'max-w-md', 'w-full space-y-4 ease-in-out animate-in fade-in slide-in-from-bottom-4 transition-all duration-1000']">
         <div class="flex h-fit w-full flex-row items-center rounded-xl bg-black px-1 shadow-lg">
           <input type="search" :placeholder="currentQuestion"
             class="h-10 w-full resize-none bg-transparent px-2 py-2.5 font-mono text-sm text-white outline-none ring-0 transition-all duration-300 placeholder:text-gray-400"
