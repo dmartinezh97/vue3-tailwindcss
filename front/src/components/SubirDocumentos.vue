@@ -55,7 +55,7 @@ const numFicheros = ref(1)
                                             <!-- mt-6 flex-1 px-4 sm:px-6 -->
                                             <!-- Your content -->
                                             <li v-for="x in numFicheros"
-                                                class="flex items-center justify-between py-2 px-4 text-sm leading-6  hover:bg-gray-600/10 py-2 rounded-lg">
+                                                class="flex items-center justify-between py-2 px-4 text-sm leading-6 hover:bg-gray-600/10 rounded-lg">
                                                 <div class="flex w-0 flex-1 items-center">
                                                     <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20"
                                                         fill="currentColor" aria-hidden="true">
