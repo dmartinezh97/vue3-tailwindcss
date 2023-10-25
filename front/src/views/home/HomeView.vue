@@ -100,7 +100,7 @@ onMounted(() => {
       </div>
     </div>
     <transition name="fade">
-      <SubirDocumentos v-show="showDialogSubirDocumentos"></SubirDocumentos>
+      <SubirDocumentos :open="showDialogSubirDocumentos" @close="showDialogSubirDocumentos = false"></SubirDocumentos>
     </transition>
   </div>
 </template>
