@@ -70,7 +70,7 @@ const createDocPDF = async (user_id, title) => {
  * @param {Object} docBody
  * @returns {Promise<User>}
  */
-const askPDF = async (user_id, collection_name, question, mode, initial_prompt) => {
+const askPDF = async (user_id, collection_name, question, mode, initial_prompt, temperatura, modelName) => {
   try {
     const embeddings = new OpenAIEmbeddings();
 
@@ -81,7 +81,7 @@ const askPDF = async (user_id, collection_name, question, mode, initial_prompt) 
 
     // const response = await loadedVectorStore.similaritySearchWithScore(question, 2);
 
-    const chain = makeChain(loadedVectorStore, mode, '');
+    const chain = makeChain(loadedVectorStore, mode, '', temperatura, modelName);
 
     const response = await chain.call({
       question: question, chat_history: [],

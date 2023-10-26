@@ -126,8 +126,8 @@ const onClickGoToPanelAdministrador = () => {
         <router-link v-for="item in listadoMenuPrincipal" :to="{ name: item.route }">{{ item.label }}</router-link>
       </nav> -->
       <div class="lg:flex lg:flex-1 justify-end items-center hidden">
-        <span
-          class="material-icons text-lg text-gray-400 hover:bg-gray-200/60 p-3 rounded-full leading-none">language</span>
+        <!-- <span
+          class="material-icons text-lg text-gray-400 hover:bg-gray-200/60 p-3 rounded-full leading-none">language</span> -->
         <Menu as="div" class="relative inline-block text-left ml-2">
           <MenuButton data-test="btnMenu"
             class="flex items-center border border-gray-300 shadow-sm hover:shadow-md pl-3 p-1 rounded-full">

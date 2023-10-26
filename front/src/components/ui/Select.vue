@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, type CSSProperties, type PropType } from 'vue';
 import { Listbox, ListboxLabel, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
-import { getPropertyFromItem } from '../../utils/shared/helpershelpers'
-import IconArrowDown from '../icons/IconArrowDown.vue';
-import IconCheck from '../icons/IconCheck.vue';
+import { getPropertyFromItem } from '../../utils/shared/helpersUtils'
+import IconArrowDown from '../layouts/icons/IconArrowDown.vue';
+import IconCheck from '../layouts/icons/IconCheck.vue';
 import type { SelectItemKey } from "@/types/app"
 
 let selectText = ref("");
@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<{
   itemImg?: string,
   itemText?: string,
   itemValue?: string,
-  modelValue: [string, Number, Object],
+  modelValue: [String, Number, Object],
 }>(), {
   placeholder: "- Selecciona una opción -",
   returnObject: false,
@@ -128,7 +128,6 @@ const updateValue = (e: Event) => {
           class="absolute z-1 mt-1 max-h-60 border border-gray-200 divide-y divide-gray-200 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
           <slot name="header"></slot>
           <ListboxOption v-slot="{ active, selected }" v-for="item in props.items" :value="item" :key="getValue(item)">
-            as="template">
             <li :class="[
               active ? 'bg-uno-100 text-uno-900' : 'text-gray-900',
               'relative cursor-pointer select-none py-2 pl-10 pr-4',

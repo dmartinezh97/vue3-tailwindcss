@@ -12,6 +12,8 @@ const askDoc = {
   body: Joi.object().keys({
     collection_name: Joi.string().optional(),
     question: Joi.string().optional(),
+    temperatura: Joi.number().optional(),
+    modelName: Joi.string().optional(),
   }),
 };
 

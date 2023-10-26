@@ -2,16 +2,13 @@ const { OpenAI } = require('langchain/llms/openai');
 const { PineconeStore } = require('langchain/vectorstores/pinecone')
 const { ConversationalRetrievalQAChain } = require('langchain/chains');
 
-const makeChain = (vectorstore, mode, initial_prompt) => {
+const makeChain = (vectorstore, mode, initial_prompt, temperatura, modelName) => {
 
     const prompts = getInitialPromptByMode(mode, initial_prompt);
 
     const model = new OpenAI({
-        temperature: 1, // increase temepreature to get more creative answers
-        modelName: 'gpt-3.5-turbo',
-        // modelName: 'text-davinci-003' //OK
-        // modelName: 'text-davinci-002' //OK
-        // modelName: 'gpt-4',
+        temperature: temperatura, // increase temepreature to get more creative answers
+        modelName,
     });
 
     let enableSourceDocuments = false;

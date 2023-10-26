@@ -5,9 +5,11 @@ import BasicButton from './ui/buttons/BasicButton.vue'
 import InputText from './ui/InputText.vue'
 import type { LoginParams } from '@/api/model/userModel';
 import { useUserStore } from '@/stores/modulos/user';
+import { useToastStore } from '@/stores/modulos/toast';
 import { getEnv } from '@/utils/shared/envUtils';
 
 const userStore = useUserStore();
+const toastStore = useToastStore();
 
 const frmData: LoginParams = reactive({
     email: "demo@example.com",
@@ -30,9 +32,10 @@ const onClickOpenRegistro = () => {
 const onClickBtnLogin = async () => {
     const res = await userStore.login(frmData)
     if (res) {
+        toastStore.info("¡Bienvenido!")
         setIsOpen(false)
-        frmData.email = ""
-        frmData.password = ""
+        // frmData.email = ""
+        // frmData.password = ""
     }
 };
 

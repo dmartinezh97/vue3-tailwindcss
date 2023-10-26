@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { nextTick, onMounted, reactive, ref } from 'vue';
+import { nextTick, onMounted, provide, reactive, ref } from 'vue';
 import SubirDocumentos from "../../components/SubirDocumentos.vue";
 import { useToastStore } from '@/stores/modulos/toast';
 import axios from 'axios'
 import LoadingHamster from '@/components/ui/loaders/LoadingHamster.vue';
+import Select from '@/components/ui/Select.vue';
+import { Menu, MenuButton, MenuItem, MenuItems, Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/vue'
 
 const toastStore = useToastStore();
 
@@ -42,6 +44,30 @@ const conversacionInicial = reactive([
   'Oye, ¿qué quieres saber? Pregunta.',
   'Tss, ¿no tienes curiosidad? Pregúntame lo que quieras.',
   '¡Vamos! Házmela difícil con una buena pregunta.'
+])
+
+const temperatura = ref(1)
+const modelName = ref('gpt-3.5-turbo')
+
+const modelos = reactive([
+    'gpt-4',
+    'gpt-3.5-turbo',
+    'text-davinci-002',
+    'text-davinci-003',
+])
+
+const temperaturas = reactive([
+    1,
+    0.9,
+    0.8,
+    0.7,
+    0.6,
+    0.5,
+    0.4,
+    0.3,
+    0.2,
+    0.1,
+    0
 ])
 
 const conversacion = reactive<ConversacionItem[]>([
@@ -92,18 +118,18 @@ const scrollChatBottom = () => {
 }
 
 const onClickBtnSearch = () => {
-  modoChat.value = true
-  if(esLaPrimeraPregunta.value){
-    conversacion.push({ tipo: 'humano', text: question.value })
-    setTimeout(() => {
+  if(question.value){
+    modoChat.value = true
+    if(esLaPrimeraPregunta.value){
+      conversacion.push({ tipo: 'humano', text: question.value })
+      setTimeout(() => {
+        lanzarPregunta()
+        esLaPrimeraPregunta.value = false
+      }, 1200);
+    }else{
       lanzarPregunta()
-      esLaPrimeraPregunta.value = false
-    }, 1200);
-  }else{
-    lanzarPregunta()
+    }
   }
-  // questionLoading.value = true
-
 }
 
 const lanzarPregunta = () => {
@@ -116,7 +142,7 @@ const lanzarPregunta = () => {
 
   scrollChatBottom()
 
-  axios.post('/docs/ask', { collection_name: nombreColeccion.value, question: questionToSend })
+  axios.post('/docs/ask', { collection_name: nombreColeccion.value, question: questionToSend, temperatura: temperatura.value, modelName: modelName.value })
       .then((res) => {
         const { text } = res.data
         conversacion[conversacion.length-1].text = text
@@ -124,7 +150,8 @@ const lanzarPregunta = () => {
         scrollChatBottom()
       })
       .catch((err: Error) => {
-          // toastStore.error('Algo ha ido mal.. :/')
+        conversacion[conversacion.length-1].text = err.message
+          // toastStore.error(err)
       })
       .finally(() => {
         questionLoading.value = false
@@ -149,9 +176,78 @@ onMounted(() => {
       <h1
         class="mb-3 text-4xl font-medium text-black duration-1000 ease-in-out animate-in fade-in slide-in-from-bottom-3">
         WorkPlanAssist IA</h1>
-      <p class="mb-12 text-base text-gray-500 duration-1200 ease-in-out animate-in fade-in slide-in-from-bottom-4 max-w-sm text-center">
+      <p class="mb-3 text-base text-gray-500 duration-1200 ease-in-out animate-in fade-in slide-in-from-bottom-4 max-w-sm text-center">
         Nuestra IA analiza y comprende tus consultas para ofrecerte respuestas rápidas y relevantes.
       </p>
+      <div class="grid grid-cols-2 gap-x-2 max-w-md w-full mb-12">
+        <Listbox v-model="modelName" class="z-20">
+            <div class="relative w-full">
+                <ListboxButton
+                    class="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+                    <span class="block truncate">{{ modelName }}</span>
+                    <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                    </span>
+                </ListboxButton>
+
+                <transition leave-active-class="transition duration-100 ease-in" leave-from-class="opacity-100"
+                    leave-to-class="opacity-0">
+                    <ListboxOptions
+                        class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                        <ListboxOption v-slot="{ active, selected }" v-for="modelo in modelos" :key="modelo" :value="modelo"
+                            as="template">
+                            <li :class="[
+                                active ? 'bg-blue-100 text-blue-900' : 'text-gray-900',
+                                'relative cursor-default select-none py-2 pl-10 pr-4',
+                            ]">
+                                <span :class="[
+                                    selected ? 'font-medium' : 'font-normal',
+                                    'block truncate',
+                                ]">{{ modelo }}</span>
+                                <span v-if="selected"
+                                    class="absolute inset-y-0 left-0 flex items-center text-blue-600">
+                                    <span class="material-icons text-lg text-gray-400 p-3 leading-none">check</span>
+                                    <!-- <CheckIcon class="h-5 w-5" aria-hidden="true" /> -->
+                                </span>
+                            </li>
+                        </ListboxOption>
+                    </ListboxOptions>
+                </transition>
+            </div>
+        </Listbox>
+        <Listbox v-model="temperatura" class="z-20">
+            <div class="relative w-full">
+                <ListboxButton
+                    class="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+                      <span class="block truncate">{{ temperatura }}</span>
+                      <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                    </span>
+                </ListboxButton>
+
+                <transition leave-active-class="transition duration-100 ease-in" leave-from-class="opacity-100"
+                    leave-to-class="opacity-0">
+                    <ListboxOptions
+                        class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                        <ListboxOption v-slot="{ active, selected }" v-for="temp in temperaturas" :key="temp" :value="temp"
+                            as="template">
+                            <li :class="[
+                                active ? 'bg-blue-100 text-blue-900' : 'text-gray-900',
+                                'relative cursor-default select-none py-2 pl-10 pr-4',
+                            ]">
+                                <span :class="[
+                                    selected ? 'font-medium' : 'font-normal',
+                                    'block truncate',
+                                ]">{{ temp }}</span>
+                                <span v-if="selected"
+                                    class="absolute inset-y-0 left-0 flex items-center text-blue-600">
+                                    <span class="material-icons text-lg text-gray-400 p-3 leading-none">check</span>
+                                </span>
+                            </li>
+                        </ListboxOption>
+                    </ListboxOptions>
+                </transition>
+            </div>
+        </Listbox>
+    </div>
       <div :class="[modoChat ? 'max-w-2xl': 'max-w-lg', 'w-full space-y-4 ease-in-out animate-in fade-in slide-in-from-bottom-4 transition-all duration-1000']">
         <!-- Chat -->
         <div ref="ventanaChat" class="flex flex-col text-gray-800 max-h-96 overflow-y-auto">

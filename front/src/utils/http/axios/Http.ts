@@ -52,6 +52,9 @@ export namespace Http {
                             case 400:
                                 toastStore.error(error.response.data.message);
                                 break;
+                            // case 401:
+                            //     toastStore.error("Por favor, inicia sesión");
+                            //     break;
                             default:
                                 toastStore.warning(error.response.data.message);
                                 break;
