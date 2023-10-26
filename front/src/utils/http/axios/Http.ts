@@ -50,7 +50,7 @@ export namespace Http {
                         //TODO: Si da un 401, redireccionar a una página personalizada
                         switch (error.response.status) {
                             case 400:
-                                toastStore.error(error.response.data.message);
+                                toastStore.error('¡Ups! Algo ha salido mal.. :/');
                                 break;
                             // case 401:
                             //     toastStore.error("Por favor, inicia sesión");
