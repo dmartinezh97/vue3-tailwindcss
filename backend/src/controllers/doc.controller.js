@@ -17,7 +17,7 @@ const createDoc = catchAsync(async (req, res) => {
 const askDoc = catchAsync(async (req, res) => {
   const { collection_name, question } = req.body;
   const { id } = req.user
-  const mode = 'pair_programming'
+  const mode = 'assistant'
   const initial_prompt = ''
 
   const result = await docsService.askPDF(id, collection_name, question, mode, initial_prompt)

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
+import { nextTick, onMounted, reactive, ref } from 'vue';
 import SubirDocumentos from "../../components/SubirDocumentos.vue";
 import { useToastStore } from '@/stores/modulos/toast';
 import axios from 'axios'
@@ -22,6 +22,8 @@ type ConversacionItem = Humano | Asistente
 
 const showDialogSubirDocumentos = ref(false)
 const modoChat = ref(false)
+const esLaPrimeraPregunta = ref(true)
+const ventanaChat = ref(null)
 const currentQuestion = ref("");
 const question = ref("")
 const questionLoading = ref(false)
@@ -29,12 +31,27 @@ const nombreColeccion = ref('bold-workplanner')
 let indexAskRandom = ref(0)
 let isDeleting = ref(false);
 const questions = reactive([
-  '¿Utilizas la aplicación?',
-  '¿Cuántas veces al día?',
-  '¿Recomendarías nuestra app?'
+  '¿Qué hace la opción Modificar % de jornada?',
+  '¿Qué es BOLD Quir?',
+  '¿Qué se necesita para poder utilizar la app?',
+  '¿La aplicación de windows requiere instalación?',
 ])
 
-const conversacion = reactive<ConversacionItem[]>([])
+const conversacionInicial = reactive([
+  'Tss, ¿tienes algo que preguntar? ¡Dale!',
+  'Oye, ¿qué quieres saber? Pregunta.',
+  'Tss, ¿no tienes curiosidad? Pregúntame lo que quieras.',
+  '¡Vamos! Házmela difícil con una buena pregunta.'
+])
+
+const conversacion = reactive<ConversacionItem[]>([
+  { tipo: 'asistente', text: '' }
+])
+
+const updateConversacionInicial = () => {
+  let newIndex  = Math.floor(Math.random() * conversacionInicial.length);
+  conversacion[0].text = conversacionInicial[newIndex]
+};
 
 const updateQuestion = () => {
   // Si estamos eliminando, quitamos un carácter
@@ -66,47 +83,51 @@ const selectNewIndex = () => {
   indexAskRandom.value = newIndex;
 };
 
+const scrollChatBottom = () => {
+  nextTick(() => {
+    if(ventanaChat && ventanaChat.value){
+      (ventanaChat.value as HTMLElement).scrollTop = (ventanaChat.value as HTMLElement).scrollHeight
+    }
+  })
+}
 
 const onClickBtnSearch = () => {
   modoChat.value = true
-  questionLoading.value = true
+  if(esLaPrimeraPregunta.value){
+    conversacion.push({ tipo: 'humano', text: question.value })
+    setTimeout(() => {
+      lanzarPregunta()
+      esLaPrimeraPregunta.value = false
+    }, 1200);
+  }else{
+    lanzarPregunta()
+  }
+  // questionLoading.value = true
 
-  console.log('Hacer pregunta')
-  conversacion.push({ tipo: 'humano', text: question.value })
+}
+
+const lanzarPregunta = () => {
+  if(!esLaPrimeraPregunta.value){
+    conversacion.push({ tipo: 'humano', text: question.value })
+  }
   conversacion.push({ tipo: 'asistente', text: '' })
   let questionToSend = question.value
   question.value = ''
 
-  // conversacion.push({ tipo: 'humano', text: 'Hola, WorkPlanAssist IA!' })
-  // conversacion.push({ tipo: 'asistente', text: '¡Hola! ¿En qué puedo ayudarte?' })
-
+  scrollChatBottom()
 
   axios.post('/docs/ask', { collection_name: nombreColeccion.value, question: questionToSend })
       .then((res) => {
-        // const { text } = res.data
-        // conversacion[conversacion.length-1].text = text
-        // conversacion.push({ tipo: 'asistente', text })
+        const { text } = res.data
+        conversacion[conversacion.length-1].text = text
 
-        // toastStore.success('Los documentos se han subido con éxito')
-
-        // res.data.title = `Chat: ${res.data.title}`
-        // res.data.icon = {
-        //   icon: 'tabler-message',
-        // }
-        // res.data.to = { name: 'chats-id', params: { id: res.data.id } }
-        // res.data.action = 'read'
-        // res.data.subject = 'Auth'
-
-        // chatStore.addChat(res.data)
-        // router.push({ name: 'chats-id', params: { id: res.data.id } })
+        scrollChatBottom()
       })
       .catch((err: Error) => {
           // toastStore.error('Algo ha ido mal.. :/')
       })
       .finally(() => {
         questionLoading.value = false
-          // loadingDocs.value = false
-          // emit('close')
       })
 }
 
@@ -114,8 +135,8 @@ const onClickBtnFiles = () => {
   showDialogSubirDocumentos.value = !showDialogSubirDocumentos.value
 }
 
-
 onMounted(() => {
+  updateConversacionInicial()
   updateQuestion()
 })
 
@@ -131,30 +152,9 @@ onMounted(() => {
       <p class="mb-12 text-base text-gray-500 duration-1200 ease-in-out animate-in fade-in slide-in-from-bottom-4 max-w-sm text-center">
         Nuestra IA analiza y comprende tus consultas para ofrecerte respuestas rápidas y relevantes.
       </p>
-      <div :class="[modoChat ? 'max-w-xl': 'max-w-md', 'w-full space-y-4 ease-in-out animate-in fade-in slide-in-from-bottom-4 transition-all duration-1000']">
-        <div class="flex h-fit w-full flex-row items-center rounded-xl bg-black px-1 shadow-lg">
-          <input v-model="question" :disabled="questionLoading" type="search" @keyup.enter="onClickBtnSearch" :placeholder="currentQuestion"
-            class="h-10 w-full resize-none bg-transparent px-2 py-2.5 font-mono text-sm text-white outline-none ring-0 transition-all duration-300 placeholder:text-gray-400"
-            name="prompt">
-          <!-- BUTTON -->
-          <button type="button" @click="onClickBtnSearch" class="flex aspect-square h-8 w-8 items-center justify-center rounded-lg text-white outline-0 ring-0 hover:bg-white/25 focus:bg-white/25">
-            <svg class="-ml-px transform hover:scale-125 active:scale-125" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="9 10 4 15 9 20"></polyline>
-              <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
-            </svg></button>
-            <button type="button" @click="onClickBtnFiles" class="flex aspect-square h-8 w-8 items-center justify-center rounded-lg text-white outline-0 ring-0 hover:bg-white/25 focus:bg-white/25">
-              <svg class="-ml-px transform hover:scale-125 active:scale-125" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M15 3v4a1 1 0 0 0 1 1h4" />
-                <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" />
-                <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />
-              </svg>
-            </button>
-          <!-- BUTTON -->
-        </div>
-        <div v-show="modoChat" class="flex flex-col text-gray-800">
+      <div :class="[modoChat ? 'max-w-2xl': 'max-w-lg', 'w-full space-y-4 ease-in-out animate-in fade-in slide-in-from-bottom-4 transition-all duration-1000']">
+        <!-- Chat -->
+        <div ref="ventanaChat" class="flex flex-col text-gray-800 max-h-96 overflow-y-auto">
           <div class="mx-auto w-full space-y-4">
             <template v-for="chat in conversacion">
               <!-- Humano -->
@@ -183,94 +183,29 @@ onMounted(() => {
               </div>
             </template>
           </div>
-          <!-- Component Start -->
-	<!-- <div class="flex flex-col flex-grow w-full max-w-xl bg-white shadow-xl rounded-lg overflow-hidden">
-		<div class="flex flex-col flex-grow h-0 p-4 overflow-auto">
-			<div class="flex w-full mt-2 space-x-3 max-w-xs">
-				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-				<div>
-					<div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
-						<p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					</div>
-					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
-				</div>
-			</div>
-			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-				<div>
-					<div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-						<p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</p>
-					</div>
-					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
-				</div>
-				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-			</div>
-			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-				<div>
-					<div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-						<p class="text-sm">Lorem ipsum dolor sit amet.</p>
-					</div>
-					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
-				</div>
-				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-			</div>
-			<div class="flex w-full mt-2 space-x-3 max-w-xs">
-				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-				<div>
-					<div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
-						<p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-					</div>
-					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
-				</div>
-			</div>
-			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-				<div>
-					<div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-						<p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-					</div>
-					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
-				</div>
-				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-			</div>
-			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-				<div>
-					<div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-						<p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-					</div>
-					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
-				</div>
-				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-			</div>
-			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-				<div>
-					<div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-						<p class="text-sm">Lorem ipsum dolor sit amet.</p>
-					</div>
-					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
-				</div>
-				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-			</div>
-			<div class="flex w-full mt-2 space-x-3 max-w-xs">
-				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-				<div>
-					<div class="bg-gray-300 p-3 rounded-r-lg rounded-bl-lg">
-						<p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-					</div>
-					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
-				</div>
-			</div>
-			<div class="flex w-full mt-2 space-x-3 max-w-xs ml-auto justify-end">
-				<div>
-					<div class="bg-blue-600 text-white p-3 rounded-l-lg rounded-br-lg">
-						<p class="text-sm">Lorem ipsum dolor sit.</p>
-					</div>
-					<span class="text-xs text-gray-500 leading-none">2 min ago</span>
-				</div>
-				<div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300"></div>
-			</div>
-		</div>
-	</div> -->
-	<!-- Component End  -->
-
+        </div>
+        <!-- Fin chat -->
+        <div class="flex h-fit w-full flex-row items-center rounded-xl bg-black px-1 shadow-lg">
+          <input v-model="question" :disabled="questionLoading" type="search" @keyup.enter="onClickBtnSearch" :placeholder="currentQuestion"
+            class="h-10 w-full resize-none bg-transparent px-2 py-2.5 font-mono text-sm text-white outline-none ring-0 transition-all duration-300 placeholder:text-gray-400"
+            name="prompt">
+          <!-- BUTTON -->
+          <button type="button" @click="onClickBtnSearch" class="flex aspect-square h-8 w-8 items-center justify-center rounded-lg text-white outline-0 ring-0 hover:bg-white/25 focus:bg-white/25">
+            <svg class="-ml-px transform hover:scale-125 active:scale-125" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 10 4 15 9 20"></polyline>
+              <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+            </svg></button>
+            <button type="button" @click="onClickBtnFiles" class="flex aspect-square h-8 w-8 items-center justify-center rounded-lg text-white outline-0 ring-0 hover:bg-white/25 focus:bg-white/25">
+              <svg class="-ml-px transform hover:scale-125 active:scale-125" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M15 3v4a1 1 0 0 0 1 1h4" />
+                <path d="M18 17h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h4l5 5v7a2 2 0 0 1 -2 2z" />
+                <path d="M16 17v2a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h2" />
+              </svg>
+            </button>
+          <!-- BUTTON -->
         </div>
       </div>
     </div>

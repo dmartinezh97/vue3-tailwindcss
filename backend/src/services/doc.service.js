@@ -97,7 +97,7 @@ const askPDF = async (user_id, collection_name, question, mode, initial_prompt) 
     //     question: sanitizedQuestion, chat_history: [],
     // });
 
-    return {chain, response}
+    return response
   } catch (error) {
     throw new ApiError(httpStatus.BAD_REQUEST, error);
   }

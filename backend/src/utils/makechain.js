@@ -8,8 +8,8 @@ const makeChain = (vectorstore, mode, initial_prompt) => {
 
     const model = new OpenAI({
         temperature: 1, // increase temepreature to get more creative answers
-        // modelName: 'gpt-3.5-turbo',
-        modelName: 'text-davinci-003' //OK
+        modelName: 'gpt-3.5-turbo',
+        // modelName: 'text-davinci-003' //OK
         // modelName: 'text-davinci-002' //OK
         // modelName: 'gpt-4',
     });
