@@ -28,19 +28,30 @@ export default defineConfig({
         ...routes,
       ],
     }),
+    Layouts({
+      layoutsDirs: './src/layouts'
+    }),
     Components({
-      dirs: ['src/@core/components'],
+      dirs: ['src/@core/components', 'src/components'],
       dts: true,
     }),
   ],
+  define: { 'process.env': {} },
   resolve: {
     alias: [
       { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
-      { find: '@assets', replacement: fileURLToPath(new URL('./src/assets', import.meta.url)) },
-
+      { find: '@core', replacement: fileURLToPath(new URL('./src/@core', import.meta.url)) },
+      { find: '@layouts', replacement: fileURLToPath(new URL('./src/@layouts', import.meta.url)) },
     ]
-    // alias: {
-    //   '@': fileURLToPath(new URL('./src', import.meta.url))
-    // }
-  }
+  },
+  build: {
+    // https://vitejs.dev/config/build-options.html#build-chunksizewarninglimit
+    chunkSizeWarningLimit: 5000,
+  },
+  optimizeDeps: {
+    exclude: ['vuetify'],
+    entries: [
+      './src/**/*.vue',
+    ],
+  },
 })
