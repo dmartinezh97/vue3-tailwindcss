@@ -35,6 +35,9 @@ export default defineConfig({
       dirs: ['src/@core/components', 'src/components'],
       dts: true,
     }),
+    AutoImport({
+      imports: ['vue', 'vue-router', '@vueuse/core', 'vue-i18n', 'pinia']
+    })
   ],
   define: { 'process.env': {} },
   resolve: {
