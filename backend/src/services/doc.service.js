@@ -52,11 +52,17 @@ const createDocPDF = async (user_id, title) => {
     const pathUserIndex = getUserIndexPathWithCollection(user_id, collection_name)
     await vectorStore.save(pathUserIndex);
 
-    const newDoc = await Doc.create({
-      user: user_id,
-      type: docsTypes.PDF,
-      title,
-    });
+    let newDoc = null
+    const existsDoc = await Doc.existCollection(collection_name)
+    if(!!existsDoc){
+      newDoc = existsDoc
+    }else{
+      newDoc = await Doc.create({
+        user: user_id,
+        type: docsTypes.PDF,
+        title,
+      });
+    }
 
     console.log('Todo listo, carpeta eliminada');
     return newDoc

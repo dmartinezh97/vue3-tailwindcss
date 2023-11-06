@@ -37,26 +37,15 @@ const docSchema = mongoose.Schema(
 docSchema.plugin(toJSON);
 // docSchema.plugin(paginate);
 
-// /**
-//  * Check if email is taken
-//  * @param {string} email - The user's email
-//  * @param {ObjectId} [excludeUserId] - The id of the user to be excluded
-//  * @returns {Promise<boolean>}
-//  */
-// docSchema.statics.isEmailTaken = async function (email, excludeUserId) {
-//   const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
-//   return !!user;
-// };
-
-// /**
-//  * Check if password matches the user's password
-//  * @param {string} password
-//  * @returns {Promise<boolean>}
-//  */
-// docSchema.methods.isPasswordMatch = async function (password) {
-//   const user = this;
-//   return bcrypt.compare(password, user.password);
-// };
+/**
+ * Check si el documento existe
+ * @param {string} collection_name - El nombre de la colección
+ * @returns {Promise<boolean>}
+ */
+docSchema.statics.existCollection = async function (collection_name) {
+  const doc = await this.findOne({ collection_name });
+  return doc;
+};
 
 docSchema.pre('save', async function (next) {
   const doc = this;

@@ -4,9 +4,13 @@ import { Dialog, DialogOverlay, DialogTitle, DialogDescription } from '@headless
 import BasicButton from './ui/buttons/BasicButton.vue'
 import InputText from './ui/InputText.vue'
 import { useUserStore } from '@/stores/modulos/user';
+import { useToastStore } from '@/stores/modulos/toast';
 import type { SignupParams } from '@/api/model/userModel';
+import { getEnv } from '@/utils/shared/envUtils';
 
 const userStore = useUserStore();
+const toastStore = useToastStore();
+
 
 const frmData: SignupParams = reactive({
     name: "demo",
@@ -30,6 +34,7 @@ const onClickOpenLogin = () => {
 const onClickBtnLogin = async () => {
     const res = await userStore.signUp(frmData)
     if (res) {
+        toastStore.info("Cuenta creada con éxito")
         console.log(res)
         setIsOpen(false)
         /* TODO: Redireccionar a otro formulario para hacer la comprobación por correo o SMS */
@@ -52,7 +57,7 @@ const onClickBtnLogin = async () => {
                 </div>
                 <div class="p-6">
                     <div class="mb-8">
-                        <h3 class="font-semibold text-xl">¡Únete a {nombreApp} hoy mismo!</h3>
+                        <h3 class="font-semibold text-xl">¡Únete a {{ getEnv().VITE_APP_NAME }} hoy mismo!</h3>
                     </div>
                     <div>
                         <InputText label="Nombre" v-model="frmData.name"></InputText>
