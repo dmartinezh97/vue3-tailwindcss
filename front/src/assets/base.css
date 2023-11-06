@@ -1,8 +1,5 @@
 /* color palette from <https://github.com/vuejs/theme> */
 
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
-/* @import url('https://fonts.googleapis.com/icon?family=Material+Icons'); */
-
 *,*::before,*::after {
   box-sizing: border-box;
   margin: 0;
@@ -31,35 +28,28 @@ body {
   transition: opacity .15s ease-out;
 }
 
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url('./fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2') format('woff2');
-}
-
-.material-icons {
+/* .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
+  font-size: 24px; */
   /* Preferred icon size */
-  display: inline-block;
+  /* display: inline-block;
   line-height: 1;
   text-transform: none;
   letter-spacing: normal;
   word-wrap: normal;
   white-space: nowrap;
-  direction: ltr;
+  direction: ltr; */
 
   /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
+  /* -webkit-font-smoothing: antialiased; */
   /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
+  /* text-rendering: optimizeLegibility; */
 
   /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
+  /* -moz-osx-font-smoothing: grayscale; */
 
   /* Support for IE. */
-  font-feature-settings: 'liga';
-}
+  /* font-feature-settings: 'liga';
+} */

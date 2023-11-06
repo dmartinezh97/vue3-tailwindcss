@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import './assets/tailwind.css'
+// import './assets/tailwind.css'
 
 import { setupRouter } from './router'
 import { setupStore } from './stores'
@@ -38,6 +38,8 @@ setupErrorHandle(app);
 
 //Añadimos los filtros
 app.config.globalProperties.$filters = filters
+
+//Mi plugin de layouts
 
 //Montamos/Instanciamos la aplicación web
 app.mount('#app')

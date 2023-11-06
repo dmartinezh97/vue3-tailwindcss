@@ -1,34 +1,13 @@
 import type { App } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router'
-import { homeModule } from '@/views/home';
-import { profileModule } from '@/views/profile';
-import BaseViewVue from '@/views/app/BaseView.vue';
-import BaseNegocioViewVue from '@/views/admin/BaseAdminView.vue';
-import BaseAdminViewVue from '@/views/admin/BaseAdminView.vue';
-import { adminModule } from '@/views/admin';
-import { PageEnum } from '@/enums/pageEnum';
+import { setupLayouts } from 'virtual:generated-layouts'
+import routes from '~pages'
+
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '',
-      name: PageEnum.BASE_INICIO,
-      component: BaseViewVue,
-      children: [
-        ...homeModule.routes,
-        //...profileModule.routes,
-      ]
-    },
-    {
-      path: '/admin',
-      name: PageEnum.BASE_ADMIN,
-      component: BaseAdminViewVue,
-      children: [
-        ...adminModule.routes,
-      ]
-    },
-    //...negocioModule.routes
+    ...setupLayouts(routes),
   ]
 })
 
