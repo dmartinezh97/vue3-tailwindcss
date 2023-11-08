@@ -11,6 +11,8 @@ import { router } from './router/index';
 import filters from './utils/shared/filtersUtils';
 import { setupErrorHandle } from './logica/gestion-errores'
 import { initAppConfigStore } from './logica/initAppConfig'
+import vuetify from '@/plugins/vuetify'
+
 
 const app = createApp(App)
 
@@ -39,7 +41,8 @@ setupErrorHandle(app);
 //Añadimos los filtros
 app.config.globalProperties.$filters = filters
 
-//Mi plugin de layouts
+// Inicializar plugins
+app.use(vuetify)
 
 //Montamos/Instanciamos la aplicación web
 app.mount('#app')

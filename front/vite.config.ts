@@ -17,6 +17,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    // ℹ️  https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin
     vuetify({
       styles: {
         configFile: 'src/styles/variables/_vuetify.css',
@@ -36,7 +37,8 @@ export default defineConfig({
       dts: true,
     }),
     AutoImport({
-      imports: ['vue', 'vue-router', '@vueuse/core', 'vue-i18n', 'pinia']
+      imports: ['vue', 'vue-router', '@vueuse/core', 'vue-i18n', 'pinia'],
+      vueTemplate: true
     })
   ],
   define: { 'process.env': {} },
@@ -48,7 +50,7 @@ export default defineConfig({
     ]
   },
   build: {
-    // https://vitejs.dev/config/build-options.html#build-chunksizewarninglimit
+    // ℹ️ https://vitejs.dev/config/build-options.html#build-chunksizewarninglimit
     chunkSizeWarningLimit: 5000,
   },
   optimizeDeps: {
