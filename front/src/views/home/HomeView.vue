@@ -51,9 +51,12 @@ const modelName = ref('gpt-3.5-turbo')
 
 const modelos = reactive([
     'gpt-4',
+    'gpt-4-1106-preview',
     'gpt-3.5-turbo',
+    'gpt-3.5-turbo-1106',
     'text-davinci-002',
     'text-davinci-003',
+    'babbage-002',
 ])
 
 const temperaturas = reactive([
