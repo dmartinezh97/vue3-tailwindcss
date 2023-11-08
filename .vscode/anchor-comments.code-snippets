@@ -1,0 +1,23 @@
+{
+    "Añadir emoji de mano": {
+        "prefix": "cm-mano-emoji",
+        "body": [
+            "👉"
+        ],
+        "description": "Añadir emoji de mano"
+    },
+    "Añadir emoji de información": {
+        "prefix": "cm-info-emoji",
+        "body": [
+            "ℹ️"
+        ],
+        "description": "Añadir emoji de información"
+    },
+    "Añadir emoji de warning": {
+        "prefix": "cm-warning-emoji",
+        "body": [
+            "❗"
+        ],
+        "description": "Añadir emoji de warning"
+    }
+}
