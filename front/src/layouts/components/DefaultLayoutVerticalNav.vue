@@ -1,7 +1,11 @@
 <script lang="ts" setup>
+
 import VerticalNavLayout from '@layouts/components/VerticalNavLayout.vue'
+
 </script>
 
 <template>
-    <VerticalNavLayout></VerticalNavLayout>
+    <VerticalNavLayout>
+        <RouterView></RouterView>
+    </VerticalNavLayout>
 </template>
