@@ -67,6 +67,9 @@ devDependencies:
   jsdom:
     specifier: ^19.0.0
     version: 19.0.0
+  plugin-vue-jsx^2.1.1:
+    specifier: link:@vitejs/plugin-vue-jsx^2.1.1
+    version: link:@vitejs/plugin-vue-jsx^2.1.1
   postcss:
     specifier: ^8.4.18
     version: 8.4.31

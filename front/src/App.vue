@@ -11,7 +11,7 @@ const appStore = useAppStore();
 
 <template>
   <VLocaleProvider>
-    <VApp>
+    <VApp class="v-app">
       <RouterView />
     </VApp>
   </VLocaleProvider>

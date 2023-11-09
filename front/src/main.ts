@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 // import './assets/tailwind.css'
+import '@core/css/base/_index.css'
+
 
 import { setupRouter } from './router'
 import { setupStore } from './stores'
@@ -12,7 +14,6 @@ import filters from './utils/shared/filtersUtils';
 import { setupErrorHandle } from './logica/gestion-errores'
 import { initAppConfigStore } from './logica/initAppConfig'
 import vuetify from '@/plugins/vuetify'
-
 
 const app = createApp(App)
 

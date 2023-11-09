@@ -17,6 +17,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+
     // ℹ️  https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin
     vuetify({
       styles: {
