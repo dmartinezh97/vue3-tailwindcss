@@ -1,9 +1,15 @@
 <script lang="ts">
 
+import VerticalNav from '@layouts/components/VerticalNav.vue'
+
 export default defineComponent({
   setup(props, { slots }) {
     return () => {
-    return h('div', { class: 'test vertical' })
+
+        const verticalNav = h(VerticalNav)
+
+        return h('div', { class: 'test vertical' }, [verticalNav])
+
     }
   },
 })
