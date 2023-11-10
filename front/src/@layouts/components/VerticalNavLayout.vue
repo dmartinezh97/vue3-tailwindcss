@@ -18,12 +18,12 @@ export default defineComponent({
             // 👉 Slots por defecto
             const main = h('main', { class: 'layout-main-content' }, h('div', { class: 'main-content-container' }, slots.default?.()))
 
-            // Retornará el div padre con la clase .test-vertical y los siguientes components:
+            // Retornará el div padre con la clase .layout-base y los siguientes components:
             // 👉 El componente VerticalNav contendrá la barra vertical lateral izquierda
-            // Renderizará un div con la clase .layout-content-container y dentro de ella meteremos la barra de navegación superior
+            // Renderizará un div con la clase .layout-content-base y dentro de ella meteremos la barra de navegación superior
             // Los slots por defecto irán dentro de main
 
-            return h('div', { class: 'test-vertical' }, [verticalNav, h('div', { class: 'layout-content-container' }, [navbar, main])])
+            return h('div', { class: 'layout-base layout-nav-vertical' }, [verticalNav, h('div', { class: 'layout-content-base' }, [navbar, main])])
         }
     },
 })

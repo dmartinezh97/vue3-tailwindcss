@@ -5,7 +5,5 @@ const DefaultLayoutVerticalNav = defineAsyncComponent(() => import('./components
 </script>
 
 <template>
-  <div class="default">
-    <DefaultLayoutVerticalNav></DefaultLayoutVerticalNav>
-  </div>
+  <DefaultLayoutVerticalNav></DefaultLayoutVerticalNav>
 </template>
