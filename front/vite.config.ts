@@ -7,10 +7,11 @@ import vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import vuetify from 'vite-plugin-vuetify'
 import Layouts from 'vite-plugin-vue-layouts'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/',
+  base: '.',
   server: {
     host: '0.0.0.0',
     port: 80
@@ -47,6 +48,7 @@ export default defineConfig({
     alias: [
       { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
       { find: '@core', replacement: fileURLToPath(new URL('./src/@core', import.meta.url)) },
+      { find: '@plugins', replacement: fileURLToPath(new URL('./src/plugins', import.meta.url)) },
       { find: '@layouts', replacement: fileURLToPath(new URL('./src/@layouts', import.meta.url)) },
     ]
   },

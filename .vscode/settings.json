@@ -4,7 +4,7 @@
       "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "[typescript]": {
-      "editor.defaultFormatter": "Vue.volar",
+      "editor.defaultFormatter": "vscode.typescript-language-features",
       "editor.autoClosingBrackets": "always"
     },
     "[markdown]": {

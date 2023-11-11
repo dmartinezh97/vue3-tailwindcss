@@ -28,3 +28,19 @@ export default defineComponent({
     },
 })
 </script>
+
+
+<style lang="scss">
+.layout-base.layout-nav-vertical{
+    block-size: 100%;
+
+    .layout-content-base{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        min-block-size: calc(var(--vh, 1vh) * 100);
+        transition: padding-inline-start 0.2s ease-in-out;
+        will-change: padding-inline-start;
+    }
+}
+</style>

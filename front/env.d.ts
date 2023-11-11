@@ -2,6 +2,7 @@
 /// <reference path="components.d.ts" />
 /// <reference types="vite/client" />
 /// <reference types="vite-plugin-pages/client" />
+
 /* https://vitejs.dev/guide/env-and-mode.html */
 
 interface ImportMetaEnv {
@@ -10,6 +11,6 @@ interface ImportMetaEnv {
     readonly VITE_APP_API_URL: string
 }
 
-// interface ImportMeta {
-//     readonly env: ImportMetaEnv
-// }
+interface ImportMeta {
+    readonly env: ImportMetaEnv
+}

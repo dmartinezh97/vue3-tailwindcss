@@ -8,14 +8,12 @@ import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
             <slot name="nav-header"></slot>
         </div>
         <slot name="nav-items">
-            <PerfectScrollbar>
-                <ul>
-                    <li>Hola 1</li>
-                    <li>Hola 2</li>
-                    <li>Hola 3</li>
-                    <li>Hola 4</li>
-                    <li>Hola 5</li>
-                </ul>
+            <PerfectScrollbar tag="ul" class="nav-items">
+                <li>Hola 1</li>
+                <li>Hola 2</li>
+                <li>Hola 3</li>
+                <li>Hola 4</li>
+                <li>Hola 5</li>
             </PerfectScrollbar>
         </slot>
     </aside>

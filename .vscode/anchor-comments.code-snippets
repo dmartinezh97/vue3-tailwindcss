@@ -6,6 +6,13 @@
         ],
         "description": "Añadir emoji de mano"
     },
+    "Añadir emoji de persona hablando": {
+        "prefix": "cm-explicar-emoji",
+        "body": [
+            "🗯️"
+        ],
+        "description": "Añadir emoji de persona hablando"
+    },
     "Añadir emoji de información": {
         "prefix": "cm-info-emoji",
         "body": [

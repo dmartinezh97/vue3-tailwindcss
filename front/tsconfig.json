@@ -1,10 +1,11 @@
 {
   "include": [
-    "vite.config.ts",
+    "vite.config.*",
     "env.d.ts",
     "shims.d.ts",
     "src/**/*",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "src/**/*.ts",
   ],
   "extends": "@vue/tsconfig/tsconfig.json",
   "files": [],
@@ -23,8 +24,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@core/*": ["./src/@core/*"],
+      "@plugins/*": ["./src/plugins/*"],
       "@layouts/*": ["./src/@layouts/*"],
-      "@layouts": ["./src/@layouts"]
     },
     "types": [
       "vite/client",
