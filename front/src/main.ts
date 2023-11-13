@@ -13,7 +13,6 @@ import filters from './utils/shared/filtersUtils';
 import { setupErrorHandle } from './logica/gestion-errores'
 import { initAppConfigStore } from './logica/initAppConfig'
 import vuetify from '@/plugins/vuetify'
-import { usarPropDynamicVhCss } from '@layouts/composable/usarPropDynamicVhCss'
 
 
 const app = createApp(App)
@@ -45,7 +44,6 @@ app.config.globalProperties.$filters = filters
 
 // Inicializar plugins
 app.use(vuetify)
-usarPropDynamicVhCss()
 
 //Montamos/Instanciamos la aplicación web
 app.mount('#app')

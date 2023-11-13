@@ -1,17 +1,17 @@
 <script lang="ts" setup>
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
+import logo from '@core/assets/img/favicon.png'
+
 </script>
 
 <template>
     <aside class="layout-vertical-nav">
         <div class="nav-header">
             <slot name="nav-header">
-                <RouterLink
-          to="/"
-          class="app-logo app-title-wrapper"
-        >
-        <h1>Test app</h1>
-        </RouterLink>
+                <RouterLink to="/" class="app-logo app-title-wrapper">
+                    <img :src="logo" alt="">
+                    <h1 class="app-logo-title leading-normal">Test app</h1>
+                </RouterLink>
             </slot>
         </div>
         <slot name="nav-items">
