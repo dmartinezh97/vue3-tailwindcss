@@ -1,0 +1,54 @@
+@use "@configuracion-variables" as variables;
+
+.layout-base.layout-nav-vertical {
+    block-size: 100%;
+
+    .layout-content-base {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        min-block-size: 100dvh;
+        // min-block-size: calc(var(--vh, 1vh) * 100);
+        transition: padding-inline-start 0.2s ease-in-out;
+        will-change: padding-inline-start;
+
+        @media screen and (min-width: 1280px) {
+            padding-inline-start: variables.$layout-vertical-nav-width;
+        }
+    }
+}
+
+.layout-nav-vertical {
+    .layout-vertical-nav{
+        background-color: variables.$vertical-nav-background-color;
+
+        .nav-header{
+            overflow: hidden;
+            padding: variables.$vertical-nav-header-padding;
+            margin-inline: variables.$vertical-nav-header-inline-spacing;
+            min-block-size: variables.$vertical-nav-header-height;
+        }
+    }
+}
+
+.layout-vertical-nav{
+    position: fixed;
+    z-index: variables.$layout-vertical-nav-z-index;
+    display: flex;
+    flex-direction: column;
+    block-size: 100%;
+    inline-size: variables.$layout-vertical-nav-width;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    transition: inline-size 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+    will-change: transform, inline-size;
+
+    .nav-header {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-items {
+        block-size: 100%;
+    }
+}

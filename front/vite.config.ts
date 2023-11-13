@@ -38,6 +38,7 @@ export default defineConfig({
       dirs: ['src/@core/components', 'src/components'],
       dts: true,
     }),
+    // ℹ️ Más información: https://www.npmjs.com/package/unplugin-auto-import
     AutoImport({
       imports: ['vue', 'vue-router', '@vueuse/core', 'vue-i18n', 'pinia'],
       vueTemplate: true
@@ -50,6 +51,7 @@ export default defineConfig({
       { find: '@core', replacement: fileURLToPath(new URL('./src/@core', import.meta.url)) },
       { find: '@plugins', replacement: fileURLToPath(new URL('./src/plugins', import.meta.url)) },
       { find: '@layouts', replacement: fileURLToPath(new URL('./src/@layouts', import.meta.url)) },
+      { find: '@configuracion-variables', replacement: fileURLToPath(new URL('./src/@core/css/base/_variables.scss', import.meta.url)) },
     ]
   },
   build: {

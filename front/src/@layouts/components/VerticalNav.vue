@@ -3,9 +3,16 @@ import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
 </script>
 
 <template>
-    <aside>
+    <aside class="layout-vertical-nav">
         <div class="nav-header">
-            <slot name="nav-header"></slot>
+            <slot name="nav-header">
+                <RouterLink
+          to="/"
+          class="app-logo app-title-wrapper"
+        >
+        <h1>Test app</h1>
+        </RouterLink>
+            </slot>
         </div>
         <slot name="nav-items">
             <PerfectScrollbar tag="ul" class="nav-items">
